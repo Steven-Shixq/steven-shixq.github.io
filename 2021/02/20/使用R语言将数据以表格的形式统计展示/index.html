@@ -86,156 +86,154 @@ function activateLightMode(){
 <p><img src="/" class="lazyload" data-src="https://github.com/ddsjoberg/gtsummary/raw/master/data-raw/misc_files/tbl_summary_demo1.gif"  alt="gtsummary&#x5305;&#x4F7F;&#x7528;&#x793A;&#x4F8B;"></p>
 <p>&#x62FF;&#x5230;&#x4E00;&#x6279;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x603B;&#x8981;&#x5148;&#x770B;&#x770B;&#x6570;&#x636E;&#x7684;&#x57FA;&#x672C;&#x60C5;&#x51B5;&#xFF0C;&#x770B;&#x770B;&#x6027;&#x522B;&#xFF0C;&#x5E74;&#x9F84;&#xFF0C;case, control&#x7B49;&#x8FD9;&#x4E9B;&#x57FA;&#x672C;&#x7684;&#x4FE1;&#x606F;&#x5206;&#x5E03;&#xFF0C;&#x6709;&#x7684;&#x65F6;&#x5019;&#x4E5F;&#x8981;&#x7ED9;&#x51FA;&#x76F8;&#x5E94;&#x7684;P&#x503C;&#x6765;&#x8BF4;&#x660E;&#x95EE;&#x9898;&#xFF0C;&#x5728;R&#x7684;&#x7F16;&#x7A0B;&#x73AF;&#x5883;&#x4E2D;&#xFF0C;R&#x5305;gtsummary&#x5C31;&#x5F88;&#x597D;&#x7684;&#x89E3;&#x51B3;&#x4E86;&#x8FD9;&#x4E2A;&#x9700;&#x6C42;&#x3002;&#x4E0B;&#x9762;&#x4ECB;&#x7ECD;&#x4E00;&#x4E0B;&#x8FD9;&#x4E2A;&#x5305;&#x7684;&#x7528;&#x6CD5;&#x3002;</p>
 <h2 id="1-gtsummary&#x5305;&#x7684;&#x5B89;&#x88C5;"><a href="#1-gtsummary&#x5305;&#x7684;&#x5B89;&#x88C5;" class="headerlink" title="1. gtsummary&#x5305;&#x7684;&#x5B89;&#x88C5;"></a>1. gtsummary&#x5305;&#x7684;&#x5B89;&#x88C5;</h2><figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment">#&#x76F4;&#x63A5;&#x5B89;&#x88C5;</span></span><br><span class="line">install.packages(<span class="string">&quot;gtsummary&quot;</span>)</span><br><span class="line"><span class="comment"># &#x4E5F;&#x53EF;&#x4EE5;&#x5B89;&#x88C5;&#x6700;&#x65B0;&#x7684;&#x5F00;&#x53D1;&#x677F;</span></span><br><span class="line"><span class="comment"># remotes::install_github(&quot;ddsjoberg/gtsummary&quot;)</span></span><br></pre></td></tr></table></figure>
+
 <p>&#x6211;&#x5B89;&#x88C5;&#x7684;&#x65F6;&#x5019;&#x9047;&#x5230;&#x4E86;&#x4E00;&#x4E2A;&#x5C0F;&#x7684;&#x62A5;&#x9519;&#xFF0C;&#x62A5;&#x9519;&#x63D0;&#x793A;rlang&#x7684;&#x7248;&#x672C;&#x4E0D;&#x591F;&#xFF0C;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x6700;&#x597D;&#x7684;&#x529E;&#x6CD5;&#x5C31;&#x662F;&#x5148;&#x5378;&#x8F7D;rlang&#xFF0C;&#x7136;&#x540E;&#x518D;&#x5B89;&#x88C5;&#x5373;&#x53EF;&#x66F4;&#x6362;&#x5230;&#x6700;&#x65B0;&#x7248;&#x7684;rlang&#xFF0C;&#x89E3;&#x51B3;&#x7248;&#x672C;&#x95EE;&#x9898;</p>
 <figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># &#x5378;&#x8F7D;rlang</span></span><br><span class="line">remove.packages(<span class="string">&quot;rlang&quot;</span>)</span><br><span class="line"><span class="comment"># &#x5B89;&#x88C5;&#x6700;&#x65B0;&#x7248;&#x672C;&#x7684;rlang</span></span><br><span class="line">install.packages(<span class="string">&quot;rlang&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
 <h2 id="2-gtsmmary&#x5305;&#x7684;&#x4F7F;&#x7528;"><a href="#2-gtsmmary&#x5305;&#x7684;&#x4F7F;&#x7528;" class="headerlink" title="2. gtsmmary&#x5305;&#x7684;&#x4F7F;&#x7528;"></a>2. gtsmmary&#x5305;&#x7684;&#x4F7F;&#x7528;</h2><p><img src="/" class="lazyload" data-src="https://github.com/ddsjoberg/gtsummary/raw/master/data-raw/misc_files/tbl_summary_demo1.gif"  alt="gtsummary&#x5305;&#x4F7F;&#x7528;&#x793A;&#x4F8B;"></p>
 <p>&#x6D4B;&#x8BD5;&#x4F7F;&#x7528;&#x7684;&#x6570;&#x636E;&#x96C6;</p>
 <figure class="highlight r"><table><tr><td class="code"><pre><span class="line">head(trial)</span><br></pre></td></tr></table></figure>
-<div class="table-container">
+
 <table>
 <thead>
 <tr>
-<th style="text-align:left">trt</th>
-<th style="text-align:right">age</th>
-<th style="text-align:right">marker</th>
-<th style="text-align:left">stage</th>
-<th style="text-align:left">grade</th>
-<th style="text-align:right">response</th>
-<th style="text-align:right">death</th>
-<th style="text-align:right">ttdeath</th>
+<th align="left">trt</th>
+<th align="right">age</th>
+<th align="right">marker</th>
+<th align="left">stage</th>
+<th align="left">grade</th>
+<th align="right">response</th>
+<th align="right">death</th>
+<th align="right">ttdeath</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">Drug A</td>
-<td style="text-align:right">23</td>
-<td style="text-align:right">0.160</td>
-<td style="text-align:left">T1</td>
-<td style="text-align:left">II</td>
-<td style="text-align:right">0</td>
-<td style="text-align:right">0</td>
-<td style="text-align:right">24.00</td>
+<tbody><tr>
+<td align="left">Drug A</td>
+<td align="right">23</td>
+<td align="right">0.160</td>
+<td align="left">T1</td>
+<td align="left">II</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">24.00</td>
 </tr>
 <tr>
-<td style="text-align:left">Drug B</td>
-<td style="text-align:right">9</td>
-<td style="text-align:right">1.107</td>
-<td style="text-align:left">T2</td>
-<td style="text-align:left">I</td>
-<td style="text-align:right">1</td>
-<td style="text-align:right">0</td>
-<td style="text-align:right">24.00</td>
+<td align="left">Drug B</td>
+<td align="right">9</td>
+<td align="right">1.107</td>
+<td align="left">T2</td>
+<td align="left">I</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">24.00</td>
 </tr>
 <tr>
-<td style="text-align:left">Drug A</td>
-<td style="text-align:right">31</td>
-<td style="text-align:right">0.277</td>
-<td style="text-align:left">T1</td>
-<td style="text-align:left">II</td>
-<td style="text-align:right">0</td>
-<td style="text-align:right">0</td>
-<td style="text-align:right">24.00</td>
+<td align="left">Drug A</td>
+<td align="right">31</td>
+<td align="right">0.277</td>
+<td align="left">T1</td>
+<td align="left">II</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">24.00</td>
 </tr>
 <tr>
-<td style="text-align:left">Drug A</td>
-<td style="text-align:right">NA</td>
-<td style="text-align:right">2.067</td>
-<td style="text-align:left">T3</td>
-<td style="text-align:left">III</td>
-<td style="text-align:right">1</td>
-<td style="text-align:right">1</td>
-<td style="text-align:right">17.64</td>
+<td align="left">Drug A</td>
+<td align="right">NA</td>
+<td align="right">2.067</td>
+<td align="left">T3</td>
+<td align="left">III</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">17.64</td>
 </tr>
 <tr>
-<td style="text-align:left">Drug A</td>
-<td style="text-align:right">51</td>
-<td style="text-align:right">2.767</td>
-<td style="text-align:left">T4</td>
-<td style="text-align:left">III</td>
-<td style="text-align:right">1</td>
-<td style="text-align:right">1</td>
-<td style="text-align:right">16.43</td>
+<td align="left">Drug A</td>
+<td align="right">51</td>
+<td align="right">2.767</td>
+<td align="left">T4</td>
+<td align="left">III</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">16.43</td>
 </tr>
 <tr>
-<td style="text-align:left">Drug B</td>
-<td style="text-align:right">39</td>
-<td style="text-align:right">0.613</td>
-<td style="text-align:left">T4</td>
-<td style="text-align:left">I</td>
-<td style="text-align:right">0</td>
-<td style="text-align:right">1</td>
-<td style="text-align:right">15.64</td>
+<td align="left">Drug B</td>
+<td align="right">39</td>
+<td align="right">0.613</td>
+<td align="left">T4</td>
+<td align="left">I</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">15.64</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <h3 id="2-1-&#x7528;&#x6CD5;&#x793A;&#x4F8B;1-Summary-table"><a href="#2-1-&#x7528;&#x6CD5;&#x793A;&#x4F8B;1-Summary-table" class="headerlink" title="2.1 &#x7528;&#x6CD5;&#x793A;&#x4F8B;1-Summary table"></a>2.1 &#x7528;&#x6CD5;&#x793A;&#x4F8B;1-Summary table</h3><figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># &#x4F7F;&#x7528;tbl_summary&#x51FD;&#x6570;&#x5BF9;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x6C47;&#x603B;</span></span><br><span class="line"><span class="keyword">library</span>(gtsummary)</span><br><span class="line"><span class="keyword">library</span>(tidyverse) <span class="comment">#&#x81EA;&#x884C;&#x5B89;&#x88C5;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x4F7F;&#x7528;R&#x81EA;&#x5E26;&#x7684;trail&#x6570;&#x636E;&#x96C6;&#x6F14;&#x793A;</span></span><br><span class="line">trial %&gt;% </span><br><span class="line">  <span class="comment"># &#x9009;&#x51FA;trial&#x6570;&#x636E;&#x96C6;&#x7684;&#x51E0;&#x5217;&#x6570;&#x636E;&#x7EDF;&#x8BA1;</span></span><br><span class="line">  select(trt, age, grade, response) %&gt;% </span><br><span class="line">  <span class="comment"># &#x8868;&#x683C;&#x4EE5;trt&#x4E3A;&#x5206;&#x7EC4;&#x7EDF;&#x8BA1;</span></span><br><span class="line">  tbl_summary(by = trt,</span><br><span class="line">              <span class="comment"># NA&#x503C;&#x4E0D;&#x663E;&#x793A;</span></span><br><span class="line">              missing = <span class="string">&quot;no&quot;</span>) %&gt;%</span><br><span class="line">  <span class="comment"># &#x589E;&#x52A0;&#x4E00;&#x5217;P&#x503C;&#x7EDF;&#x8BA1;&#x6570;&#x636E;</span></span><br><span class="line">  add_p() %&gt;% </span><br><span class="line">  <span class="comment"># &#x589E;&#x52A0;&#x4E00;&#x5217;trt&#x5206;&#x7EC4;&#x4E0B;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;&#x5206;&#x7C7B;&#x8868;&#x578B;&#x603B;&#x7684;&#x6837;&#x672C;&#x7EDF;&#x8BA1;,&#x4E5F;&#x5C31;&#x662F;Overall&#x5217;</span></span><br><span class="line">  add_overall() %&gt;% </span><br><span class="line">  <span class="comment"># &#x52A0;&#x7C97;&#x5206;&#x7C7B;&#x7684;&#x6807;&#x9898;</span></span><br><span class="line">  bold_labels()</span><br></pre></td></tr></table></figure>
+
 <p><img src="/" class="lazyload" data-src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210209162822.png"  alt></p>
 <p>&#x8FDE;&#x7EED;&#x6027;&#x53D8;&#x91CF;&#xFF08;&#x5982;&#x8868;&#x683C;&#x4E2D;&#x7684;age&#x53D8;&#x91CF;&#xFF09;&#x5982;&#x679C;&#x4E0D;&#x6307;&#x5B9A;&#x7EDF;&#x8BA1;&#x65B9;&#x5F0F;&#xFF0C;&#x9ED8;&#x8BA4;&#x4F7F;&#x7528;<code>&#x4E2D;&#x4F4D;&#x6570;(&#x4E0B;&#x56DB;&#x5206;&#x4F4D;&#x6570;&#xFF0C;&#x4E0A;&#x56DB;&#x5206;&#x4F4D;&#x6570;)</code>&#x7684;&#x5F62;&#x5F0F;</p>
 <p>&#x4E5F;&#x53EF;&#x4EE5;&#x5C06;&#x8FDE;&#x7EED;&#x6027;&#x53D8;&#x91CF;&#x7684;&#x7EDF;&#x8BA1;&#x65B9;&#x5F0F;&#x6539;&#x4E3A;&#x5E38;&#x7528;&#x7684;mean &#xB1; SD&#x7684;&#x5F62;&#x5F0F;</p>
 <figure class="highlight r"><table><tr><td class="code"><pre><span class="line">trial %&gt;% </span><br><span class="line">  <span class="comment"># &#x9009;&#x51FA;trial&#x6570;&#x636E;&#x96C6;&#x7684;&#x51E0;&#x5217;&#x6570;&#x636E;&#x7EDF;&#x8BA1;</span></span><br><span class="line">  select(trt, age, grade, response) %&gt;% </span><br><span class="line">  <span class="comment"># &#x8868;&#x683C;&#x4EE5;trt&#x4E3A;&#x5206;&#x7EC4;&#x7EDF;&#x8BA1;</span></span><br><span class="line">  tbl_summary(by = trt,</span><br><span class="line">              <span class="comment"># NA&#x503C;&#x4E0D;&#x663E;&#x793A;</span></span><br><span class="line">              missing = <span class="string">&quot;no&quot;</span>,</span><br><span class="line">              <span class="comment"># &#x6539;&#x4E3A;mean &#xB1; SD </span></span><br><span class="line">              list(all_continuous() ~ <span class="string">&quot;{mean} &#xB1; ({sd})&quot;</span>),</span><br><span class="line">              <span class="comment"># &#x66F4;&#x6539;label</span></span><br><span class="line">              label = list(age ~ <span class="string">&quot;Participants age&quot;</span>, grade ~ <span class="string">&quot;Modified grade&quot;</span>)</span><br><span class="line">              ) %&gt;%</span><br><span class="line">  <span class="comment"># &#x589E;&#x52A0;&#x4E00;&#x5217;P&#x503C;&#x7EDF;&#x8BA1;&#x6570;&#x636E;</span></span><br><span class="line">  add_p() %&gt;% </span><br><span class="line">  <span class="comment"># &#x589E;&#x52A0;&#x4E00;&#x5217;trt&#x5206;&#x7EC4;&#x4E0B;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;&#x5206;&#x7C7B;&#x8868;&#x578B;&#x603B;&#x7684;&#x6837;&#x672C;&#x7EDF;&#x8BA1;,&#x4E5F;&#x5C31;&#x662F;Overall&#x5217;</span></span><br><span class="line">  add_overall() %&gt;% </span><br><span class="line">  <span class="comment"># &#x52A0;&#x7C97;&#x5206;&#x7C7B;&#x7684;&#x6807;&#x9898;</span></span><br><span class="line">  bold_labels() %&gt;% </span><br><span class="line">  <span class="comment"># &#x8F6C;&#x6362;&#x4E3A;tibble&#x8F93;&#x51FA;</span></span><br><span class="line">  as_gt() <span class="comment"># gtsummary&#x683C;&#x5F0F;&#x8F93;&#x51FA;</span></span><br></pre></td></tr></table></figure>
+
 <p><img src="/" class="lazyload" data-src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210209170035.png"  alt></p>
 <p>&#x5176;&#x4ED6;&#x8F93;&#x51FA;&#x65B9;&#x5F0F;&#xFF1A;</p>
 <ul>
 <li><code>as_kable()</code>&#x8F93;&#x51FA;&#xFF1A;&#x8F93;&#x51FA;&#x4E3A;markdown&#x683C;&#x5F0F;</li>
 </ul>
-<div class="table-container">
 <table>
 <thead>
 <tr>
-<th style="text-align:left"><strong>Characteristic</strong></th>
-<th style="text-align:left"><strong>Overall</strong>, N = 200</th>
-<th style="text-align:left"><strong>Drug A</strong>, N = 98</th>
-<th style="text-align:left"><strong>Drug B</strong>, N = 102</th>
-<th style="text-align:left"><strong>p-value</strong></th>
+<th align="left"><strong>Characteristic</strong></th>
+<th align="left"><strong>Overall</strong>, N = 200</th>
+<th align="left"><strong>Drug A</strong>, N = 98</th>
+<th align="left"><strong>Drug B</strong>, N = 102</th>
+<th align="left"><strong>p-value</strong></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">Participants age</td>
-<td style="text-align:left">47 &#xB1; (14)</td>
-<td style="text-align:left">47 &#xB1; (15)</td>
-<td style="text-align:left">47 &#xB1; (14)</td>
-<td style="text-align:left">0.7</td>
+<tbody><tr>
+<td align="left">Participants age</td>
+<td align="left">47 &#xB1; (14)</td>
+<td align="left">47 &#xB1; (15)</td>
+<td align="left">47 &#xB1; (14)</td>
+<td align="left">0.7</td>
 </tr>
 <tr>
-<td style="text-align:left">Modified grade</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-<td style="text-align:left">0.9</td>
+<td align="left">Modified grade</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">0.9</td>
 </tr>
 <tr>
-<td style="text-align:left">I</td>
-<td style="text-align:left">68 (34%)</td>
-<td style="text-align:left">35 (36%)</td>
-<td style="text-align:left">33 (32%)</td>
-<td style="text-align:left"></td>
+<td align="left">I</td>
+<td align="left">68 (34%)</td>
+<td align="left">35 (36%)</td>
+<td align="left">33 (32%)</td>
+<td align="left"></td>
 </tr>
 <tr>
-<td style="text-align:left">II</td>
-<td style="text-align:left">68 (34%)</td>
-<td style="text-align:left">32 (33%)</td>
-<td style="text-align:left">36 (35%)</td>
-<td style="text-align:left"></td>
+<td align="left">II</td>
+<td align="left">68 (34%)</td>
+<td align="left">32 (33%)</td>
+<td align="left">36 (35%)</td>
+<td align="left"></td>
 </tr>
 <tr>
-<td style="text-align:left">III</td>
-<td style="text-align:left">64 (32%)</td>
-<td style="text-align:left">31 (32%)</td>
-<td style="text-align:left">33 (32%)</td>
-<td style="text-align:left"></td>
+<td align="left">III</td>
+<td align="left">64 (32%)</td>
+<td align="left">31 (32%)</td>
+<td align="left">33 (32%)</td>
+<td align="left"></td>
 </tr>
 <tr>
-<td style="text-align:left">Tumor Response</td>
-<td style="text-align:left">61 (32%)</td>
-<td style="text-align:left">28 (29%)</td>
-<td style="text-align:left">33 (34%)</td>
-<td style="text-align:left">0.5</td>
+<td align="left">Tumor Response</td>
+<td align="left">61 (32%)</td>
+<td align="left">28 (29%)</td>
+<td align="left">33 (34%)</td>
+<td align="left">0.5</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <ul>
 <li><p><code>as_hux_table()</code>&#x8F93;&#x51FA;: &#x4E3A;huxtable &#x5BF9;&#x8C61;,&#x8F93;&#x51FA;&#x6587;&#x672C;&#x5B57;&#x7B26;</p>
 <p>Characteristic     Overall, N = 200   Drug A, N = 98   Drug B, N = 102   p-value<br> &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;<br>Participants age          47 &#xB1; (14)        47 &#xB1; (15)         47 &#xB1; (14)       0.7<br>Modified grade   0.9<br>I  68 (34%)         35 (36%)          33 (32%)<br>II 68 (34%)         32 (33%)          36 (35%)<br>III64 (32%)         31 (32%)          33 (32%)<br>Tumor Response 61 (32%)         28 (29%)          33 (34%)       0.5<br> &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;<br>Mean &#xB1; (SD); n (%)<br>Wilcoxon rank sum test; Pearson&#x2019;s Chi-squared test        </p>
@@ -251,9 +249,11 @@ function activateLightMode(){
 </ul>
 <p>label&#x66F4;&#x6539;&#x793A;&#x4F8B;</p>
 <figure class="highlight r"><table><tr><td class="code"><pre><span class="line">trial %&gt;% </span><br><span class="line">  <span class="comment"># &#x9009;&#x51FA;trial&#x6570;&#x636E;&#x96C6;&#x7684;&#x51E0;&#x5217;&#x6570;&#x636E;&#x7EDF;&#x8BA1;</span></span><br><span class="line">  select(trt, age, grade, response) %&gt;% </span><br><span class="line">  <span class="comment"># &#x8868;&#x683C;&#x4EE5;trt&#x4E3A;&#x5206;&#x7EC4;&#x7EDF;&#x8BA1;</span></span><br><span class="line">  tbl_summary(by = trt,</span><br><span class="line">              <span class="comment"># NA&#x503C;&#x4E0D;&#x663E;&#x793A;</span></span><br><span class="line">              missing = <span class="string">&quot;no&quot;</span>,</span><br><span class="line">              <span class="comment"># &#x6539;&#x4E3A;mean &#xB1; SD </span></span><br><span class="line">              list(all_continuous() ~ <span class="string">&quot;{mean} &#xB1; ({sd})&quot;</span>),</span><br><span class="line">              <span class="comment"># &#x66F4;&#x6539;label</span></span><br><span class="line">              label = list(age ~ <span class="string">&quot;Participants age&quot;</span>, grade ~ <span class="string">&quot;Modified grade&quot;</span>)</span><br><span class="line">              ) %&gt;%</span><br><span class="line">  <span class="comment"># &#x589E;&#x52A0;&#x4E00;&#x5217;P&#x503C;&#x7EDF;&#x8BA1;&#x6570;&#x636E;</span></span><br><span class="line">  add_p() %&gt;% </span><br><span class="line">  <span class="comment"># &#x589E;&#x52A0;&#x4E00;&#x5217;trt&#x5206;&#x7EC4;&#x4E0B;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;&#x5206;&#x7C7B;&#x8868;&#x578B;&#x603B;&#x7684;&#x6837;&#x672C;&#x7EDF;&#x8BA1;,&#x4E5F;&#x5C31;&#x662F;Overall&#x5217;</span></span><br><span class="line">  add_overall() %&gt;% </span><br><span class="line">  <span class="comment"># &#x52A0;&#x7C97;&#x5206;&#x7C7B;&#x7684;&#x6807;&#x9898;</span></span><br><span class="line">  bold_labels() %&gt;% </span><br><span class="line">  <span class="comment"># &#x8F6C;&#x6362;&#x4E3A;&#x8BBA;&#x6587;&#x4E2D;&#x5E38;&#x7528;&#x7684;&#x4E09;&#x7EBF;&#x8868;&#x683C;&#x5F0F;</span></span><br><span class="line">  as_flex_table()</span><br></pre></td></tr></table></figure>
+
 <p><img src="/" class="lazyload" data-src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210209163647.png"  alt></p>
 <p><strong>tbl_summary&#x51FD;&#x6570;&#x53C2;&#x6570;&#x4ECB;&#x7ECD;</strong></p>
 <figure class="highlight r"><table><tr><td class="code"><pre><span class="line">tbl_summary(</span><br><span class="line">  data,</span><br><span class="line">  by = <span class="literal">NULL</span>,</span><br><span class="line">  label = <span class="literal">NULL</span>,</span><br><span class="line">  statistic = <span class="literal">NULL</span>,</span><br><span class="line">  digits = <span class="literal">NULL</span>,</span><br><span class="line">  type = <span class="literal">NULL</span>,</span><br><span class="line">  value = <span class="literal">NULL</span>,</span><br><span class="line">  missing = <span class="literal">NULL</span>,</span><br><span class="line">  missing_text = <span class="literal">NULL</span>,</span><br><span class="line">  sort = <span class="literal">NULL</span>,</span><br><span class="line">  percent = <span class="literal">NULL</span>,</span><br><span class="line">  include = everything(),</span><br><span class="line">  group = <span class="literal">NULL</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
 <p>&#x53C2;&#x6570;&#xFF1A;</p>
 <ul>
 <li><p>data: &#x4F7F;&#x7528;&#x7684;&#x6570;&#x636E;&#x6846;</p>
@@ -285,13 +285,15 @@ function activateLightMode(){
 </ul>
 <h3 id="2-2-&#x7528;&#x6CD5;&#x793A;&#x4F8B;2-Regression-Models"><a href="#2-2-&#x7528;&#x6CD5;&#x793A;&#x4F8B;2-Regression-Models" class="headerlink" title="2.2 &#x7528;&#x6CD5;&#x793A;&#x4F8B;2-Regression Models"></a>2.2 &#x7528;&#x6CD5;&#x793A;&#x4F8B;2-Regression Models</h3><p>&#x4F7F;&#x7528;<code>tbl_regression()</code> &#x4EE5;&#x8868;&#x683C;&#x7684;&#x5F62;&#x5F0F;&#x5C55;&#x793A;&#x56DE;&#x5F52;&#x6A21;&#x578B;&#x7684;&#x7ED3;&#x679C;&#x3002;&#x66F4;&#x52A0;&#x8BE6;&#x7EC6;&#x7684;&#x6559;&#x7A0B;&#x53C2;&#x8003;&#xFF1A; <a href="http://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html" target="_blank" rel="noopener">tutorial</a></p>
 <figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># &#x903B;&#x8F91;&#x56DE;&#x5F52;</span></span><br><span class="line">mod1 &lt;- glm(response ~ trt + age + grade, trial, family = binomial)</span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x9ED8;&#x8BA4;&#x503C;&#x663E;&#x793A;&#x4E3A;log(OR),&#x6C42;e^OR&#x6B21;&#x65B9;&#x5373;&#x4E3A;&#x8F6C;&#x6362;&#x7684;&#x7ED3;&#x679C;</span></span><br><span class="line">t1 &lt;- tbl_regression(mod1, exponentiate = <span class="literal">TRUE</span>)</span><br><span class="line"></span><br><span class="line">t1</span><br></pre></td></tr></table></figure>
+
 <p><img src="/" class="lazyload" data-src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210209170308.png"  alt></p>
 <h3 id="2-3-&#x7528;&#x6CD5;&#x793A;&#x4F8B;3-&#x5E76;&#x6392;&#x663E;&#x793A;&#x56DE;&#x5F52;&#x6A21;&#x578B;"><a href="#2-3-&#x7528;&#x6CD5;&#x793A;&#x4F8B;3-&#x5E76;&#x6392;&#x663E;&#x793A;&#x56DE;&#x5F52;&#x6A21;&#x578B;" class="headerlink" title="2.3 &#x7528;&#x6CD5;&#x793A;&#x4F8B;3-&#x5E76;&#x6392;&#x663E;&#x793A;&#x56DE;&#x5F52;&#x6A21;&#x578B;"></a>2.3 &#x7528;&#x6CD5;&#x793A;&#x4F8B;3-&#x5E76;&#x6392;&#x663E;&#x793A;&#x56DE;&#x5F52;&#x6A21;&#x578B;</h3><p>&#x4F7F;&#x7528;<code>tbl_merge()</code>&#x51FD;&#x6570;&#x5E76;&#x6392;&#x5C55;&#x793A;&#x591A;&#x4E2A;&#x56DE;&#x5F52;&#x6A21;&#x578B;&#x7684;&#x7ED3;&#x679C;</p>
 <figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="keyword">library</span>(survival) </span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x5EFA;&#x7ACB;&#x751F;&#x5B58;&#x6A21;&#x578B;&#x8868;</span></span><br><span class="line">t2 &lt;- coxph(Surv(ttdeath, death) ~ trt + grade + age, trial) %&gt;%</span><br><span class="line">  tbl_regression(exponentiate = <span class="literal">TRUE</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#&#x5408;&#x5E76;&#x4E24;&#x4E2A;&#x8868;&#x683C;</span></span><br><span class="line">tbl_merge_ex1 &lt;-tbl_merge(</span><br><span class="line">    tbls = list(t1, t2),</span><br><span class="line">    tab_spanner = c(<span class="string">&quot;&lt;mark&gt;Tumor Response&lt;mark&gt;&quot;</span>, <span class="string">&quot;**Time to Death**&quot;</span>)</span><br><span class="line">  )</span><br><span class="line"><span class="comment"># &#x5176;&#x4E2D;tab_spanner&#x6307;&#x5B9A;&#x8868;&#x7684;&#x5217;&#x540D;&#xFF0C;&#x652F;&#x6301;markdown&#x8BED;&#x6CD5;&#xFF0C;*&#x659C;&#x4F53;*; **&#x7C97;&#x4F53;**</span></span><br><span class="line"></span><br><span class="line">tbl_merge_ex1</span><br></pre></td></tr></table></figure>
+
 <p><img src="/" class="lazyload" data-src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210209170355.png"  alt></p>
 <p>Reference:</p>
 <p><a href="http://www.danieldsjoberg.com/gtsummary/" target="_blank" rel="noopener">http://www.danieldsjoberg.com/gtsummary/</a></p>
-</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:2583551979@qq.com">石晓强</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://steven-shixq.github.io/2021/02/20/%E4%BD%BF%E7%94%A8R%E8%AF%AD%E8%A8%80%E5%B0%86%E6%95%B0%E6%8D%AE%E4%BB%A5%E8%A1%A8%E6%A0%BC%E7%9A%84%E5%BD%A2%E5%BC%8F%E7%BB%9F%E8%AE%A1%E5%B1%95%E7%A4%BA/">https://steven-shixq.github.io/2021/02/20/%E4%BD%BF%E7%94%A8R%E8%AF%AD%E8%A8%80%E5%B0%86%E6%95%B0%E6%8D%AE%E4%BB%A5%E8%A1%A8%E6%A0%BC%E7%9A%84%E5%BD%A2%E5%BC%8F%E7%BB%9F%E8%AE%A1%E5%B1%95%E7%A4%BA/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://steven-shixq.github.io" target="_blank">衷深学习</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/tags/R%E8%AF%AD%E8%A8%80/">R语言</a><a class="post-meta__tags" href="/tags/ggpubr/">ggpubr</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210427004609.png" data-sites="wechat,weibo,qq,facebook,twitter"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/shixq_wechat.png" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/shixq_alipay.png" alt="支付寶"/><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2021/02/21/MY-100-Day-English-68/"><img class="prev_cover lazyload" data-src="https://hbr.org/resources/images/article_assets/2018/10/R1806L_SCHNEIDER.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">MY 100-Day English -68</div></div></a></div><div class="next-post pull_right"><a href="/2021/02/20/MY-100-Day-English-67/"><img class="next_cover lazyload" data-src="https://hbr.org/resources/images/article_assets/2018/10/R1806L_SCHNEIDER.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MY 100-Day English -67</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2021/01/23/使用ggpubr绘制出版级别的图形/" title="使用ggpubr绘制出版级别的图形"><img class="relatedPosts_cover lazyload"data-src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210124003805.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-01-23</div><div class="relatedPosts_title">使用ggpubr绘制出版级别的图形</div></div></a></div><div class="relatedPosts_item"><a href="/2020/07/18/R语言学习笔记23/" title="R语言学习笔记23"><img class="relatedPosts_cover lazyload"data-src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-07-18</div><div class="relatedPosts_title">R语言学习笔记23</div></div></a></div><div class="relatedPosts_item"><a href="/2020/07/11/R语言学习笔记22/" title="R语言学习笔记22"><img class="relatedPosts_cover lazyload"data-src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-07-11</div><div class="relatedPosts_title">R语言学习笔记22</div></div></a></div><div class="relatedPosts_item"><a href="/2020/07/04/R语言学习笔记21/" title="R语言学习笔记21"><img class="relatedPosts_cover lazyload"data-src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-07-04</div><div class="relatedPosts_title">R语言学习笔记21</div></div></a></div><div class="relatedPosts_item"><a href="/2020/06/27/R语言学习笔记20/" title="R语言学习笔记20"><img class="relatedPosts_cover lazyload"data-src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-06-27</div><div class="relatedPosts_title">R语言学习笔记20</div></div></a></div><div class="relatedPosts_item"><a href="/2020/06/20/R语言学习笔记19/" title="R语言学习笔记19"><img class="relatedPosts_cover lazyload"data-src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-06-20</div><div class="relatedPosts_title">R语言学习笔记19</div></div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var requestSetting = function (from,set) {
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:2583551979@qq.com">石晓强</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://steven-shixq.github.io/2021/02/20/%E4%BD%BF%E7%94%A8R%E8%AF%AD%E8%A8%80%E5%B0%86%E6%95%B0%E6%8D%AE%E4%BB%A5%E8%A1%A8%E6%A0%BC%E7%9A%84%E5%BD%A2%E5%BC%8F%E7%BB%9F%E8%AE%A1%E5%B1%95%E7%A4%BA/">https://steven-shixq.github.io/2021/02/20/%E4%BD%BF%E7%94%A8R%E8%AF%AD%E8%A8%80%E5%B0%86%E6%95%B0%E6%8D%AE%E4%BB%A5%E8%A1%A8%E6%A0%BC%E7%9A%84%E5%BD%A2%E5%BC%8F%E7%BB%9F%E8%AE%A1%E5%B1%95%E7%A4%BA/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://steven-shixq.github.io" target="_blank">衷深学习</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/tags/R%E8%AF%AD%E8%A8%80/">R语言</a><a class="post-meta__tags" href="/tags/ggpubr/">ggpubr</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/%E6%8B%A5%E6%8A%B1%E5%8F%AF%E8%83%BD.png" data-sites="wechat,weibo,qq,facebook,twitter"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/shixq_wechat.png" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/shixq_alipay.png" alt="支付寶"/><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2021/02/21/MY-100-Day-English-68/"><img class="prev_cover lazyload" data-src="https://hbr.org/resources/images/article_assets/2018/10/R1806L_SCHNEIDER.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">MY 100-Day English -68</div></div></a></div><div class="next-post pull_right"><a href="/2021/02/20/MY-100-Day-English-67/"><img class="next_cover lazyload" data-src="https://hbr.org/resources/images/article_assets/2018/10/R1806L_SCHNEIDER.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MY 100-Day English -67</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2021/01/23/使用ggpubr绘制出版级别的图形/" title="使用ggpubr绘制出版级别的图形"><img class="relatedPosts_cover lazyload"data-src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210124003805.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-01-23</div><div class="relatedPosts_title">使用ggpubr绘制出版级别的图形</div></div></a></div><div class="relatedPosts_item"><a href="/2020/07/18/R语言学习笔记23/" title="R语言学习笔记23"><img class="relatedPosts_cover lazyload"data-src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-07-18</div><div class="relatedPosts_title">R语言学习笔记23</div></div></a></div><div class="relatedPosts_item"><a href="/2020/07/11/R语言学习笔记22/" title="R语言学习笔记22"><img class="relatedPosts_cover lazyload"data-src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-07-11</div><div class="relatedPosts_title">R语言学习笔记22</div></div></a></div><div class="relatedPosts_item"><a href="/2020/07/04/R语言学习笔记21/" title="R语言学习笔记21"><img class="relatedPosts_cover lazyload"data-src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-07-04</div><div class="relatedPosts_title">R语言学习笔记21</div></div></a></div><div class="relatedPosts_item"><a href="/2020/06/27/R语言学习笔记20/" title="R语言学习笔记20"><img class="relatedPosts_cover lazyload"data-src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-06-27</div><div class="relatedPosts_title">R语言学习笔记20</div></div></a></div><div class="relatedPosts_item"><a href="/2020/06/20/R语言学习笔记19/" title="R语言学习笔记19"><img class="relatedPosts_cover lazyload"data-src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-06-20</div><div class="relatedPosts_title">R语言学习笔记19</div></div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var requestSetting = function (from,set) {
   var from = from
   var setting = set.split(',').filter(function(item){
   return from.indexOf(item) > -1
