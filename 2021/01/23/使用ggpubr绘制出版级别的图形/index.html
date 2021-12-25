@@ -1,0 +1,996 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>使用ggpubr绘制出版级别的图形 | 衷深学习</title><meta name="keywords" content="计算机,编程,R语言,ggpubr"><meta name="author" content="石晓强"><meta name="copyright" content="石晓强"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="在ggplot的图形中加上P值和显著性水平">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用ggpubr绘制出版级别的图形">
+<meta property="og:url" content="https://steven-shixq.github.io/2021/01/23/%E4%BD%BF%E7%94%A8ggpubr%E7%BB%98%E5%88%B6%E5%87%BA%E7%89%88%E7%BA%A7%E5%88%AB%E7%9A%84%E5%9B%BE%E5%BD%A2/index.html">
+<meta property="og:site_name" content="衷深学习">
+<meta property="og:description" content="在ggplot的图形中加上P值和显著性水平">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210124003805.png">
+<meta property="article:published_time" content="2021-01-23T14:26:49.000Z">
+<meta property="article:modified_time" content="2021-02-19T02:28:13.550Z">
+<meta property="article:author" content="石晓强">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="R语言">
+<meta property="article:tag" content="ggpubr">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210124003805.png"><link rel="shortcut icon" href="/img/avatar_reader.jpg"><link rel="canonical" href="https://steven-shixq.github.io/2021/01/23/%E4%BD%BF%E7%94%A8ggpubr%E7%BB%98%E5%88%B6%E5%87%BA%E7%89%88%E7%BA%A7%E5%88%AB%E7%9A%84%E5%9B%BE%E5%BD%A2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 石晓强","link":"链接: ","source":"来源: 衷深学习","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '使用ggpubr绘制出版级别的图形',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-02-19 10:28:13'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar_reader.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">331</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">174</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210124003805.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">衷深学习</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">使用ggpubr绘制出版级别的图形</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-01-23T14:26:49.000Z" title="发表于 2021-01-23 22:26:49">2021-01-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-02-19T02:28:13.550Z" title="更新于 2021-02-19 10:28:13">2021-02-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/R%E8%AF%AD%E8%A8%80/">R语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>18分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="使用ggpubr绘制出版级别的图形"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><code>本文主要学习和介绍：</code></p>
+<ol>
+<li>
+<p>比较两组或者多组数据的平均值</p>
+</li>
+<li>
+<p>然后自动添加P值或者显著性水平到ggplot的各种图形中(such as box plots, dot plots, bar plots and line plots …)</p>
+</li>
+</ol>
+<h2 id="一、比较均值的方法">一、比较均值的方法</h2>
+<blockquote>
+<p>The standard methods to compare the means of two or more groups in R, have been largely described at: comparing means in R.</p>
+</blockquote>
+<p>常用的几种比较方法如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Methods</th>
+<th style="text-align:center">R function</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">T-test</td>
+<td style="text-align:center">t.test()</td>
+<td style="text-align:center">Compare two groups (parametric)</td>
+</tr>
+<tr>
+<td style="text-align:center">Wilcoxon test</td>
+<td style="text-align:center">wilcox.test()</td>
+<td style="text-align:center">Compare two groups (non-parametric)</td>
+</tr>
+<tr>
+<td style="text-align:center">ANOVA</td>
+<td style="text-align:center">aov() or anova()</td>
+<td style="text-align:center">Compare multiple groups (parametric)</td>
+</tr>
+<tr>
+<td style="text-align:center">Kruskal-Wallis</td>
+<td style="text-align:center">kruskal.test()</td>
+<td style="text-align:center">Compare multiple groups (non-parametric)</td>
+</tr>
+</tbody>
+</table>
+<p>如何使用这些方法进行计算和对结果进行解释，可以参考以下链接:</p>
+<ul>
+<li>Comparing one-sample mean to a standard known mean:
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.sthda.com/english/wiki/one-sample-t-test-in-r">One-Sample T-test (parametric)</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.sthda.com/english/wiki/one-sample-wilcoxon-signed-rank-test-in-r">One-Sample Wilcoxon Test (non-parametric)</a></li>
+</ul>
+</li>
+<li>Comparing the means of two independent groups:
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.sthda.com/english/wiki/unpaired-two-samples-t-test-in-r">Unpaired Two Samples T-test (parametric)</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.sthda.com/english/wiki/unpaired-two-samples-wilcoxon-test-in-r">Unpaired Two-Samples Wilcoxon Test (non-parametric)</a></li>
+</ul>
+</li>
+<li>Comparing the means of paired samples:
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.sthda.com/english/wiki/paired-samples-t-test-in-r">Paired Samples T-test (parametric)</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.sthda.com/english/wiki/paired-samples-wilcoxon-test-in-r">Paired Samples Wilcoxon Test (non-parametric)</a></li>
+</ul>
+</li>
+<li>Comparing the means of more than two groups
+<ul>
+<li>Analysis of variance (ANOVA, parametric):
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.sthda.com/english/wiki/one-way-anova-test-in-r">One-Way ANOVA Test in R</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.sthda.com/english/wiki/two-way-anova-test-in-r">Two-Way ANOVA Test in R</a></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="http://www.sthda.com/english/wiki/kruskal-wallis-test-in-r">Kruskal-Wallis Test in R (non parametric alternative to one-way ANOVA)</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="二、R中添加P值的函数介绍">二、R中添加P值的函数介绍</h2>
+<p>这里主要使用的是ggpubr包的的两个函数：</p>
+<ul>
+<li><strong>compare_means</strong>(): 比较一组或多组均值，包括P值和显著性水平</li>
+<li><strong>stat_compare_means</strong>(): 自动添加P值或显著性水平到ggplot的图形中</li>
+</ul>
+<h3 id="1-compare-means函数">1. compare_means函数</h3>
+<p>compare_means函数用于比较输出一组或者多组的均值，使用不同的方法</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">compare_means(formula, data, method = <span class="string">&quot;wilcox.test&quot;</span>, paired = <span class="literal">FALSE</span>,</span><br><span class="line">  group.by = <span class="literal">NULL</span>, ref.group = <span class="literal">NULL</span>, ...)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>formula</strong>: 画图的公式y ~ x。
+<ul>
+<li>a formula of the form <em>x ~ group</em>, where x is a numeric variable and group is a factor with one or multiple levels. For example, <em>formula = TP53 ~ cancer_group</em>. It’s also possible to perform the test for multiple response variables at the same time. For example, <em>formula = c(TP53, PTEN) ~ cancer_group</em>.</li>
+</ul>
+</li>
+<li><strong>data</strong>: 使用的数据。
+<ul>
+<li>a data.frame containing the variables in the formula.</li>
+</ul>
+</li>
+<li>method: 使用的检验P值的方法。the type of test. Default is “wilcox.test”. Allowed values include:
+<ul>
+<li><em>“t.test”</em> (parametric) and <em>“wilcox.test”</em>&quot; (non-parametric). Perform comparison between two groups of samples. If the grouping variable contains more than two levels, then a pairwise comparison is performed.</li>
+<li><em>“anova”</em> (parametric) and <em>“kruskal.test”</em> (non-parametric). Perform one-way ANOVA test comparing multiple groups.</li>
+</ul>
+</li>
+<li><strong>paired</strong>: 是否做配对检验。
+<ul>
+<li>a logical indicating whether you want a paired test. Used only in <em>t.test</em> and in <em>wilcox.test</em>.</li>
+</ul>
+</li>
+<li><strong><a target="_blank" rel="noopener" href="http://group.by">group.by</a></strong>: 指定分组做P值检验。variables used to group the data set before applying the test. When specified the mean comparisons will be performed in each subset of the data formed by the different levels of the <a target="_blank" rel="noopener" href="http://group.by">group.by</a> variables.</li>
+<li><strong>ref.group</strong>: 比较均值时指定参考的组，就像比较case-control的数据时，指定control组为对照一样，指定一个组做为参照。
+<ul>
+<li>a character string specifying the reference group. If specified, for a given grouping variable, each of the group levels will be compared to the reference group (i.e. control group). ref.group can be also <em>“.all.”</em>. In this case, each of the grouping variable levels is compared to all (i.e. base-mean). 这里的base-mean指的就是所有组的平均值</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-stat-compare-means函数">2.stat_compare_means函数</h3>
+<p>功能与上一个函数相似，只是这个函数用于在ggplot图形中添加平均值比较的P值或者显著性水平</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">stat_compare_means(mapping = <span class="literal">NULL</span>, comparisons = <span class="literal">NULL</span> hide.ns = <span class="literal">FALSE</span>,</span><br><span class="line">                   label = <span class="literal">NULL</span>,  label.x = <span class="literal">NULL</span>, label.y = <span class="literal">NULL</span>,  ...)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>mapping</strong>: 和ggplot函数一样指定aes()映射。
+<ul>
+<li>Set of aesthetic mappings created by aes().</li>
+</ul>
+</li>
+<li><strong>comparisons</strong>: 由两个向量组成的列表，这两个向量就是要对比组的名字或者index值。
+<ul>
+<li>A list of length-2 vectors. The entries in the vector are either the names of 2 values on the x-axis or the 2 integers that correspond to the index of the groups of interest, to be compared.</li>
+</ul>
+</li>
+<li><strong>hide.ns</strong>: 逻辑值，默认为FALSE。是否显示不显著时的符号ns。
+<ul>
+<li>logical value. If TRUE, hide ns symbol when displaying significance levels.</li>
+</ul>
+</li>
+<li><strong>label</strong>: 指定标签的类型，可以是P值（“p.format”）或者是显著性水平（“p.signif”）(用*号和ns表示)。
+<ul>
+<li>character string specifying label type. Allowed values include “p.signif” (shows the significance levels), “p.format” (shows the formatted p value).</li>
+</ul>
+</li>
+<li><strong>label.x,label.y</strong>: 指定label的坐标位置。
+<ul>
+<li>numeric values. coordinates (in data units) to be used for absolute positioning of the label. If too short they will be recycled.</li>
+</ul>
+</li>
+<li><strong>…</strong>: 其他的参数。
+<ul>
+<li>other arguments passed to the function <strong>compare_means</strong>() such as <em>method</em>, <em>paired</em>, <em>ref.group</em>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="使用boxplot演示添加P值和显著性水平">使用boxplot演示添加P值和显著性水平</h2>
+<h3 id="1-准备">1. 准备</h3>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 加载包</span></span><br><span class="line"><span class="comment"># library(tidyverse) #非必须</span></span><br><span class="line">library(ggpubr)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例数据：ToothGrowth</span></span><br><span class="line">data(<span class="string">&quot;ToothGrowth&quot;</span>)</span><br><span class="line">head(ToothGrowth)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><figcaption><span>echo</span></figcaption><table><tr><td class="code"><pre><span class="line">head(ToothGrowth) %&gt;% knitr::kable(format = &quot;markdown&quot;)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">len</th>
+<th style="text-align:left">supp</th>
+<th style="text-align:right">dose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">4.2</td>
+<td style="text-align:left">VC</td>
+<td style="text-align:right">0.5</td>
+</tr>
+<tr>
+<td style="text-align:right">11.5</td>
+<td style="text-align:left">VC</td>
+<td style="text-align:right">0.5</td>
+</tr>
+<tr>
+<td style="text-align:right">7.3</td>
+<td style="text-align:left">VC</td>
+<td style="text-align:right">0.5</td>
+</tr>
+<tr>
+<td style="text-align:right">5.8</td>
+<td style="text-align:left">VC</td>
+<td style="text-align:right">0.5</td>
+</tr>
+<tr>
+<td style="text-align:right">6.4</td>
+<td style="text-align:left">VC</td>
+<td style="text-align:right">0.5</td>
+</tr>
+<tr>
+<td style="text-align:right">10.0</td>
+<td style="text-align:left">VC</td>
+<td style="text-align:right">0.5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-独立双样本比较">2. 独立双样本比较</h3>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">compare_means(len ~ supp, data = ToothGrowth) %&gt;% knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">.y.</th>
+<th style="text-align:left">group1</th>
+<th style="text-align:left">group2</th>
+<th style="text-align:right">p</th>
+<th style="text-align:right">p.adj</th>
+<th style="text-align:left">p.format</th>
+<th style="text-align:left">p.signif</th>
+<th style="text-align:left">method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">len</td>
+<td style="text-align:left">OJ</td>
+<td style="text-align:left">VC</td>
+<td style="text-align:right">0.0644907</td>
+<td style="text-align:right">0.064</td>
+<td style="text-align:left">0.064</td>
+<td style="text-align:left">ns</td>
+<td style="text-align:left">Wilcoxon</td>
+</tr>
+</tbody>
+</table>
+<p>Returned value is a data frame with the following columns:</p>
+<p>.y.: the y variable used in the test.<br>
+p: the p-value<br>
+p.adj: the adjusted p-value. Default value for p.adjust.method = “holm”<br>
+p.format: the formatted p-value<br>
+p.signif: the significance level.<br>
+method: the statistical test used to compare groups.</p>
+<p>Create a box plot with p-values:</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">p &lt;- ggboxplot(data = ToothGrowth, </span><br><span class="line">               x = <span class="string">&quot;supp&quot;</span>, y = <span class="string">&quot;len&quot;</span>,</span><br><span class="line">               color = <span class="string">&quot;supp&quot;</span>, palette = <span class="string">&quot;jco&quot;</span>,</span><br><span class="line">               add = <span class="string">&quot;jitter&quot;</span>)</span><br><span class="line"><span class="comment"># add = &quot;jitter&quot;参数添加箱线图的数值点</span></span><br><span class="line"><span class="comment"># 添加p值</span></span><br><span class="line">p + stat_compare_means()</span><br><span class="line"><span class="comment"># 再画一幅，这次改变P值的统计方法</span></span><br><span class="line">p + stat_compare_means(method = <span class="string">&quot;t.test&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210123232427.png" alt=""></p>
+<p>显示P值的标签位置可以通过如下参数来调整：label.x, label.y。</p>
+<p>显示P值的标签默认为 compare_means() 返回值中的 method 和 p 的组合。也可以通过 aes() 函数指定为其他显示形式。例如：</p>
+<p>For example,</p>
+<p>aes(label = …p.format…) or aes(label = paste0(“p =”, …p.format…)): display only the formatted p-value (without the method name)<br>
+aes(label = …p.signif…): display only the significance level.<br>
+aes(label = paste0(…method…, “\n”, “p =”, …p.format…)): Use line break (“\n”) between the method name and the p-value.</p>
+<p>如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">p + stat_compare_means(aes(label = paste0(..method..,<span class="string">&quot;: &quot;</span>,<span class="string">&quot;p=&quot;</span>,..p.format..)),</span><br><span class="line">                       label.x = <span class="number">1.5</span>, label.y = <span class="number">40</span>, method = <span class="string">&quot;t.test&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210123232511.png" alt=""></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 单独显示字符型向量的显著水平</span></span><br><span class="line">p + stat_compare_means(label = <span class="string">&quot;p.signif&quot;</span>, label.x = <span class="number">1.5</span>, label.y = <span class="number">40</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210123232653.png" alt=""></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 单独显示P值</span></span><br><span class="line">p + stat_compare_means(label = <span class="string">&quot;p.format&quot;</span>,</span><br><span class="line">                       label.x = <span class="number">1.5</span>, label.y = <span class="number">40</span>, method = <span class="string">&quot;t.test&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用aes映射也可以达到同样的效果，此时只有P值，需要连接P=</span></span><br><span class="line">p + stat_compare_means(aes(label = paste(<span class="string">&quot;p = &quot;</span>,..p.format..)),</span><br><span class="line">                       label.x = <span class="number">1.5</span>, label.y = <span class="number">40</span>, method = <span class="string">&quot;t.test&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210123232856.png" alt=""></p>
+<h3 id="3-比较两个配对样本">3. 比较两个配对样本</h3>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">compare_means(len ~ supp, data = ToothGrowth, paired = <span class="literal">TRUE</span>)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">.y.</th>
+<th style="text-align:left">group1</th>
+<th style="text-align:left">group2</th>
+<th style="text-align:right">p</th>
+<th style="text-align:right">p.adj</th>
+<th style="text-align:left">p.format</th>
+<th style="text-align:left">p.signif</th>
+<th style="text-align:left">method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">len</td>
+<td style="text-align:left">OJ</td>
+<td style="text-align:left">VC</td>
+<td style="text-align:right">0.0043126</td>
+<td style="text-align:right">0.0043</td>
+<td style="text-align:left">0.0043</td>
+<td style="text-align:left">**</td>
+<td style="text-align:left">Wilcoxon</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用ggpaired函数可视化配对数据</span></span><br><span class="line">ggpaired(data = ToothGrowth, </span><br><span class="line">         x = <span class="string">&quot;supp&quot;</span>, y = <span class="string">&quot;len&quot;</span>,</span><br><span class="line">         color = <span class="string">&quot;supp&quot;</span>, line.color = <span class="string">&quot;gray&quot;</span>,</span><br><span class="line">         line.size = <span class="number">0.4</span>, palette = <span class="string">&quot;jco&quot;</span>) +</span><br><span class="line">  stat_compare_means(paired = <span class="built_in">T</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210123233139.png" alt=""></p>
+<ul>
+<li>palette: 选择不同的调色板</li>
+</ul>
+<h3 id="4-比较多组样本">4.比较多组样本</h3>
+<p><strong>1. 全局比较</strong></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用anova的方法， 全局比较</span></span><br><span class="line">compare_means(len ~ dose,  data = ToothGrowth, method = <span class="string">&quot;anova&quot;</span>)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">.y.</th>
+<th style="text-align:right">p</th>
+<th style="text-align:right">p.adj</th>
+<th style="text-align:left">p.format</th>
+<th style="text-align:left">p.signif</th>
+<th style="text-align:left">method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">len</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:left">9.5e-16</td>
+<td style="text-align:left">****</td>
+<td style="text-align:left">Anova</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Default method = &quot;kruskal.test&quot; for multiple groups</span></span><br><span class="line">ggboxplot(ToothGrowth, x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>,</span><br><span class="line">          color = <span class="string">&quot;dose&quot;</span>, palette = <span class="string">&quot;jco&quot;</span>)+</span><br><span class="line">  stat_compare_means()</span><br><span class="line"><span class="comment"># Change method to anova</span></span><br><span class="line">ggboxplot(ToothGrowth, x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>,</span><br><span class="line">          color = <span class="string">&quot;dose&quot;</span>, palette = <span class="string">&quot;jco&quot;</span>)+</span><br><span class="line">  stat_compare_means(method = <span class="string">&quot;anova&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210123233337.png" alt=""></p>
+<p><strong>2. 成对比较</strong></p>
+<p>如果分组超过两个，默认将所有组两两比较, 默认方法为wilcox.test， 可以改为t.test</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">compare_means(len ~ dose,  data = ToothGrowth)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">.y.</th>
+<th style="text-align:left">group1</th>
+<th style="text-align:left">group2</th>
+<th style="text-align:right">p</th>
+<th style="text-align:right">p.adj</th>
+<th style="text-align:left">p.format</th>
+<th style="text-align:left">p.signif</th>
+<th style="text-align:left">method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">len</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">1</td>
+<td style="text-align:right">0.0000070</td>
+<td style="text-align:right">1.4e-05</td>
+<td style="text-align:left">7.0e-06</td>
+<td style="text-align:left">****</td>
+<td style="text-align:left">Wilcoxon</td>
+</tr>
+<tr>
+<td style="text-align:left">len</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">2</td>
+<td style="text-align:right">0.0000001</td>
+<td style="text-align:right">2.0e-07</td>
+<td style="text-align:left">8.4e-08</td>
+<td style="text-align:left">****</td>
+<td style="text-align:left">Wilcoxon</td>
+</tr>
+<tr>
+<td style="text-align:left">len</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">2</td>
+<td style="text-align:right">0.0001772</td>
+<td style="text-align:right">1.8e-04</td>
+<td style="text-align:left">0.00018</td>
+<td style="text-align:left">***</td>
+<td style="text-align:left">Wilcoxon</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 可视化所指定的比较</span></span><br><span class="line"><span class="comment"># 指定比较的组，以下3组都指定</span></span><br><span class="line">my_comparisons &lt;- <span class="built_in">list</span>( <span class="built_in">c</span>(<span class="string">&quot;0.5&quot;</span>, <span class="string">&quot;1&quot;</span>), <span class="built_in">c</span>(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>), <span class="built_in">c</span>(<span class="string">&quot;0.5&quot;</span>, <span class="string">&quot;2&quot;</span>) )</span><br><span class="line"></span><br><span class="line">ggboxplot(data = ToothGrowth, </span><br><span class="line">          x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>,</span><br><span class="line">          color = <span class="string">&quot;dose&quot;</span>, palette = <span class="string">&quot;jco&quot;</span>) +</span><br><span class="line">  stat_compare_means(comparisons = my_comparisons) + <span class="comment"># 指定成对比较, 并指定P值位置</span></span><br><span class="line">  stat_compare_means(label.y = <span class="number">50</span>) <span class="comment"># 指定P值位置的这句代码不能和上面的同一个函数的代码合并，合并之后P值比价会显示在一条线段上</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210123233515.png" alt=""></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将分组比较的P值label使用label.y指定位置</span></span><br><span class="line">ggboxplot(ToothGrowth, x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>,</span><br><span class="line">          color = <span class="string">&quot;dose&quot;</span>, palette = <span class="string">&quot;jco&quot;</span>)+ </span><br><span class="line">  stat_compare_means(comparisons = my_comparisons, label.y = <span class="built_in">c</span>(<span class="number">29</span>, <span class="number">35</span>, <span class="number">40</span>))</span><br><span class="line"><span class="comment"># 去掉全局比较的数值</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210123233600.png" alt=""></p>
+<p><strong>3. 指定一个参考组的两两比较</strong></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Pairwise comparison against reference</span></span><br><span class="line">compare_means(len ~ dose,  data = ToothGrowth,</span><br><span class="line">              <span class="comment"># 指定dose中0.5的组作为参考组</span></span><br><span class="line">              ref.group = <span class="string">&quot;0.5&quot;</span>,</span><br><span class="line">              method = <span class="string">&quot;t.test&quot;</span>) %&gt;% </span><br><span class="line">  knitr::kable(format = <span class="string">&quot;markdown&quot;</span>)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">.y.</th>
+<th style="text-align:left">group1</th>
+<th style="text-align:left">group2</th>
+<th style="text-align:right">p</th>
+<th style="text-align:right">p.adj</th>
+<th style="text-align:left">p.format</th>
+<th style="text-align:left">p.signif</th>
+<th style="text-align:left">method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">len</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">1</td>
+<td style="text-align:right">1e-07</td>
+<td style="text-align:right">1e-07</td>
+<td style="text-align:left">1.3e-07</td>
+<td style="text-align:left">****</td>
+<td style="text-align:left">T-test</td>
+</tr>
+<tr>
+<td style="text-align:left">len</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">2</td>
+<td style="text-align:right">0e+00</td>
+<td style="text-align:right">0e+00</td>
+<td style="text-align:left">4.4e-14</td>
+<td style="text-align:left">****</td>
+<td style="text-align:left">T-test</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Visualize</span></span><br><span class="line">ggboxplot(ToothGrowth, x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>,</span><br><span class="line">          color = <span class="string">&quot;dose&quot;</span>, palette = <span class="string">&quot;jco&quot;</span>)+</span><br><span class="line">  stat_compare_means(method = <span class="string">&quot;anova&quot;</span>, label.y = <span class="number">40</span>)+      <span class="comment"># 全局比较，使用anova方法</span></span><br><span class="line">  stat_compare_means(label = <span class="string">&quot;p.signif&quot;</span>, method = <span class="string">&quot;t.test&quot;</span>,</span><br><span class="line">                     ref.group = <span class="string">&quot;0.5&quot;</span>)                    <span class="comment"># 指定配对比价的refer group，比较对象为0.5的组</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210123233752.png" alt=""></p>
+<p><strong>4. 相对于所有组的均值(base-mean)的多重两两比较的检验</strong></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Comparison of each group against base-mean</span></span><br><span class="line">compare_means(len ~ dose,  data = ToothGrowth, ref.group = <span class="string">&quot;.all.&quot;</span>,</span><br><span class="line">              method = <span class="string">&quot;t.test&quot;</span>)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">.y.</th>
+<th style="text-align:left">group1</th>
+<th style="text-align:left">group2</th>
+<th style="text-align:right">p</th>
+<th style="text-align:right">p.adj</th>
+<th style="text-align:left">p.format</th>
+<th style="text-align:left">p.signif</th>
+<th style="text-align:left">method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">len</td>
+<td style="text-align:left">.all.</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:right">0.0000003</td>
+<td style="text-align:right">9.0e-07</td>
+<td style="text-align:left">2.9e-07</td>
+<td style="text-align:left">****</td>
+<td style="text-align:left">T-test</td>
+</tr>
+<tr>
+<td style="text-align:left">len</td>
+<td style="text-align:left">.all.</td>
+<td style="text-align:left">1</td>
+<td style="text-align:right">0.5118773</td>
+<td style="text-align:right">5.1e-01</td>
+<td style="text-align:left">0.51</td>
+<td style="text-align:left">ns</td>
+<td style="text-align:left">T-test</td>
+</tr>
+<tr>
+<td style="text-align:left">len</td>
+<td style="text-align:left">.all.</td>
+<td style="text-align:left">2</td>
+<td style="text-align:right">0.0000004</td>
+<td style="text-align:right">9.0e-07</td>
+<td style="text-align:left">4.3e-07</td>
+<td style="text-align:left">****</td>
+<td style="text-align:left">T-test</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># .all.参数比较其中一组与所有的组的均值（base-mean），在组比较多时，比较方便</span></span><br><span class="line">ggboxplot(data = ToothGrowth, </span><br><span class="line">          x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>,</span><br><span class="line">          color = <span class="string">&quot;dose&quot;</span>, palette = <span class="string">&quot;jco&quot;</span>)+</span><br><span class="line">  stat_compare_means(method = <span class="string">&quot;kruskal.test&quot;</span>, label.y = <span class="number">40</span>)+</span><br><span class="line">  stat_compare_means(label = <span class="string">&quot;p.format&quot;</span>, method = <span class="string">&quot;t.test&quot;</span>, ref.group = <span class="string">&quot;.all.&quot;</span>) </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210123233937.png" alt=""></p>
+<p>下面使用骨髓瘤的数据来说明和所有样本的均值(.all.)比较在一些典型的情况中是很有用的。</p>
+<p>将依据患者molecular进行分组，绘制各个组别DEPDC1基因的表达水平。目的是比较各个组别之间是否存在差别，如果有差别，差别又在哪里。</p>
+<p>要回答以上问题，可以在所有7个组之间进行两两比较(pairwise comparison)。 由于组别较多，将导致很多种组别组合，这将很难解释。</p>
+<p>一个简单的解决办法是将7组中的每一组与“.all.”（如base-mean）比较。当检验结果显著时，可以得出结论：与所有组相比，xxx组的DEPDC1的表达水平显著降低或显著升高。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Load myeloma data from GitHub</span></span><br><span class="line">myeloma &lt;- read.delim(<span class="string">&quot;https://raw.githubusercontent.com/kassambara/data/master/myeloma.txt&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Perform the test</span></span><br><span class="line">compare_means(DEPDC1 ~ molecular_group,  data = myeloma,</span><br><span class="line">              ref.group = <span class="string">&quot;.all.&quot;</span>, method = <span class="string">&quot;t.test&quot;</span>)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">.y.</th>
+<th style="text-align:left">group1</th>
+<th style="text-align:left">group2</th>
+<th style="text-align:right">p</th>
+<th style="text-align:right">p.adj</th>
+<th style="text-align:left">p.format</th>
+<th style="text-align:left">p.signif</th>
+<th style="text-align:left">method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">DEPDC1</td>
+<td style="text-align:left">.all.</td>
+<td style="text-align:left">Cyclin D-1</td>
+<td style="text-align:right">0.2877529</td>
+<td style="text-align:right">1.0e+00</td>
+<td style="text-align:left">0.29</td>
+<td style="text-align:left">ns</td>
+<td style="text-align:left">T-test</td>
+</tr>
+<tr>
+<td style="text-align:left">DEPDC1</td>
+<td style="text-align:left">.all.</td>
+<td style="text-align:left">Cyclin D-2</td>
+<td style="text-align:right">0.4244240</td>
+<td style="text-align:right">1.0e+00</td>
+<td style="text-align:left">0.42</td>
+<td style="text-align:left">ns</td>
+<td style="text-align:left">T-test</td>
+</tr>
+<tr>
+<td style="text-align:left">DEPDC1</td>
+<td style="text-align:left">.all.</td>
+<td style="text-align:left">MMSET</td>
+<td style="text-align:right">0.5784193</td>
+<td style="text-align:right">1.0e+00</td>
+<td style="text-align:left">0.58</td>
+<td style="text-align:left">ns</td>
+<td style="text-align:left">T-test</td>
+</tr>
+<tr>
+<td style="text-align:left">DEPDC1</td>
+<td style="text-align:left">.all.</td>
+<td style="text-align:left">MAF</td>
+<td style="text-align:right">0.2538126</td>
+<td style="text-align:right">1.0e+00</td>
+<td style="text-align:left">0.25</td>
+<td style="text-align:left">ns</td>
+<td style="text-align:left">T-test</td>
+</tr>
+<tr>
+<td style="text-align:left">DEPDC1</td>
+<td style="text-align:left">.all.</td>
+<td style="text-align:left">Hyperdiploid</td>
+<td style="text-align:right">0.0000000</td>
+<td style="text-align:right">2.0e-07</td>
+<td style="text-align:left">2.7e-08</td>
+<td style="text-align:left">****</td>
+<td style="text-align:left">T-test</td>
+</tr>
+<tr>
+<td style="text-align:left">DEPDC1</td>
+<td style="text-align:left">.all.</td>
+<td style="text-align:left">Proliferation</td>
+<td style="text-align:right">0.0000239</td>
+<td style="text-align:right">1.2e-04</td>
+<td style="text-align:left">2.4e-05</td>
+<td style="text-align:left">****</td>
+<td style="text-align:left">T-test</td>
+</tr>
+<tr>
+<td style="text-align:left">DEPDC1</td>
+<td style="text-align:left">.all.</td>
+<td style="text-align:left">Low bone disease</td>
+<td style="text-align:right">0.0000053</td>
+<td style="text-align:right">3.2e-05</td>
+<td style="text-align:left">5.3e-06</td>
+<td style="text-align:left">****</td>
+<td style="text-align:left">T-test</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">head(myeloma)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">X</th>
+<th style="text-align:left">molecular_group</th>
+<th style="text-align:left">chr1q21_status</th>
+<th style="text-align:left">treatment</th>
+<th style="text-align:right">event</th>
+<th style="text-align:right">time</th>
+<th style="text-align:right">CCND1</th>
+<th style="text-align:right">CRIM1</th>
+<th style="text-align:right">DEPDC1</th>
+<th style="text-align:right">IRF4</th>
+<th style="text-align:right">TP53</th>
+<th style="text-align:right">WHSC1</th>
+<th style="text-align:left">group</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">GSM50986</td>
+<td style="text-align:left">Cyclin D-1</td>
+<td style="text-align:left">3 copies</td>
+<td style="text-align:left">TT2</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">69.24</td>
+<td style="text-align:right">9908.4</td>
+<td style="text-align:right">420.9</td>
+<td style="text-align:right">523.5</td>
+<td style="text-align:right">16156.5</td>
+<td style="text-align:right">10.0</td>
+<td style="text-align:right">261.9</td>
+<td style="text-align:left">cyclin.d.1</td>
+</tr>
+<tr>
+<td style="text-align:left">GSM50988</td>
+<td style="text-align:left">Cyclin D-2</td>
+<td style="text-align:left">2 copies</td>
+<td style="text-align:left">TT2</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">66.43</td>
+<td style="text-align:right">16698.8</td>
+<td style="text-align:right">52.0</td>
+<td style="text-align:right">21.1</td>
+<td style="text-align:right">16946.2</td>
+<td style="text-align:right">1056.9</td>
+<td style="text-align:right">363.8</td>
+<td style="text-align:left">cyclin.d.2</td>
+</tr>
+<tr>
+<td style="text-align:left">GSM50989</td>
+<td style="text-align:left">MMSET</td>
+<td style="text-align:left">2 copies</td>
+<td style="text-align:left">TT2</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">66.50</td>
+<td style="text-align:right">294.5</td>
+<td style="text-align:right">617.9</td>
+<td style="text-align:right">192.9</td>
+<td style="text-align:right">8903.9</td>
+<td style="text-align:right">1762.8</td>
+<td style="text-align:right">10042.9</td>
+<td style="text-align:left">mmset</td>
+</tr>
+<tr>
+<td style="text-align:left">GSM50990</td>
+<td style="text-align:left">MMSET</td>
+<td style="text-align:left">3 copies</td>
+<td style="text-align:left">TT2</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">42.67</td>
+<td style="text-align:right">241.9</td>
+<td style="text-align:right">11.9</td>
+<td style="text-align:right">184.7</td>
+<td style="text-align:right">11894.7</td>
+<td style="text-align:right">946.8</td>
+<td style="text-align:right">4931.0</td>
+<td style="text-align:left">mmset</td>
+</tr>
+<tr>
+<td style="text-align:left">GSM50991</td>
+<td style="text-align:left">MAF</td>
+<td style="text-align:left">NA</td>
+<td style="text-align:left">TT2</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">65.00</td>
+<td style="text-align:right">472.6</td>
+<td style="text-align:right">38.8</td>
+<td style="text-align:right">212.0</td>
+<td style="text-align:right">7563.1</td>
+<td style="text-align:right">361.4</td>
+<td style="text-align:right">165.0</td>
+<td style="text-align:left">maf</td>
+</tr>
+<tr>
+<td style="text-align:left">GSM50992</td>
+<td style="text-align:left">Hyperdiploid</td>
+<td style="text-align:left">2 copies</td>
+<td style="text-align:left">TT2</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">65.20</td>
+<td style="text-align:right">664.1</td>
+<td style="text-align:right">16.9</td>
+<td style="text-align:right">341.6</td>
+<td style="text-align:right">16023.4</td>
+<td style="text-align:right">2096.3</td>
+<td style="text-align:right">569.2</td>
+<td style="text-align:left">hyperdiploid</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 可视化</span></span><br><span class="line"><span class="comment"># legend = &quot;none&quot;参数去掉图形上方显示的每种颜色的box代表哪种分组的信息</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line">ggboxplot(myeloma, x = <span class="string">&quot;molecular_group&quot;</span>, y = <span class="string">&quot;DEPDC1&quot;</span>, color = <span class="string">&quot;molecular_group&quot;</span>, </span><br><span class="line">          add = <span class="string">&quot;jitter&quot;</span>, legend = <span class="string">&quot;none&quot;</span>) +</span><br><span class="line">  rotate_x_text(angle = <span class="number">45</span>)+</span><br><span class="line">  geom_hline(yintercept = mean(myeloma$DEPDC1), linetype = <span class="number">2</span>)+ <span class="comment"># Add horizontal line at base mean</span></span><br><span class="line">  stat_compare_means(method = <span class="string">&quot;anova&quot;</span>, label.y = <span class="number">1600</span>)+        <span class="comment"># Add global annova p-value</span></span><br><span class="line">  stat_compare_means(label = <span class="string">&quot;p.signif&quot;</span>, method = <span class="string">&quot;t.test&quot;</span>,</span><br><span class="line">                     ref.group = <span class="string">&quot;.all.&quot;</span>)                      <span class="comment"># Pairwise comparison against all, 此处添加hide.ns = TRUE参数，将隐藏不显著的ns符号</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210123234045.png" alt=""></p>
+<p>From the plot above, we can conclude that DEPDC1 is significantly overexpressed in proliferation group and, it’s significantly downexpressed in Hyperdiploid and Low bone disease compared to all.</p>
+<h3 id="5-多个分组变量">5. 多个分组变量</h3>
+<ul>
+<li><strong>在使用另外一个变量分组后，两个独立样本之间的比较</strong></li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">compare_means(len ~ supp, data = ToothGrowth, </span><br><span class="line">              group.by = <span class="string">&quot;dose&quot;</span>)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">dose</th>
+<th style="text-align:left">.y.</th>
+<th style="text-align:left">group1</th>
+<th style="text-align:left">group2</th>
+<th style="text-align:right">p</th>
+<th style="text-align:right">p.adj</th>
+<th style="text-align:left">p.format</th>
+<th style="text-align:left">p.signif</th>
+<th style="text-align:left">method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0.5</td>
+<td style="text-align:left">len</td>
+<td style="text-align:left">OJ</td>
+<td style="text-align:left">VC</td>
+<td style="text-align:right">0.0231864</td>
+<td style="text-align:right">0.046</td>
+<td style="text-align:left">0.023</td>
+<td style="text-align:left">*</td>
+<td style="text-align:left">Wilcoxon</td>
+</tr>
+<tr>
+<td style="text-align:right">1.0</td>
+<td style="text-align:left">len</td>
+<td style="text-align:left">OJ</td>
+<td style="text-align:left">VC</td>
+<td style="text-align:right">0.0040304</td>
+<td style="text-align:right">0.012</td>
+<td style="text-align:left">0.004</td>
+<td style="text-align:left">**</td>
+<td style="text-align:left">Wilcoxon</td>
+</tr>
+<tr>
+<td style="text-align:right">2.0</td>
+<td style="text-align:left">len</td>
+<td style="text-align:left">OJ</td>
+<td style="text-align:left">VC</td>
+<td style="text-align:right">1.0000000</td>
+<td style="text-align:right">1.000</td>
+<td style="text-align:left">1.000</td>
+<td style="text-align:left">ns</td>
+<td style="text-align:left">Wilcoxon</td>
+</tr>
+</tbody>
+</table>
+<p>Visualize (1/2). Create a multi-panel box plots facetted by group (here, “dose”):</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 多个小图facet</span></span><br><span class="line">p &lt;- ggboxplot(data = ToothGrowth, </span><br><span class="line">               x = <span class="string">&quot;supp&quot;</span>, y = <span class="string">&quot;len&quot;</span>,</span><br><span class="line">               color = <span class="string">&quot;supp&quot;</span>, palette = <span class="string">&quot;jco&quot;</span>,</span><br><span class="line">               add = <span class="string">&quot;jitter&quot;</span>,</span><br><span class="line">               facet.by = <span class="string">&quot;dose&quot;</span>,</span><br><span class="line">               short.panel.labs = <span class="built_in">F</span>) <span class="comment"># short.panel.labs默认为T,改为F显示分组dose:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 仅显示P值，去除方法</span></span><br><span class="line">p + stat_compare_means(label = <span class="string">&quot;p.format&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210123234222.png" alt=""></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 或者显示显著性符号，而不是直接显示P值</span></span><br><span class="line">p + stat_compare_means(label =  <span class="string">&quot;p.signif&quot;</span>, label.x = <span class="number">1.5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># To hide the ‘ns’ symbol, use the argument hide.ns = TRUE.</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210123234244.png" alt=""></p>
+<p>Visualize (2/2). Create one single panel with all box plots. Plot y = “len” by x = “dose” and color by “supp”:</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将所有小图组合放在一张图里</span></span><br><span class="line">p &lt;- ggboxplot(ToothGrowth, x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>,</span><br><span class="line">          color = <span class="string">&quot;supp&quot;</span>, palette = <span class="string">&quot;jco&quot;</span>,</span><br><span class="line">          add = <span class="string">&quot;jitter&quot;</span>) <span class="comment"># 去掉facet.by参数</span></span><br><span class="line">p + stat_compare_means(aes(group = supp))</span><br><span class="line"><span class="comment"># 使用aes映射时，列名不能加双引号</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210123234333.png" alt=""></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 只显示P值</span></span><br><span class="line">p + stat_compare_means(aes(group = supp),label = <span class="string">&quot;p.format&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/image-20210123234424481.png" alt="显示P=数值"></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 单纯的只显示P的数值</span></span><br><span class="line">p + stat_compare_means(aes(group = supp, label = paste(..p.format..)))</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/image-20210123234450136.png" alt="只显示P值"></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 只显示显著性水平</span></span><br><span class="line">p + stat_compare_means(aes(group = supp), label = <span class="string">&quot;p.signif&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210123234525.png" alt=""></p>
+<ul>
+<li><strong>将数据按另一个变量分组后进行配对样本比较</strong></li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">compare_means(len ~ supp, data = ToothGrowth, </span><br><span class="line">              group.by = <span class="string">&quot;dose&quot;</span>, paired = <span class="literal">TRUE</span>) <span class="comment"># 增加paired参数</span></span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">dose</th>
+<th style="text-align:left">.y.</th>
+<th style="text-align:left">group1</th>
+<th style="text-align:left">group2</th>
+<th style="text-align:right">p</th>
+<th style="text-align:right">p.adj</th>
+<th style="text-align:left">p.format</th>
+<th style="text-align:left">p.signif</th>
+<th style="text-align:left">method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0.5</td>
+<td style="text-align:left">len</td>
+<td style="text-align:left">OJ</td>
+<td style="text-align:left">VC</td>
+<td style="text-align:right">0.0329694</td>
+<td style="text-align:right">0.066</td>
+<td style="text-align:left">0.033</td>
+<td style="text-align:left">*</td>
+<td style="text-align:left">Wilcoxon</td>
+</tr>
+<tr>
+<td style="text-align:right">1.0</td>
+<td style="text-align:left">len</td>
+<td style="text-align:left">OJ</td>
+<td style="text-align:left">VC</td>
+<td style="text-align:right">0.0136719</td>
+<td style="text-align:right">0.041</td>
+<td style="text-align:left">0.014</td>
+<td style="text-align:left">*</td>
+<td style="text-align:left">Wilcoxon</td>
+</tr>
+<tr>
+<td style="text-align:right">2.0</td>
+<td style="text-align:left">len</td>
+<td style="text-align:left">OJ</td>
+<td style="text-align:left">VC</td>
+<td style="text-align:right">1.0000000</td>
+<td style="text-align:right">1.000</td>
+<td style="text-align:left">1.000</td>
+<td style="text-align:left">ns</td>
+<td style="text-align:left">Wilcoxon</td>
+</tr>
+</tbody>
+</table>
+<p>相比于非配对P检验，配对P检验的P值更大</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Box plot facetted by &quot;dose&quot;</span></span><br><span class="line">p &lt;- ggpaired(ToothGrowth, x = <span class="string">&quot;supp&quot;</span>, y = <span class="string">&quot;len&quot;</span>,</span><br><span class="line">          color = <span class="string">&quot;supp&quot;</span>, palette = <span class="string">&quot;jco&quot;</span>, </span><br><span class="line">          line.color = <span class="string">&quot;gray&quot;</span>, line.size = <span class="number">0.4</span>,</span><br><span class="line">          facet.by = <span class="string">&quot;dose&quot;</span>, short.panel.labs = <span class="literal">FALSE</span>)</span><br><span class="line"><span class="comment"># Use only p.format as label. Remove method name.</span></span><br><span class="line">p + stat_compare_means(label = <span class="string">&quot;p.format&quot;</span>, paired = <span class="literal">TRUE</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/image-20210123234616181.png" alt=""></p>
+<h3 id="6-其他类型的图表">6. 其他类型的图表</h3>
+<h4 id="6-1-不分组的图">6.1 不分组的图</h4>
+<ul>
+<li><strong>条形图</strong></li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 条形图</span></span><br><span class="line">ggbarplot(data = ToothGrowth, x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>, add = <span class="string">&quot;mean_se&quot;</span>,</span><br><span class="line">          color = <span class="string">&quot;dose&quot;</span>,palette=<span class="string">&quot;jco&quot;</span>, legend=<span class="string">&quot;none&quot;</span>)+</span><br><span class="line">  stat_compare_means()+ <span class="comment"># 总体比较</span></span><br><span class="line">  stat_compare_means(ref.group = <span class="string">&quot;0.5&quot;</span>, label = <span class="string">&quot;p.signif&quot;</span>, label.y = <span class="built_in">c</span>(<span class="number">22</span>,<span class="number">28</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/image-20210123234658969.png" alt=""></p>
+<ul>
+<li><strong>折线图</strong></li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Line plot of mean +/-se</span></span><br><span class="line">ggline(ToothGrowth, x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>, add = <span class="string">&quot;mean_se&quot;</span>,</span><br><span class="line">          color = <span class="string">&quot;black&quot;</span>, linetype = <span class="number">2</span>)+</span><br><span class="line">  stat_compare_means() +                                         <span class="comment"># Global p-value</span></span><br><span class="line">  stat_compare_means(ref.group = <span class="string">&quot;0.5&quot;</span>, label = <span class="string">&quot;p.signif&quot;</span>,</span><br><span class="line">                     label.y = <span class="built_in">c</span>(<span class="number">22</span>, <span class="number">29</span>)) </span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/image-20210123234724122.png" alt=""></p>
+<h4 id="6-2-分组的图">6.2 分组的图</h4>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 分组条形图</span></span><br><span class="line"><span class="comment"># position = position_dodge()调节supp分组的OJ组和VC组两组样本的柱状图的距离，默认值为重合(0)</span></span><br><span class="line">ggbarplot(ToothGrowth, x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>, add = <span class="string">&quot;mean_se&quot;</span>,</span><br><span class="line">          color = <span class="string">&quot;supp&quot;</span>, palette = <span class="string">&quot;jco&quot;</span>, </span><br><span class="line">          position = position_dodge(<span class="number">0.8</span>))+</span><br><span class="line">  stat_compare_means(aes(group = supp), label = <span class="string">&quot;p.signif&quot;</span>, label.y = <span class="number">29</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分组折线图</span></span><br><span class="line">ggline(ToothGrowth, x = <span class="string">&quot;dose&quot;</span>, y = <span class="string">&quot;len&quot;</span>, add = <span class="string">&quot;mean_se&quot;</span>,</span><br><span class="line">          color = <span class="string">&quot;supp&quot;</span>, palette = <span class="string">&quot;jco&quot;</span>)+</span><br><span class="line">  stat_compare_means(aes(group = supp), label = <span class="string">&quot;p.signif&quot;</span>, </span><br><span class="line">                     label.y = <span class="built_in">c</span>(<span class="number">16</span>, <span class="number">25</span>, <span class="number">29</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210123234945.png" alt=""></p>
+<p>参考：</p>
+<ol>
+<li>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhouhucheng00/article/details/106391872">数据可视化——R语言为ggplot图形添加P值和显著性水平</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="http://www.sthda.com/english/articles/24-ggpubr-publication-ready-plots/76-add-p-values-and-significance-levels-to-ggplots/">ggpubr: Publication Ready Plots Add P-values and Significance Levels to ggplots</a></p>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">石晓强</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://steven-shixq.github.io/2021/01/23/%E4%BD%BF%E7%94%A8ggpubr%E7%BB%98%E5%88%B6%E5%87%BA%E7%89%88%E7%BA%A7%E5%88%AB%E7%9A%84%E5%9B%BE%E5%BD%A2/">https://steven-shixq.github.io/2021/01/23/%E4%BD%BF%E7%94%A8ggpubr%E7%BB%98%E5%88%B6%E5%87%BA%E7%89%88%E7%BA%A7%E5%88%AB%E7%9A%84%E5%9B%BE%E5%BD%A2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://steven-shixq.github.io" target="_blank">衷深学习</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/tags/R%E8%AF%AD%E8%A8%80/">R语言</a><a class="post-meta__tags" href="/tags/ggpubr/">ggpubr</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/20210124003805.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/shixq_wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/shixq_alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/01/23/MY-100-Day-English-39/"><img class="prev-cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">MY 100-Day English -39</div></div></a></div><div class="next-post pull-right"><a href="/2021/01/24/MY-100-Day-English-40/"><img class="next-cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/Biden.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MY 100-Day English -40</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/02/20/%E4%BD%BF%E7%94%A8R%E8%AF%AD%E8%A8%80%E5%B0%86%E6%95%B0%E6%8D%AE%E4%BB%A5%E8%A1%A8%E6%A0%BC%E7%9A%84%E5%BD%A2%E5%BC%8F%E7%BB%9F%E8%AE%A1%E5%B1%95%E7%A4%BA/" title="使用R语言将数据以表格的形式统计展示"><img class="cover" src="https://github.com/ddsjoberg/gtsummary/raw/master/data-raw/misc_files/tbl_summary_demo1.gif" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-20</div><div class="title">使用R语言将数据以表格的形式统计展示</div></div></a></div><div><a href="/2020/02/15/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/" title="R语言学习笔记1"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-15</div><div class="title">R语言学习笔记1</div></div></a></div><div><a href="/2020/04/18/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B010/" title="R语言学习笔记10"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-18</div><div class="title">R语言学习笔记10</div></div></a></div><div><a href="/2020/04/25/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B011/" title="R语言学习笔记11"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-25</div><div class="title">R语言学习笔记11</div></div></a></div><div><a href="/2020/05/02/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B012/" title="R语言学习笔记12"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-02</div><div class="title">R语言学习笔记12</div></div></a></div><div><a href="/2020/05/09/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B013/" title="R语言学习笔记13"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-09</div><div class="title">R语言学习笔记13</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%AF%94%E8%BE%83%E5%9D%87%E5%80%BC%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">一、比较均值的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81R%E4%B8%AD%E6%B7%BB%E5%8A%A0P%E5%80%BC%E7%9A%84%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D"><span class="toc-text">二、R中添加P值的函数介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-compare-means%E5%87%BD%E6%95%B0"><span class="toc-text">1. compare_means函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-stat-compare-means%E5%87%BD%E6%95%B0"><span class="toc-text">2.stat_compare_means函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8boxplot%E6%BC%94%E7%A4%BA%E6%B7%BB%E5%8A%A0P%E5%80%BC%E5%92%8C%E6%98%BE%E8%91%97%E6%80%A7%E6%B0%B4%E5%B9%B3"><span class="toc-text">使用boxplot演示添加P值和显著性水平</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%87%86%E5%A4%87"><span class="toc-text">1. 准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%8B%AC%E7%AB%8B%E5%8F%8C%E6%A0%B7%E6%9C%AC%E6%AF%94%E8%BE%83"><span class="toc-text">2. 独立双样本比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AA%E9%85%8D%E5%AF%B9%E6%A0%B7%E6%9C%AC"><span class="toc-text">3. 比较两个配对样本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%AF%94%E8%BE%83%E5%A4%9A%E7%BB%84%E6%A0%B7%E6%9C%AC"><span class="toc-text">4.比较多组样本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%A4%9A%E4%B8%AA%E5%88%86%E7%BB%84%E5%8F%98%E9%87%8F"><span class="toc-text">5. 多个分组变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%85%B6%E4%BB%96%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%9B%BE%E8%A1%A8"><span class="toc-text">6. 其他类型的图表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-%E4%B8%8D%E5%88%86%E7%BB%84%E7%9A%84%E5%9B%BE"><span class="toc-text">6.1 不分组的图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-%E5%88%86%E7%BB%84%E7%9A%84%E5%9B%BE"><span class="toc-text">6.2 分组的图</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 石晓强</div><div class="footer_custom_text">欢迎来到我的<a href="https://steven-shixq.github.io/">博客</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'NFoxKw5kAkzXk9OujXdPn1Qp-gzGzoHsz',
+      appKey: '9awzk7TAM6SBvkG1Sn28h7Qf',
+      placeholder: '说点什么吧',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>

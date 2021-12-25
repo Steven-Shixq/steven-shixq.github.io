@@ -1,0 +1,282 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ClusterProfiler富集分析 | 衷深学习</title><meta name="keywords" content="python,R,统计,金融,心理,生物,医学"><meta name="author" content="石晓强"><meta name="copyright" content="石晓强"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="没想到一个富集分析涉及这么多的东西，今天没有完全的搞懂，先记录一下学习的代码, 我打算先把R学一下，再来更新这篇文章  「生信下游分析」如何使用clusterProfiler进行富集分析  安装clusterProfiler等包 if (!requireNamespace(&quot;BiocManager&quot;, quietly &#x3D; TRUE))    install.packages(&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ClusterProfiler富集分析">
+<meta property="og:url" content="https://steven-shixq.github.io/2020/02/08/ClusterProfiler%E5%AF%8C%E9%9B%86%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="衷深学习">
+<meta property="og:description" content="没想到一个富集分析涉及这么多的东西，今天没有完全的搞懂，先记录一下学习的代码, 我打算先把R学一下，再来更新这篇文章  「生信下游分析」如何使用clusterProfiler进行富集分析  安装clusterProfiler等包 if (!requireNamespace(&quot;BiocManager&quot;, quietly &#x3D; TRUE))    install.packages(&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200208231135.png">
+<meta property="article:published_time" content="2020-02-08T14:57:13.000Z">
+<meta property="article:modified_time" content="2020-02-08T15:27:27.389Z">
+<meta property="article:author" content="石晓强">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="R">
+<meta property="article:tag" content="统计">
+<meta property="article:tag" content="金融">
+<meta property="article:tag" content="心理">
+<meta property="article:tag" content="生物">
+<meta property="article:tag" content="医学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200208231135.png"><link rel="shortcut icon" href="/img/avatar_reader.jpg"><link rel="canonical" href="https://steven-shixq.github.io/2020/02/08/ClusterProfiler%E5%AF%8C%E9%9B%86%E5%88%86%E6%9E%90/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 石晓强","link":"链接: ","source":"来源: 衷深学习","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ClusterProfiler富集分析',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-02-08 23:27:27'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar_reader.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">331</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">174</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200208231135.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">衷深学习</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">ClusterProfiler富集分析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-02-08T14:57:13.000Z" title="发表于 2020-02-08 22:57:13">2020-02-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-02-08T15:27:27.389Z" title="更新于 2020-02-08 23:27:27">2020-02-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">922</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="ClusterProfiler富集分析"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>没想到一个富集分析涉及这么多的东西，今天没有完全的搞懂，先记录一下学习的代码<img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/表情_sob.png">, 我打算先把R学一下，再来更新这篇文章</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av45748387/">「生信下游分析」如何使用clusterProfiler进行富集分析</a></p>
+</blockquote>
+<h2 id="安装clusterProfiler等包">安装clusterProfiler等包</h2>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!requireNamespace(<span class="string">&quot;BiocManager&quot;</span>, quietly = <span class="literal">TRUE</span>))</span><br><span class="line">    install.packages(<span class="string">&quot;BiocManager&quot;</span>)</span><br><span class="line">BiocManager::install(<span class="string">&quot;clusterProfiler&quot;</span>)</span><br><span class="line">browseVignettes(<span class="string">&quot;clusterProfiler&quot;</span>) <span class="comment"># documentation</span></span><br><span class="line"><span class="keyword">if</span> (!requireNamespace(<span class="string">&quot;edgeR&quot;</span>))&#123;</span><br><span class="line">  BiocManager::install(<span class="string">&quot;edgeR&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 物种包到：http://www.bioconductor.org/packages/release/BiocViews.html#___Organism 查找，这里的表示humans。</span></span><br><span class="line"><span class="keyword">if</span> (!requireNamespace(<span class="string">&quot;org.Hs.eg.db&quot;</span>))&#123;</span><br><span class="line">  BiocManager::install(<span class="string">&quot;org.Hs.eg.db&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>不同的参考物种，下载不同的数据：<br>
+<img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/bioconductor%E7%89%A9%E7%A7%8D%E5%8C%85.png" alt="BIoconductor物种包"></p>
+<p>加载R包</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">library(edgeR)</span><br><span class="line">library(clusterProfiler)</span><br><span class="line">library(org.Hs.eg.db)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="数据导入">数据导入</h2>
+<p>数据信息:</p>
+<ul>
+<li>来源: TCGA Ovarian Serous Cystadenocarcinoma(OSC)</li>
+<li>日期: 2017-06-14</li>
+<li>下载工具: TCGABiolinks®</li>
+<li>类型: RNA-seq(RSEM)</li>
+<li>样本大小: 296
+<ul>
+<li>79 Immunoreactive(免疫反应物);</li>
+<li>71 Mesenchymal(间充质);</li>
+<li>67 Differentiated(分化);</li>
+<li>79 Proliferative(增生);</li>
+</ul>
+</li>
+</ul>
+<p>表达量数据数据导入:</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">raw_count &lt;- read.table(<span class="string">&quot;D:/baiduyundownload/富集分析/enrichment_analysis/TCGA_RNASeq_rawcounts.txt&quot;</span>,</span><br><span class="line">                        sep = <span class="string">&quot;\t&quot;</span>,</span><br><span class="line">                        stringsAsFactors = <span class="literal">FALSE</span>,</span><br><span class="line">                        header = <span class="literal">TRUE</span>)</span><br><span class="line"><span class="built_in">dim</span>(raw_count)</span><br></pre></td></tr></table></figure>
+<p>查看部分数据</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">raw_count[<span class="number">1</span>:<span class="number">5</span>,<span class="number">1</span>:<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+<p>分组信息导入</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">groups_df &lt;- read.table(<span class="string">&quot;./RNASeq_classdefinitions.txt&quot;</span>,</span><br><span class="line">                        header = <span class="literal">TRUE</span>,</span><br><span class="line">                        sep = <span class="string">&quot;\t&quot;</span>, stringsAsFactors = <span class="literal">FALSE</span>)</span><br><span class="line">head(groups_df)</span><br></pre></td></tr></table></figure>
+<h2 id="差异表达分析">差异表达分析</h2>
+<h3 id="数据预过滤">数据预过滤</h3>
+<p>根据CPM值，过滤低表达的基因. 标准是基因至少在50个样本量的表达量超过1</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">cpms &lt;- cpm(raw_count)</span><br><span class="line">keep &lt;- rowSums(cpms &gt; <span class="number">1</span>) &gt;= <span class="number">50</span></span><br><span class="line">counts &lt;- raw_count[keep,]</span><br><span class="line"><span class="built_in">dim</span>(counts)</span><br></pre></td></tr></table></figure>
+<h3 id="数据标准化和离散度-Dispersion-分析">数据标准化和离散度(Dispersion)分析</h3>
+<p>创建<code>DGEList</code>类，用于存放表达量和样本信息</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># create data structure to hold counts and subtype information for each sample.</span></span><br><span class="line">d &lt;- DGEList(counts=counts, group=groups_df$SUBTYPE)</span><br></pre></td></tr></table></figure>
+<p>对原始文库数据计算标准化因子</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment">#Normalize the data</span></span><br><span class="line">d &lt;- calcNormFactors(d)</span><br></pre></td></tr></table></figure>
+<p>样本间距离</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment">#create multidimensional scaling(MDS) plot. The command below will automatically</span></span><br><span class="line"><span class="comment"># generate the plot containing all samples where each subtype is a different color.</span></span><br><span class="line"><span class="comment">#Ideally there should be a good separation between the different classes.</span></span><br><span class="line">mds_output &lt;- plotMDS(d, labels=<span class="literal">NULL</span>, pch = <span class="number">1</span>,</span><br><span class="line">                      col= <span class="built_in">c</span>(<span class="string">&quot;darkgreen&quot;</span>,<span class="string">&quot;blue&quot;</span>,<span class="string">&quot;red&quot;</span>,<span class="string">&quot;orange&quot;</span>)[factor(groups_df$SUBTYPE)],</span><br><span class="line">                      xlim = <span class="built_in">c</span>(-<span class="number">2.5</span>,<span class="number">4</span>), ylim = <span class="built_in">c</span>(-<span class="number">2.5</span>,<span class="number">4</span>))</span><br><span class="line">legend(<span class="string">&quot;topright&quot;</span>,</span><br><span class="line">       legend=levels(factor(groups_df$SUBTYPE)),</span><br><span class="line">       pch=<span class="built_in">c</span>(<span class="number">1</span>), col= <span class="built_in">c</span>(<span class="string">&quot;darkgreen&quot;</span>,<span class="string">&quot;blue&quot;</span>,<span class="string">&quot;red&quot;</span>, <span class="string">&quot;orange&quot;</span>),title=<span class="string">&quot;Class&quot;</span>,</span><br><span class="line">       bty = <span class="string">&#x27;n&#x27;</span>, cex = <span class="number">0.75</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>计算离散度</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment">#calculate dispersion</span></span><br><span class="line">d &lt;- estimateCommonDisp(d)</span><br><span class="line">d &lt;- estimateTagwiseDisp(d)</span><br></pre></td></tr></table></figure>
+<h3 id="差异表达分析-2">差异表达分析</h3>
+<p>两样本使用<code>exactTest</code>即可.</p>
+<blockquote>
+<p>多样本需要用<code>model.matrix</code>, <code>makeContrasts</code>,<code> glmFit</code>,<code>glmLRT</code>等函数。</p>
+</blockquote>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">de &lt;- exactTest(d, pair=<span class="built_in">c</span>(<span class="string">&quot;Immunoreactive&quot;</span>,<span class="string">&quot;Mesenchymal&quot;</span>))</span><br><span class="line">tt_exact_test &lt;- topTags(de,n=nrow(d))</span><br></pre></td></tr></table></figure>
+<p>保存结果:</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">output_df &lt;- cbind(gene=row.names(tt_exact_test),</span><br><span class="line">                   as.data.frame(tt_exact_test))</span><br><span class="line">write.csv(output_df, file = <span class="string">&quot;edgeR_DEG.csv&quot;</span>,</span><br><span class="line">          row.names = <span class="literal">FALSE</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="富集分析">富集分析</h2>
+<p>读取数据</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">deg_df &lt;- read.table(<span class="string">&quot;./edgeR_DEG.csv&quot;</span>,</span><br><span class="line">                     header = <span class="literal">TRUE</span>,</span><br><span class="line">                     sep = <span class="string">&quot;,&quot;</span>,</span><br><span class="line">                     stringsAsFactors = <span class="literal">FALSE</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>数据预处理: 将基因列拆分</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">deg_df$symbol &lt;- do.call(rbind, strsplit(deg_df$gene, <span class="string">&quot;|&quot;</span>, fixed = <span class="literal">TRUE</span>))[,<span class="number">1</span>]</span><br><span class="line">deg_df$geneID &lt;- do.call(rbind, strsplit(deg_df$gene, <span class="string">&quot;|&quot;</span>, fixed = <span class="literal">TRUE</span>))[,<span class="number">2</span>]</span><br><span class="line">head(deg_df)</span><br></pre></td></tr></table></figure>
+<h3 id="GO分析">GO分析</h3>
+<p>第一步: 筛选目标基因集。例如logFC &gt;1, FDR &lt; 0.05 认为是显著性上调</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">flt &lt;- deg_df[deg_df$logFC &gt; <span class="number">1</span> &amp; deg_df$FDR &lt; <span class="number">0.05</span>,]</span><br><span class="line">up_gene &lt;- flt$geneID</span><br></pre></td></tr></table></figure>
+<p>第二步(1): GO富集分析</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">ego &lt;- enrichGO(up_gene,</span><br><span class="line">                OrgDb = org.Hs.eg.db,</span><br><span class="line">                keyType = <span class="string">&quot;ENTREZID&quot;</span>,</span><br><span class="line">                ont = <span class="string">&quot;BP&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>第二步(2): KEGG富集分析</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">ekegg &lt;- enrichKEGG(up_gene,</span><br><span class="line">                    organism = <span class="string">&quot;hsa&quot;</span>,</span><br><span class="line">                    keyType = <span class="string">&quot;kegg&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>第三步: 可视化</p>
+<p>柱形图</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">barplot(ego, </span><br><span class="line">        showCategory = <span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+<p>气泡图</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">dotplot(ego)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">dotplot(ekegg)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">View(as.data.frame(ekegg))</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">browseKEGG(ekegg, <span class="string">&quot;hsa05224&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="GSEA分析">GSEA分析</h3>
+<p>第一步: 构建排序基因表</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">rank_list &lt;- deg_df$logFC</span><br><span class="line"><span class="built_in">names</span>(rank_list) &lt;- deg_df$geneID</span><br><span class="line">rank_list &lt;- sort(rank_list, decreasing = <span class="literal">TRUE</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>第二步: GSEA分析</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">gseago &lt;- gseGO(rank_list,</span><br><span class="line">      ont = <span class="string">&quot;BP&quot;</span>,</span><br><span class="line">      OrgDb = org.Hs.eg.db,</span><br><span class="line">      keyType = <span class="string">&quot;ENTREZID&quot;</span>)</span><br><span class="line"></span><br><span class="line">gseakegg &lt;- gseKEGG(rank_list,</span><br><span class="line">                    organism = <span class="string">&quot;hsa&quot;</span>,</span><br><span class="line">                    keyType = <span class="string">&quot;kegg&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>第三步: 可视化</p>
+<p>冒泡图</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">dotplot(gseakegg)</span><br></pre></td></tr></table></figure>
+<p>GSEA图</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">View(as.data.frame(gseakegg))</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">enrichplot::gseaplot2(gseakegg, <span class="string">&quot;hsa05224&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>Reference:</p>
+<p><a target="_blank" rel="noopener" href="https://yulab-smu.github.io/clusterProfiler-book/index.html">https://yulab-smu.github.io/clusterProfiler-book/index.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://guangchuangyu.github.io/software/clusterProfiler/documentation/">https://guangchuangyu.github.io/software/clusterProfiler/documentation/</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.bioconductor.org/packages/release/BiocViews.html#___Organism">http://www.bioconductor.org/packages/release/BiocViews.html#___Organism</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">石晓强</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://steven-shixq.github.io/2020/02/08/ClusterProfiler%E5%AF%8C%E9%9B%86%E5%88%86%E6%9E%90/">https://steven-shixq.github.io/2020/02/08/ClusterProfiler%E5%AF%8C%E9%9B%86%E5%88%86%E6%9E%90/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://steven-shixq.github.io" target="_blank">衷深学习</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200208231135.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/shixq_wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/shixq_alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/02/08/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB2/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/每日外闻2.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">每日外闻2</div></div></a></div><div class="next-post pull-right"><a href="/2020/02/09/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB3/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/扎克伯格FB首页.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">每日外闻3</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85clusterProfiler%E7%AD%89%E5%8C%85"><span class="toc-text">安装clusterProfiler等包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5"><span class="toc-text">数据导入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%AE%E5%BC%82%E8%A1%A8%E8%BE%BE%E5%88%86%E6%9E%90"><span class="toc-text">差异表达分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E8%BF%87%E6%BB%A4"><span class="toc-text">数据预过滤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A0%87%E5%87%86%E5%8C%96%E5%92%8C%E7%A6%BB%E6%95%A3%E5%BA%A6-Dispersion-%E5%88%86%E6%9E%90"><span class="toc-text">数据标准化和离散度(Dispersion)分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%AE%E5%BC%82%E8%A1%A8%E8%BE%BE%E5%88%86%E6%9E%90-2"><span class="toc-text">差异表达分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%8C%E9%9B%86%E5%88%86%E6%9E%90"><span class="toc-text">富集分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GO%E5%88%86%E6%9E%90"><span class="toc-text">GO分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GSEA%E5%88%86%E6%9E%90"><span class="toc-text">GSEA分析</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 石晓强</div><div class="footer_custom_text">欢迎来到我的<a href="https://steven-shixq.github.io/">博客</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'NFoxKw5kAkzXk9OujXdPn1Qp-gzGzoHsz',
+      appKey: '9awzk7TAM6SBvkG1Sn28h7Qf',
+      placeholder: '说点什么吧',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>

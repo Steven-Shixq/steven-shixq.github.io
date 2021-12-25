@@ -1,0 +1,309 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>R语言学习笔记19 | 衷深学习</title><meta name="keywords" content="计算机,编程,R语言"><meta name="author" content="石晓强"><meta name="copyright" content="石晓强"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="R基本绘图-2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R语言学习笔记19">
+<meta property="og:url" content="https://steven-shixq.github.io/2020/06/20/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B019/index.html">
+<meta property="og:site_name" content="衷深学习">
+<meta property="og:description" content="R基本绘图-2">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png">
+<meta property="article:published_time" content="2020-06-20T15:18:04.000Z">
+<meta property="article:modified_time" content="2020-06-25T03:55:22.943Z">
+<meta property="article:author" content="石晓强">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="R语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png"><link rel="shortcut icon" href="/img/avatar_reader.jpg"><link rel="canonical" href="https://steven-shixq.github.io/2020/06/20/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B019/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 石晓强","link":"链接: ","source":"来源: 衷深学习","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'R语言学习笔记19',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-06-25 11:55:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar_reader.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">331</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">174</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">衷深学习</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">R语言学习笔记19</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-06-20T15:18:04.000Z" title="发表于 2020-06-20 23:18:04">2020-06-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-06-25T03:55:22.943Z" title="更新于 2020-06-25 11:55:22">2020-06-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/R%E8%AF%AD%E8%A8%80/">R语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="R语言学习笔记19"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h4 id="axis">axis()</h4>
+<p>在<code>plot()</code>函数中用</p>
+<p><code>axes=FALSE</code>可以取消自动的坐标轴。</p>
+<p>用<code>box()</code>函数画坐标边框。</p>
+<p>用<code>axis</code>函数单独绘制坐标轴。</p>
+<p><code>axis</code>的第一个参数取1，2，3，4， 分别表示横轴、纵轴、上方和右方。 <code>axis</code>的参数<code>at</code>为 刻度线位置，<code>labels</code>为标签。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">plot(seq(along=d.class$weight), d.class$weight, axes=<span class="literal">FALSE</span>,</span><br><span class="line">     type=<span class="string">&#x27;b&#x27;</span>, lwd=<span class="number">3</span>,</span><br><span class="line">     main=<span class="string">&#x27;身高体重曲线图&#x27;</span>,</span><br><span class="line">     xlab=<span class="string">&#x27;身高分层&#x27;</span>, ylab=<span class="string">&#x27;体重&#x27;</span>,</span><br><span class="line">     col=<span class="string">&quot;blue&quot;</span>)</span><br><span class="line">box(); axis(<span class="number">2</span>)</span><br><span class="line">axis(<span class="number">1</span>, at=seq(along=d.class$weight), seq(along=d.class$weight))</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200622004930.png" alt=""></p>
+<p>数学符号：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- seq(<span class="number">0</span>, <span class="number">2</span>*<span class="built_in">pi</span>, <span class="built_in">length</span>=<span class="number">200</span>)</span><br><span class="line">y1 &lt;- <span class="built_in">sin</span>(x)</span><br><span class="line">plot(x, y1, type=<span class="string">&#x27;l&#x27;</span>, lwd=<span class="number">2</span>,</span><br><span class="line">     axes=<span class="literal">FALSE</span>,</span><br><span class="line">     xlab=<span class="string">&#x27;x&#x27;</span>, ylab=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">abline(h=<span class="number">0</span>, col=<span class="string">&#x27;gray&#x27;</span>)</span><br><span class="line">box()</span><br><span class="line">axis(<span class="number">2</span>)</span><br><span class="line">axis(<span class="number">1</span>, at=(<span class="number">0</span>:<span class="number">4</span>)/<span class="number">2</span>*<span class="built_in">pi</span>,</span><br><span class="line">     <span class="comment"># 不用数学符号时：labels=c(&#x27;0&#x27;, &#x27;pi/2&#x27;, &#x27;pi&#x27;, &#x27;3pi/2&#x27;, &#x27;2pi&#x27;))</span></span><br><span class="line">     labels=<span class="built_in">c</span>(<span class="number">0</span>, <span class="built_in">expression</span>(<span class="built_in">pi</span>/<span class="number">2</span>), </span><br><span class="line">     <span class="built_in">expression</span>(<span class="built_in">pi</span>), <span class="built_in">expression</span>(<span class="number">3</span>*<span class="built_in">pi</span>/<span class="number">2</span>), </span><br><span class="line">     <span class="built_in">expression</span>(<span class="number">2</span>*<span class="built_in">pi</span>)))</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200622005010.png" alt=""></p>
+<p>绘图中使用数学符号的演示：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">demo(plotmath)</span><br></pre></td></tr></table></figure>
+<p>使用demo()函数中展示的绘图数学符号在label中使用时要用expression()包裹。<br>
+比如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">a &lt;- <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)</span><br><span class="line">b &lt;- a^<span class="number">2</span></span><br><span class="line">plot(a,b, axes=<span class="literal">FALSE</span>, col=<span class="string">&quot;blue&quot;</span>,xlab = <span class="string">&#x27;&#x27;</span>, ylab = <span class="string">&quot;x轴平方&quot;</span>,main=<span class="string">&quot;数学符号测试&quot;</span>)</span><br><span class="line">box()</span><br><span class="line">axis(<span class="number">2</span>)</span><br><span class="line">axis(<span class="number">1</span>,at=seq(along=a), </span><br><span class="line">     labels = <span class="built_in">c</span>(<span class="built_in">expression</span>(x^<span class="number">2</span>),</span><br><span class="line">                <span class="built_in">expression</span>(hat(x)),</span><br><span class="line">                <span class="built_in">expression</span>(<span class="built_in">sum</span>(x[i],i = <span class="number">1</span>,n)),</span><br><span class="line">                <span class="built_in">expression</span>(integral(f(x)*dx, a,b)),</span><br><span class="line">                <span class="built_in">expression</span>(lim(f(x), x %-&gt;%0)),</span><br><span class="line">                <span class="built_in">expression</span>(group(<span class="string">&quot;|&quot;</span>,x, <span class="string">&quot;|&quot;</span>))</span><br><span class="line">                )</span><br><span class="line">     )</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200621210611.png" alt=""></p>
+<h4 id="text">text()</h4>
+<p>text()在坐标区域内添加文字。 mtext()在边空处添加文字。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">with(d.class, plot(height, weight))</span><br><span class="line">lm1 &lt;- lm(weight ~ height, data=d.class)</span><br><span class="line">abline(lm1, col=<span class="string">&#x27;red&#x27;</span>, lwd=<span class="number">2</span>)</span><br><span class="line"><span class="comment"># 相关性系数的第一项：截距</span></span><br><span class="line">a &lt;- coef(lm1)[<span class="number">1</span>]</span><br><span class="line"><span class="comment"># 相关性系数的第二项：斜率</span></span><br><span class="line">b &lt;- coef(lm1)[<span class="number">2</span>]</span><br><span class="line"><span class="comment"># 前两个数字代表所要放的文字的坐标</span></span><br><span class="line">text(<span class="number">52</span>, <span class="number">145</span>, adj=<span class="number">0</span>, <span class="string">&#x27;线性回归:&#x27;</span>)</span><br><span class="line">text(<span class="number">52</span>, <span class="number">140</span>, adj=<span class="number">0</span>,</span><br><span class="line">    <span class="built_in">substitute</span>(hat(y) == a + b*x,</span><br><span class="line">    ))</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200621212450.png" alt=""></p>
+<h4 id="locator-和identify">locator()和identify()</h4>
+<p>locator()函数在执行时等待用户在图形的坐标区域内点击并返回点击处的坐标。 可以用参数n指定要点击的点的个数。 不指定个数则需要用右键菜单退出。 这个函数也可以用来要求用户点击以进行到下一图形。 如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- seq(<span class="number">0</span>, <span class="number">2</span>*<span class="built_in">pi</span>, <span class="built_in">length</span>=<span class="number">200</span>)</span><br><span class="line">y1 &lt;- <span class="built_in">sin</span>(x); y2 &lt;- <span class="built_in">cos</span>(x)</span><br><span class="line">plot(x, y1, type=<span class="string">&#x27;l&#x27;</span>,</span><br><span class="line">     col=<span class="string">&quot;red&quot;</span>)</span><br><span class="line">lines(x, y2, col=<span class="string">&quot;blue&quot;</span>)</span><br><span class="line">legend(locator(<span class="number">1</span>), col=<span class="built_in">c</span>(<span class="string">&quot;red&quot;</span>, <span class="string">&quot;blue&quot;</span>),</span><br><span class="line">       lty=<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">1</span>), legend=<span class="built_in">c</span>(<span class="string">&quot;sin&quot;</span>, <span class="string">&quot;cos&quot;</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200622003926.png" alt=""></p>
+<p>locator(1)，指定在生成的plots窗口中点击图形的任意位置，摆放图形的lengend，而不用指定一个特定的坐标，这种方法比较适合一般情况。</p>
+<h3 id="图形参数">图形参数</h3>
+<p>用图形参数可以选择点的形状、颜色、线型、粗细、坐标轴做法、边空、一页多图等。 有些参数直接用在绘图函数内，如plot函数可以用 pch、col、cex、lty、 lwd等参数。 有些图形参数必须使用par()函数指定。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">opar &lt;- par(mfrow=<span class="built_in">c</span>(<span class="number">2</span>,<span class="number">2</span>))</span><br><span class="line"><span class="comment"># 大括号考起来表示大括号内的表达式都是with的第二个参数</span></span><br><span class="line">with(d.class, &#123;hist(height);</span><br><span class="line">     boxplot(height);</span><br><span class="line">     qqnorm(height); qqline(height);</span><br><span class="line">     plot(height); rug(height,side=<span class="number">2</span>)&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">par(opar)</span><br></pre></td></tr></table></figure>
+<h4 id="一些例子">一些例子</h4>
+<p>barplot的横坐标标注太宽时，自动将某些标注省略。 用las=2指定坐标轴刻度标签垂直于坐标轴， 这样x轴的刻度值就变成了纵向的。 注意使用mar参数增加横坐标边空大小。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- 1:<span class="number">10</span></span><br><span class="line"><span class="built_in">names</span>(x) &lt;- paste(<span class="number">100000</span> + (<span class="number">1</span>:<span class="number">10</span>))</span><br><span class="line">barplot(x,las=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200625113711.png" alt=""></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># barplot的一些参数</span></span><br><span class="line">barplot(d.class$age, names.arg = d.class$name, las=<span class="number">2</span>,col=rainbow(<span class="number">19</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200625113658.png" alt=""></p>
+<p>图形参数可以分为如下四类</p>
+<ul>
+<li>图形元素控制；</li>
+<li>坐标轴与坐标刻度；</li>
+<li>图形边空；</li>
+<li>一页多图。</li>
+</ul>
+<p><strong>图形元素控制</strong></p>
+<ul>
+<li><code>pch=16</code>参数。散点符号，取的数。</li>
+<li><code>lty=2</code>参数。线型，1为实线，从2开始为各种虚线。</li>
+<li><code>lwd=2</code>参数，线的粗细，标准粗细为1。</li>
+<li><code>col=&quot;red&quot;</code>参数，颜色，可以是数字， 或颜色名字符串如<code>&quot;red&quot;</code>，<code>&quot;blue&quot;</code>等。用<code>colors()</code>函数查询有名字的颜色。 用<code>rainbow(n)</code>函数产生连续变化的颜色。</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">colors()</span><br><span class="line"><span class="comment">## 657种颜色</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>font=2</code>参数，字体，一般font=1是正体,2是粗体, 3是斜体,4是粗斜体。</li>
+<li><code>adj=-0.1</code>指定文本相对于给定坐标的对齐方式。 取0表示左对齐,取1表示右对齐,取0.5表示居中。 此参数的值实际代表的是出现在给定坐标左边的文本的比例。</li>
+<li><code>cex=1.5</code> 绘点符号大小倍数，基本值为1。</li>
+</ul>
+<p><strong>坐标轴与坐标刻度</strong></p>
+<ul>
+<li>
+<p><code>mgp=c(3,1,0)</code> 坐标轴的标签、刻度值、坐标轴线 到实际的坐标轴位置的距离，以行高为单位。 经常用来缩小坐标轴所占的空间, 如<code>mgp=c(1.5, 0.5, 0)</code>。</p>
+</li>
+<li>
+<p><code>lab=c(5,7,12)</code> 提供刻度线多少的建议， 第一个数为x轴刻度线个数， 第二个数为y轴刻度线个数， 第三个数是坐标刻度标签的字符宽度。</p>
+</li>
+<li>
+<p><code>las=1</code> 坐标刻度标签的方向。 0表示总是平行于坐标轴, 1表示总是水平, 2表示总是垂直于坐标轴。</p>
+</li>
+<li>
+<p><code>tck=0.01</code> 坐标轴刻度线长度，以绘图区域大小为单位1。</p>
+</li>
+<li>
+<p><code>xaxs=&quot;s&quot;</code>, <code>yaxs=&quot;e&quot;</code>: 控制x轴和y轴标刻度的方法。</p>
+<p>取<code>&quot;s&quot;</code>(即standard)或<code>&quot;e&quot;</code>(即extended) 的时候数据范围控制在最小刻度和最大刻度之间。 取<code>&quot;e&quot;</code>时如果有数据点十分靠近边缘轴的范围会略微扩大。</p>
+<p>取值为<code>&quot;i&quot;</code>（即internal）或<code>&quot;r&quot;</code>（此为缺省） 使得刻度线都落在数据范围内部,而<code>&quot;r&quot;</code>方式所留的边空较小。</p>
+<p>取值设为<code>&quot;d&quot;</code>时会锁定此坐标轴, 后续的图形都使用与它完全相同的坐标轴, 这在要生成一系列可比较的图形的时候是有用的。 要解除锁定需要把这个图形参数设为其它值。</p>
+</li>
+</ul>
+<p><strong>坐标轴与坐标刻度</strong></p>
+<ul>
+<li>
+<p><code>mgp=c(3,1,0)</code> 坐标轴的标签、刻度值、坐标轴线 到实际的坐标轴位置的距离，以行高为单位。 经常用来缩小坐标轴所占的空间, 如<code>mgp=c(1.5, 0.5, 0)</code>。</p>
+</li>
+<li>
+<p><code>lab=c(5,7,12)</code> 提供刻度线多少的建议， 第一个数为x轴刻度线个数， 第二个数为y轴刻度线个数， 第三个数是坐标刻度标签的字符宽度。</p>
+</li>
+<li>
+<p><code>las=1</code> 坐标刻度标签的方向。 0表示总是平行于坐标轴, 1表示总是水平, 2表示总是垂直于坐标轴。</p>
+</li>
+<li>
+<p><code>tck=0.01</code> 坐标轴刻度线长度，以绘图区域大小为单位1。</p>
+</li>
+<li>
+<p><code>xaxs=&quot;s&quot;</code>, <code>yaxs=&quot;e&quot;</code>: 控制x轴和y轴标刻度的方法。</p>
+<p>取<code>&quot;s&quot;</code>(即standard)或<code>&quot;e&quot;</code>(即extended) 的时候数据范围控制在最小刻度和最大刻度之间。 取<code>&quot;e&quot;</code>时如果有数据点十分靠近边缘轴的范围会略微扩大。</p>
+<p>取值为<code>&quot;i&quot;</code>（即internal）或<code>&quot;r&quot;</code>（此为缺省） 使得刻度线都落在数据范围内部,而<code>&quot;r&quot;</code>方式所留的边空较小。</p>
+<p>取值设为<code>&quot;d&quot;</code>时会锁定此坐标轴, 后续的图形都使用与它完全相同的坐标轴, 这在要生成一系列可比较的图形的时候是有用的。 要解除锁定需要把这个图形参数设为其它值。</p>
+</li>
+</ul>
+<p><strong>图形边空</strong></p>
+<p>边空的大小由mai参数或mar参数控制, 它们都是四个元素的向量, 分别规定下方、左方、上方、右方的边空大小, 其中mai取值的单位是英寸, 而mar的取值单位是文本行高度。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">opar &lt;- par(mar=<span class="built_in">c</span>(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">0.5</span>), </span><br><span class="line">            mgp=<span class="built_in">c</span>(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0</span>), tck=<span class="number">0.005</span>)</span><br><span class="line">with(d.class, plot(height, weight, </span><br><span class="line">                   xlab=<span class="string">&#x27;&#x27;</span>, ylab=<span class="string">&#x27;&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200625113626.png" alt=""></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">par(opar)</span><br></pre></td></tr></table></figure>
+<h4 id="一页多图">一页多图</h4>
+<p>一页多图用mfrow参数或mfcol参数规定。 用oma指定四个外边空的行数。 用mtext加outer=T指定在外边空添加文本。 如果没有outer=T则在内边空添加文本。 如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">opar &lt;- par(mfrow=<span class="built_in">c</span>(<span class="number">2</span>,<span class="number">2</span>),</span><br><span class="line">            oma=<span class="built_in">c</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">0</span>))</span><br><span class="line">with(d.class, &#123;hist(height);</span><br><span class="line">     boxplot(height);</span><br><span class="line">     qqnorm(height); qqline(height);</span><br><span class="line">     plot(height); rug(height,side=<span class="number">2</span>)&#125;)</span><br><span class="line">mtext(side=<span class="number">3</span>, text=<span class="string">&#x27;身高分布&#x27;</span>, cex=<span class="number">1.5</span>, outer=<span class="built_in">T</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200625113607.png" alt=""></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">par(opar)</span><br></pre></td></tr></table></figure>
+<h3 id="图形输出">图形输出</h3>
+<h4 id="PDF输出">PDF输出</h4>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># pdf函数</span></span><br><span class="line">pdf(file=<span class="string">&#x27;fig-pdf-test.pdf&#x27;</span>, height = <span class="number">10</span>/<span class="number">2.54</span>,</span><br><span class="line">    width = <span class="number">10</span>/<span class="number">2.54</span>, family = <span class="string">&#x27;GB1&#x27;</span>)</span><br><span class="line">plot(d.class$height, d.class$weight, </span><br><span class="line">    xlab = <span class="string">&#x27;身高&#x27;</span>, ylab = <span class="string">&quot;体重&quot;</span>  ,main = <span class="string">&quot;体重与身高的关系&quot;</span>)</span><br><span class="line"><span class="comment"># 关闭当前设备并生成输出文件</span></span><br><span class="line">dev.off()</span><br></pre></td></tr></table></figure>
+<p>- family	<br>
+the font family to be used, see <a target="_blank" rel="noopener" href="http://127.0.0.1:10458/help/library/grDevices/help/postscript">postscript</a>. Defaults to “Helvetica”.</p>
+<h4 id="PNG输出">PNG输出</h4>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">png(file=<span class="string">&#x27;fig-pnd-test.png&#x27;</span>, height = <span class="number">1920</span>, width = <span class="number">1080</span>)</span><br><span class="line">with(d.class, plot(height, weight, main = <span class="string">&quot;体重与身高的关系&quot;</span>))</span><br><span class="line">dev.off()</span><br></pre></td></tr></table></figure>
+<h4 id="jpeg输出">jpeg输出</h4>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">jpeg(file=<span class="string">&#x27;fig-jpeg-test.jpg&#x27;</span>)</span><br><span class="line">with(d.class, plot(height, weight, main = <span class="string">&quot;体重与身高的关系&quot;</span>))</span><br><span class="line">dev.off()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/fig-jpeg-test.jpg" alt=""></p>
+<p>类似地， 用<code>bmp()</code>函数启用BMP图形设备,用<code>postscript()</code>函数启用PostScript图形设备。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/tags/R%E8%AF%AD%E8%A8%80/">R语言</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/shixq_wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/shixq_alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/06/20/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB135/"><img class="prev-cover" src="https://pdf.medrang.co.kr/EN/2019/028/en-28-709f1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">每日外闻135</div></div></a></div><div class="next-post pull-right"><a href="/2020/06/21/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB136/"><img class="next-cover" src="http://patrickmcginnis.com/wp-content/uploads/2020/03/book-fomo-fear-of-better-option-1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">每日外闻136</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/02/15/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/" title="R语言学习笔记1"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-15</div><div class="title">R语言学习笔记1</div></div></a></div><div><a href="/2020/04/18/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B010/" title="R语言学习笔记10"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-18</div><div class="title">R语言学习笔记10</div></div></a></div><div><a href="/2020/04/25/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B011/" title="R语言学习笔记11"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-25</div><div class="title">R语言学习笔记11</div></div></a></div><div><a href="/2020/05/02/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B012/" title="R语言学习笔记12"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-02</div><div class="title">R语言学习笔记12</div></div></a></div><div><a href="/2020/05/09/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B013/" title="R语言学习笔记13"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-09</div><div class="title">R语言学习笔记13</div></div></a></div><div><a href="/2020/05/16/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B014/" title="R语言学习笔记14"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-16</div><div class="title">R语言学习笔记14</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#axis"><span class="toc-text">axis()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#text"><span class="toc-text">text()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#locator-%E5%92%8Cidentify"><span class="toc-text">locator()和identify()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E5%8F%82%E6%95%B0"><span class="toc-text">图形参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E4%BE%8B%E5%AD%90"><span class="toc-text">一些例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E9%A1%B5%E5%A4%9A%E5%9B%BE"><span class="toc-text">一页多图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E8%BE%93%E5%87%BA"><span class="toc-text">图形输出</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PDF%E8%BE%93%E5%87%BA"><span class="toc-text">PDF输出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PNG%E8%BE%93%E5%87%BA"><span class="toc-text">PNG输出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#jpeg%E8%BE%93%E5%87%BA"><span class="toc-text">jpeg输出</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 石晓强</div><div class="footer_custom_text">欢迎来到我的<a href="https://steven-shixq.github.io/">博客</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'NFoxKw5kAkzXk9OujXdPn1Qp-gzGzoHsz',
+      appKey: '9awzk7TAM6SBvkG1Sn28h7Qf',
+      placeholder: '说点什么吧',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>

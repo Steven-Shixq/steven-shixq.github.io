@@ -1,0 +1,311 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>R语言学习笔记3 | 衷深学习</title><meta name="keywords" content="计算机,编程,R语言"><meta name="author" content="石晓强"><meta name="copyright" content="石晓强"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="R语言的基本数据类型与运算2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R语言学习笔记3">
+<meta property="og:url" content="https://steven-shixq.github.io/2020/02/29/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/index.html">
+<meta property="og:site_name" content="衷深学习">
+<meta property="og:description" content="R语言的基本数据类型与运算2">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png">
+<meta property="article:published_time" content="2020-02-29T13:17:58.000Z">
+<meta property="article:modified_time" content="2020-03-07T16:06:08.085Z">
+<meta property="article:author" content="石晓强">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="R语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png"><link rel="shortcut icon" href="/img/avatar_reader.jpg"><link rel="canonical" href="https://steven-shixq.github.io/2020/02/29/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 石晓强","link":"链接: ","source":"来源: 衷深学习","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'R语言学习笔记3',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-03-08 00:06:08'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar_reader.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">331</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">174</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">衷深学习</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">R语言学习笔记3</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-02-29T13:17:58.000Z" title="发表于 2020-02-29 21:17:58">2020-02-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-03-07T16:06:08.085Z" title="更新于 2020-03-08 00:06:08">2020-03-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/R%E8%AF%AD%E8%A8%80/">R语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="R语言学习笔记3"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>R语言教程-R数据类型与运算2</strong></p>
+<h2 id="11-R矩阵和数组">11. R矩阵和数组</h2>
+<p>矩阵用matrix函数定义，实际存储成一个向量，根据保存的行数和列数对应到矩阵的元素， 存储次序为按列存储。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">A &lt;- matrix(<span class="number">11</span>:<span class="number">16</span>,nrow=<span class="number">3</span>, ncol=<span class="number">2</span>)</span><br><span class="line">A</span><br><span class="line"><span class="comment"># 取第1、3行</span></span><br><span class="line">A[<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">3</span>), <span class="number">1</span>:<span class="number">2</span>]</span><br><span class="line"><span class="comment"># 取第2列</span></span><br><span class="line">A[<span class="number">1</span>:<span class="number">3</span>,<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 其他相等的写法，取第1、3行</span></span><br><span class="line">A[<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">3</span>),<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>)]</span><br><span class="line"><span class="comment"># 取第2列</span></span><br><span class="line">A[<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>),<span class="built_in">c</span>(<span class="number">2</span>)]</span><br></pre></td></tr></table></figure>
+<p>用colnames()函数可以给矩阵每列命名， 也可以访问矩阵列名， 用rownames()函数可以给矩阵每行命名， 也可以访问矩阵行名。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">colnames(A) &lt;- <span class="built_in">c</span>(<span class="string">&#x27;第一列&#x27;</span>,<span class="string">&#x27;第二列&#x27;</span>)</span><br><span class="line">rownames(A) &lt;- <span class="built_in">c</span>(<span class="string">&quot;第一行&quot;</span>,<span class="string">&quot;第二行&quot;</span>,<span class="string">&quot;第三行&quot;</span>)</span><br><span class="line">A</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 矩阵A的属性</span></span><br><span class="line"><span class="built_in">attributes</span>(A)</span><br><span class="line"></span><br><span class="line"><span class="built_in">dim</span>(A)</span><br><span class="line"><span class="built_in">dimnames</span>(A)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 可以用列名和行名代替矩阵下标</span></span><br><span class="line">A[,<span class="string">&quot;第二列&quot;</span>]</span><br><span class="line">A[,<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<p>注意在对矩阵取子集时， 如果取出的子集仅有一行或仅有一列， 结果就不再是矩阵而是变成了R向量， R向量既不是行向量也不是列向量。 如果想避免这样的规则起作用， 需要在方括号下标中加选项drop=FALSE</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">A[,<span class="number">1</span>,drop=<span class="literal">FALSE</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 用逻辑下标取子集</span></span><br><span class="line">A[,<span class="number">1</span>]&gt;=<span class="number">12</span></span><br><span class="line">A[A[,<span class="number">1</span>]&gt;=<span class="number">12</span>,<span class="number">1</span>:<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<p>矩阵本质上是一个向量添加了dim属性， 实际保存还是保存成一个向量， 其中元素的保存次序是按列填入， 所以， 也可以向对一个向量取子集那样， 仅用一个正整数对向量的矩阵取子集。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">A</span><br><span class="line">A[<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>)]</span><br><span class="line">A[<span class="built_in">c</span>(<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>)]</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">matrix(<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">1</span>, <span class="number">2</span>,<span class="number">2</span>, <span class="number">3</span>,<span class="number">2</span>), ncol=<span class="number">2</span>,byrow = <span class="built_in">T</span>)</span><br></pre></td></tr></table></figure>
+<p>为了挑选矩阵的任意元素组成的子集而不是子矩阵， 可以用一个两列的矩阵作为下标， 矩阵的每行的两个元素分别指定一个元素的行号和列号。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">rod &lt;- matrix(<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">1</span>, <span class="number">2</span>,<span class="number">2</span>, <span class="number">3</span>,<span class="number">2</span>), ncol=<span class="number">2</span>,byrow = <span class="built_in">T</span>)</span><br><span class="line">A</span><br><span class="line"><span class="comment"># 取矩阵中坐标为1,1, 2,2, 3,2的值</span></span><br><span class="line">A[rod]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>用c(A)或A[]返回矩阵A的所有元素。</li>
+<li>如果要修改矩阵A的所有元素， 可以对A[]赋值。</li>
+<li>diag(A)访问A的主对角线元素组成的向量。</li>
+<li>若x为长度大于1的向量， diag(x)返回以x的元素为主对角线元素的对角矩阵。</li>
+<li>若x为正整数值标量，diag(x)返回x阶单位阵</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="built_in">c</span>(A)</span><br><span class="line">A[]</span><br><span class="line">diag(A)</span><br><span class="line">diag(<span class="number">6</span>)</span><br><span class="line">diag(<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="cbind-和rbind-函数">cbind()和rbind()函数</h3>
+<p>若<code>x</code>是向量，<code>cbind(x)</code>把<code>x</code>变成列向量， 即列数为1的矩阵， <code>rbind(x)</code>把<code>x</code>变成行向量。</p>
+<p>若x1, x2, x3是等长的向量， cbind(x1, x2, x3)把它们看成列向量并在一起组成一个矩阵。 cbind()的自变量可以同时包含向量与矩阵，向量的长度必须与矩阵行数相等。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">cbind(<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>), <span class="built_in">c</span>(<span class="number">3</span>,<span class="number">4</span>), <span class="built_in">c</span>(<span class="number">5</span>,<span class="number">6</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">A</span><br><span class="line">A1 &lt;- cbind(A,<span class="built_in">c</span>(-<span class="number">3</span>,<span class="number">6</span>,-<span class="number">9</span>))</span><br><span class="line">colnames(A1) &lt;- <span class="built_in">c</span>(<span class="string">&quot;第一列&quot;</span>,<span class="string">&quot;第二列&quot;</span>,<span class="string">&quot;新增列&quot;</span>)</span><br><span class="line">A1</span><br></pre></td></tr></table></figure>
+<p>rbind()同理，向量的长度必须与矩阵列数相同（因为次函数下数字是按row来排列矩阵的）</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">rbind(<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>), <span class="built_in">c</span>(<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="四则运算">四则运算</h3>
+<ol>
+<li>矩阵可以与标量作四则运算，结果为每个元素进行相应运算</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 加法</span></span><br><span class="line">A</span><br><span class="line">C1 &lt;- A + <span class="number">2</span>; C1</span><br><span class="line"><span class="comment"># 减法</span></span><br><span class="line">c2 &lt;- A - <span class="number">3</span>; c2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 乘法</span></span><br><span class="line">c3 &lt;- A * <span class="number">2</span>; c3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 除法</span></span><br><span class="line">c4 &lt;- A / <span class="number">2</span>; c4</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>两个同形状的矩阵进行加、减运算， 即对应元素相加、相减， 用A + B，A - B表示</p>
+</li>
+<li>
+<p>对两个同形状的矩阵， 用*表示两个矩阵对应元素相乘(注意这不是线性代数中的矩阵乘法)， 用/表示两个矩阵对应元素相除。</p>
+</li>
+</ul>
+<h3 id="矩阵乘法">矩阵乘法</h3>
+<p>用<code>%*%</code>表示矩阵乘法而不是用<code>*</code>表示， 注意矩阵乘法要求左边的矩阵的列数等于右边的矩阵的行数。</p>
+<h2 id="12-数据框">12. 数据框</h2>
+<p>数据框类似于一个矩阵，有行、列， 但各列允许有不同类型：数值型向量、因子、字符型向量、日期时间向量。 同一列的数据类型相同。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d &lt;- data.frame(</span><br><span class="line">    姓名=<span class="built_in">c</span>(<span class="string">&quot;李明&quot;</span>, <span class="string">&quot;张聪&quot;</span>, <span class="string">&quot;王建&quot;</span>), </span><br><span class="line">    年龄=<span class="built_in">c</span>(<span class="number">30</span>, <span class="number">35</span>, <span class="number">28</span>), </span><br><span class="line">    身高=<span class="built_in">c</span>(<span class="number">180</span>, <span class="number">162</span>, <span class="number">175</span>),</span><br><span class="line">    stringsAsFactors=<span class="literal">FALSE</span>)</span><br><span class="line">d</span><br></pre></td></tr></table></figure>
+<p><code>data.frame()</code>函数会将字符型列转换成因子， 加选项stringsAsFactors=FALSE可以避免这样的转换。</p>
+<p>数据框每列叫做一个变量， 每列都有名字，称为列名或变量名， 可以用names()函数和colnames()函数访问。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="built_in">names</span>(d)</span><br><span class="line">colnames(d)</span><br><span class="line"><span class="comment"># 修改列名</span></span><br><span class="line"><span class="built_in">names</span>(d)[<span class="number">1</span>] &lt;- <span class="string">&quot;names&quot;</span></span><br><span class="line"><span class="built_in">names</span>(d)</span><br></pre></td></tr></table></figure>
+<p>用<code>as.data.frame(x)</code>可以把<code>x</code>转换成数据框。 如果<code>x</code>是一个向量， 转换结果是以<code>x</code>为唯一一列的数据框。 如果<code>x</code>是一个列表并且列表元素都是长度相同的向量， 转换结果中每个列表变成数据框的一列。 如果<code>x</code>是一个矩阵，转换结果把矩阵的每列变成数据框的一列。</p>
+<p>数据框是一个随着R语言前身S语言继承下来的概念， 现在已经有一些不足之处， tibble包提供了tibble类， 这是数据框的一个改进版本。</p>
+<h3 id="数据框内容访问">数据框内容访问</h3>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 数据框可以用矩阵格式访问</span></span><br><span class="line">print(d)</span><br><span class="line"><span class="comment"># 访问单个元素</span></span><br><span class="line">d[<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="comment"># 访问第二列</span></span><br><span class="line">d[<span class="number">2</span>]</span><br><span class="line"><span class="comment"># 范文第二列，使其结果为向量</span></span><br><span class="line">d[[<span class="number">2</span>]] </span><br><span class="line"><span class="comment"># 或者d[,2],也访问第二列，但是这种作法与tibble不兼容， 所以应避免使用。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 三种结果相同的访问列方法，其中第二种做法与tibble不兼容，应避免使用。</span></span><br><span class="line">d[[<span class="string">&quot;names&quot;</span>]]</span><br><span class="line">d[,<span class="string">&quot;names&quot;</span>]</span><br><span class="line">d$<span class="built_in">names</span></span><br></pre></td></tr></table></figure>
+<p>因为数据框的一行不一定是相同数据类型， 所以数据框的一行作为子集， 结果还是数据框，而不是向量。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 取数据框的第一行</span></span><br><span class="line">d[<span class="number">1</span>,]</span><br><span class="line">is.data.frame(d[<span class="number">1</span>,])</span><br><span class="line"><span class="comment"># 可以同时取行子集和列子集</span></span><br><span class="line">d[<span class="number">1</span>:<span class="number">2</span>,<span class="string">&quot;names&quot;</span>]</span><br><span class="line">d[<span class="number">1</span>:<span class="number">2</span>, <span class="built_in">c</span>(<span class="string">&#x27;names&#x27;</span>, <span class="string">&#x27;年龄&#x27;</span>)]</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 取年龄大于30的所有行和列,即前两行</span></span><br><span class="line">d[d[[<span class="string">&#x27;年龄&#x27;</span>]]&gt;=<span class="number">30</span>,]</span><br></pre></td></tr></table></figure>
+<p>与矩阵类似地是，用如d[,‘age’], d[,2]这样的方法取出的数据框的单个列是向量而不再是数据框。但是，如果取出两列或者两列以上， 结果则是数据框。<br>
+对一般的数据框， 可以在取子集的方括号内加上drop=FALSE选项， 确保取列子集的结果总是数据框。 数据框的改进类型tibble在取出列子集时保持为tibble格式。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">t1 &lt;- d[,<span class="string">&quot;names&quot;</span>]</span><br><span class="line">is.data.frame(t1)</span><br><span class="line">t2 &lt;- d[,<span class="string">&quot;names&quot;</span>,drop=<span class="built_in">F</span>]</span><br><span class="line">is.data.frame(t2)</span><br></pre></td></tr></table></figure>
+<p>数据框每一行可以有行名， 这在原始的S语言和传统的R语言中是重要的技术， 但是在改进类型tibble中则取消了行名， 需要用列名实现功能一般改用left_join()函数实现。<br>
+可以用数据中的某一列的每一行作为行名，如d数据康中可以用<code>names</code>(没有重复值)作为行名。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">rownames(d) &lt;- d$<span class="built_in">names</span></span><br><span class="line"><span class="comment"># d$name &lt;- NULL</span></span><br><span class="line">d</span><br></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     names 年龄 身高</span><br><span class="line">李明  李明   30  180</span><br><span class="line">张聪  张聪   35  162</span><br><span class="line">王建  王建   28  175</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">rownames(d) &lt;- d$<span class="built_in">names</span></span><br><span class="line">d$names &lt;- <span class="literal">NULL</span></span><br><span class="line">d</span><br></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">     年龄 身高</span><br><span class="line">李明   30  180</span><br><span class="line">张聪   35  162</span><br><span class="line">王建   28  175</span><br></pre></td></tr></table></figure>
+<p>用数据框的行名可以建立一个值到多个值的对应表。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">dm &lt;- data.frame(</span><br><span class="line">  <span class="string">&quot;年级&quot;</span>=<span class="number">1</span>:<span class="number">6</span>,</span><br><span class="line">  <span class="string">&#x27;出游&#x27;</span>=<span class="built_in">c</span>(<span class="number">0</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>),</span><br><span class="line">  <span class="string">&#x27;疫苗&#x27;</span>=<span class="built_in">c</span>(<span class="built_in">T</span>, <span class="built_in">F</span>, <span class="built_in">F</span>, <span class="built_in">F</span>, <span class="built_in">T</span>, <span class="built_in">F</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>把年级变成行名，可以建立年级到出游次数与疫苗注射的对应表：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">rownames(dm) &lt;- dm[[<span class="string">&#x27;年级&#x27;</span>]]</span><br><span class="line">dm[[<span class="string">&quot;年级&quot;</span>]] &lt;- <span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
+<p>假设某个社区的小学中抽取的4个班的年级为 c(2,1,1,3)， 其对应的出游和疫苗注射信息可查询如下：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 相当于将年级的那一项当做行来取对应的列值</span></span><br><span class="line">dm[<span class="built_in">as.character</span>(<span class="built_in">c</span>(<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">3</span>)),]</span><br></pre></td></tr></table></figure>
+<p>输出结果包含了两个1</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    出游  疫苗</span><br><span class="line">2      2 FALSE</span><br><span class="line">1      0  TRUE</span><br><span class="line">1.1    0  TRUE</span><br><span class="line">3      2 FALSE</span><br></pre></td></tr></table></figure>
+<p>可以去掉，以上程序改成：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- dm[<span class="built_in">as.character</span>(<span class="built_in">c</span>(<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">3</span>)),]</span><br><span class="line">rownames(x) &lt;- <span class="literal">NULL</span></span><br><span class="line">x</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  出游  疫苗</span><br><span class="line">1    2 FALSE</span><br><span class="line">2    0  TRUE</span><br><span class="line">3    0  TRUE</span><br><span class="line">4    2 FALSE</span><br></pre></td></tr></table></figure>
+<p>对于代替数据框的tibble类型， 如果要实现行名的功能， 可以将行名作为单独的一列</p>
+<h3 id="数据框与矩阵的区别">数据框与矩阵的区别</h3>
+<p>数据框不能作为矩阵参加矩阵运算。 需要时，可以用as.matrix()函数转换数据框或数据框的子集为矩阵。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d2 &lt;- as.matrix(d[,<span class="built_in">c</span>(<span class="string">&quot;年龄&quot;</span>, <span class="string">&quot;身高&quot;</span>)])</span><br><span class="line"><span class="comment"># 矩阵运算</span></span><br><span class="line">d3 &lt;- crossprod(d2); d3</span><br><span class="line">d4 &lt;- <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>) %*% d2;d4</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="gl-函数">gl()函数</h3>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d4 &lt;- data.frame(</span><br><span class="line">  group=gl(<span class="number">3</span>, <span class="number">10</span>, <span class="built_in">length</span>=<span class="number">30</span>),</span><br><span class="line">  subgroup=gl(<span class="number">5</span>,<span class="number">2</span>,<span class="built_in">length</span>=<span class="number">30</span>),</span><br><span class="line">  obs=gl(<span class="number">2</span>,<span class="number">1</span>,<span class="built_in">length</span>=<span class="number">30</span>))</span><br><span class="line">print(d4)</span><br></pre></td></tr></table></figure>
+<p>结果的数据框d有三个变量: group是大组，共分3个大组，每组10个观测； subgroup是子组，在每个大组内分为5个子组，每个子组2个观测。 共有3x5x2=30个观测（行）。</p>
+<p>gl()函数第一个参数是因子水平个数， 第二个参数是同一因子水平连续重复次数， 第三个参数是总共需要的元素个数， 所有水平都出现后则重复整个模式直到长度满足要求。</p>
+<h3 id="tibble类型"><code>tibble</code>类型</h3>
+<p>tibble类型是一种改进的数据框。 readr包的read_csv()函数是read.csv()函数的一个改进版本， 它将CSV文件读入为tibble类型，如文件class.csv的读入:</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">library(tibble)</span><br><span class="line">library(readr)</span><br><span class="line">t.class &lt;- read_csv(<span class="string">&#x27;class.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">t.class</span><br><span class="line"><span class="built_in">class</span>(t.class)</span><br></pre></td></tr></table></figure>
+<p>用as_tibble()可以将一个数据框转换为tibble.<br>
+可以用tibble()函数生成小的tibble，和生成data.frame的格式一样。如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">t.b &lt;- tibble(</span><br><span class="line">  <span class="string">&quot;序号&quot;</span>=<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">7</span>),</span><br><span class="line">  `收缩压`=<span class="built_in">c</span>(<span class="number">145</span>, <span class="number">110</span>, <span class="string">&quot;未测&quot;</span>, <span class="number">150</span>, <span class="string">&quot;拒绝&quot;</span>, <span class="number">115</span>)</span><br><span class="line">)</span><br><span class="line">t.b</span><br></pre></td></tr></table></figure>
+<p>用tribble可以按类似于CSV格式输入一个tibble,</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">t.bp &lt;- tribble(</span><br><span class="line">~`序号`,~`收缩压`,</span><br><span class="line"><span class="number">1</span>,<span class="number">145</span>,</span><br><span class="line"><span class="number">5</span>,<span class="number">110</span>,</span><br><span class="line"><span class="number">6</span>,<span class="string">&quot;未测&quot;</span>,</span><br><span class="line"><span class="number">9</span>,<span class="number">150</span>,</span><br><span class="line"><span class="number">10</span>,<span class="string">&quot;拒绝&quot;</span>,</span><br><span class="line"><span class="number">15</span>,<span class="number">115</span></span><br><span class="line">)</span><br><span class="line">t.bp</span><br></pre></td></tr></table></figure>
+<p>注意tribble()中数据每行末尾也需要有逗号， 最后一行末尾没有逗号。 这比较适用于在程序中输入小的数据集。</p>
+<p>tibble与数据框的一大区别是在显示时不自动显示所有内容， 这样可以避免显示很大的数据框将命令行的所有显示都充满。 可以在print()用n=和width=选项指定要显示的行数和列数。</p>
+<p>另外，用单重的方括号取列子集时， 即使仅取一列， 从tibble取出的一列结果仍是tibble而不是向量， 这时应使用双方括号格式或$格式。 因为这个原因有些原来的程序输入tibble会出错， 这时可以用as.data.frame()转换成数据框。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># tibble</span></span><br><span class="line">t.bp[,<span class="string">&quot;收缩压&quot;</span>]</span><br><span class="line"><span class="comment"># 向量</span></span><br><span class="line">t.bp[[<span class="string">&quot;收缩压&quot;</span>]]</span><br><span class="line">t.bp$<span class="string">&quot;收缩压&quot;</span></span><br><span class="line"><span class="comment"># 数据框</span></span><br><span class="line">as.data.frame(t.bp$<span class="string">&#x27;收缩压&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>tibble不使用行名， 需要行名时， 将其保存为tibble的一列。</p>
+<h3 id="练习">练习</h3>
+<p>假设class.csv已经读入为R数据框d.class, 其中的sex列已经自动转换为因子。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">library(tibble)</span><br><span class="line">library(readr)</span><br><span class="line">d.class &lt;- read_csv(<span class="string">&#x27;class.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>显示d.class中年龄至少为15的行子集；</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x1 &lt;- d.class[d.class[<span class="string">&quot;age&quot;</span>]&gt;=<span class="number">15</span>,]</span><br><span class="line">x1</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>显示女生且年龄至少为15的学生姓名和年龄；<br>
+<strong>注意：此处取sex=F时，表达式为x1$sex==“F”，两个等于号</strong></li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x2 &lt;- x1[x1$sex==<span class="string">&quot;F&quot;</span>,<span class="built_in">c</span>(<span class="string">&quot;name&quot;</span>,<span class="string">&quot;age&quot;</span>)]</span><br><span class="line">x2</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>取出数据框中的age变量赋给变量x。</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- d.class$age</span><br><span class="line">x</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">石晓强</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://steven-shixq.github.io/2020/02/29/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/">https://steven-shixq.github.io/2020/02/29/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://steven-shixq.github.io" target="_blank">衷深学习</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/tags/R%E8%AF%AD%E8%A8%80/">R语言</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/shixq_wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/shixq_alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/02/29/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB23/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/daily_english23.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">每日外闻23</div></div></a></div><div class="next-post pull-right"><a href="/2020/03/01/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB24/"><img class="next-cover" src="https://media.gatesnotes.com/-/media/Images/Books/The-Headspace-Guide-to-Meditation-and-Mindfulness/Meditation_WINTER_BOOKS_1200x564.ashx" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">每日外闻24</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/02/15/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/" title="R语言学习笔记1"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-15</div><div class="title">R语言学习笔记1</div></div></a></div><div><a href="/2020/04/18/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B010/" title="R语言学习笔记10"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-18</div><div class="title">R语言学习笔记10</div></div></a></div><div><a href="/2020/04/25/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B011/" title="R语言学习笔记11"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-25</div><div class="title">R语言学习笔记11</div></div></a></div><div><a href="/2020/05/02/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B012/" title="R语言学习笔记12"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-02</div><div class="title">R语言学习笔记12</div></div></a></div><div><a href="/2020/05/09/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B013/" title="R语言学习笔记13"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-09</div><div class="title">R语言学习笔记13</div></div></a></div><div><a href="/2020/05/16/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B014/" title="R语言学习笔记14"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-16</div><div class="title">R语言学习笔记14</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#11-R%E7%9F%A9%E9%98%B5%E5%92%8C%E6%95%B0%E7%BB%84"><span class="toc-text">11. R矩阵和数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cbind-%E5%92%8Crbind-%E5%87%BD%E6%95%B0"><span class="toc-text">cbind()和rbind()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97"><span class="toc-text">四则运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95"><span class="toc-text">矩阵乘法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E6%95%B0%E6%8D%AE%E6%A1%86"><span class="toc-text">12. 数据框</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A1%86%E5%86%85%E5%AE%B9%E8%AE%BF%E9%97%AE"><span class="toc-text">数据框内容访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A1%86%E4%B8%8E%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">数据框与矩阵的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gl-%E5%87%BD%E6%95%B0"><span class="toc-text">gl()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tibble%E7%B1%BB%E5%9E%8B"><span class="toc-text">tibble类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0"><span class="toc-text">练习</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 石晓强</div><div class="footer_custom_text">欢迎来到我的<a href="https://steven-shixq.github.io/">博客</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'NFoxKw5kAkzXk9OujXdPn1Qp-gzGzoHsz',
+      appKey: '9awzk7TAM6SBvkG1Sn28h7Qf',
+      placeholder: '说点什么吧',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>

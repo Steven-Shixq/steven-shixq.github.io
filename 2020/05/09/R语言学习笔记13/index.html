@@ -1,0 +1,289 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>R语言学习笔记13 | 衷深学习</title><meta name="keywords" content="计算机,编程,R语言"><meta name="author" content="石晓强"><meta name="copyright" content="石晓强"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="R基本编程10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R语言学习笔记13">
+<meta property="og:url" content="https://steven-shixq.github.io/2020/05/09/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B013/index.html">
+<meta property="og:site_name" content="衷深学习">
+<meta property="og:description" content="R基本编程10">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png">
+<meta property="article:published_time" content="2020-05-09T04:47:14.000Z">
+<meta property="article:modified_time" content="2020-05-10T03:26:57.901Z">
+<meta property="article:author" content="石晓强">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="R语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png"><link rel="shortcut icon" href="/img/avatar_reader.jpg"><link rel="canonical" href="https://steven-shixq.github.io/2020/05/09/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B013/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 石晓强","link":"链接: ","source":"来源: 衷深学习","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'R语言学习笔记13',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-05-10 11:26:57'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar_reader.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">331</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">174</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">衷深学习</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">R语言学习笔记13</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-05-09T04:47:14.000Z" title="发表于 2020-05-09 12:47:14">2020-05-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-05-10T03:26:57.901Z" title="更新于 2020-05-10 11:26:57">2020-05-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/R%E8%AF%AD%E8%A8%80/">R语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="R语言学习笔记13"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><em>R语言教程-R编程10</em></p>
+<h2 id="函数进阶">函数进阶</h2>
+<h3 id="函数式编程">函数式编程</h3>
+<h4 id="基本R的函数式编程支持">基本R的函数式编程支持</h4>
+<p>使用purrr包的泛函的好处是用法风格一致， 有许多方便功能。<br>
+基本R<code>lapply</code>函数用输入的函数对数据的每个元素进行变换，格式为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">lapply(X, FUN, ...)</span><br></pre></td></tr></table></figure>
+<p>其中<code>X</code>是一个列表或向量， <code>FUN</code>是一个函数（可以是有名或无名函数）， 结果也总是一个列表， 结果列表的第个元素是将<code>X</code>的第个元素输入到<code>FUN</code>中的返回结果。 <code>...</code>参数会输入到<code>FUN</code>中。 这与<code>purrr::map()</code>功能类似。</p>
+<p>sapply与lapply函数类似， 但是sapply试图简化输出结果为向量或矩阵， 在不可行时才和lapply返回列表结果。<br>
+sapply()结果是一个矩阵， 矩阵的第列保存FUN(X[i])的结果。 因为sapply()的结果类型的不确定性， 在自定义函数中应慎用。</p>
+<p>vapply(X, FUN, FUN.VALUE, …)<br>
+其中FUN.VALUE是每个FUN(X[i])的返回值的例子， 要求所有FUN(X[i])结果类型和长度相同。</p>
+<p>例如，求d.class每一列类型的问题，用lapply，写成：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">lapply(d.class, typeof)</span><br></pre></td></tr></table></figure>
+<p>lapply的结果总是列表。 sapply会尽可能将结果简化为向量或矩阵，如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">sapply(d.class, typeof)</span><br></pre></td></tr></table></figure>
+<p>或使用vapply():</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">vapply(d.class, typeof, <span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>vapply可以处理遍历时每次调用的函数返回值不是标量的情形， 结果为矩阵， purrr包的map_dbl等只能处理调用的函数返回值是标量的情形。</p>
+<p>Map()与purrr::map、purrr::pmap功能类似， 以一个函数作为参数， 可以对其它参数的每一对应元素进行变换， 结果为列表。</p>
+<p>例如， 对数据框d， 如下的程序可以计算每列的平方和：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d &lt;- data.frame(</span><br><span class="line">  x = <span class="built_in">c</span>(<span class="number">1</span>, <span class="number">7</span>, <span class="number">2</span>),</span><br><span class="line">  y = <span class="built_in">c</span>(<span class="number">3</span>, <span class="number">5</span>, <span class="number">9</span>)</span><br><span class="line">)</span><br><span class="line">Map(<span class="keyword">function</span>(x) <span class="built_in">sum</span>(x^<span class="number">2</span>), d)</span><br></pre></td></tr></table></figure>
+<p>purrr包map的写法：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">map(d, ~ <span class="built_in">sum</span>(.^<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<p>实际上，这个例子也可以用lapply()改写成</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">lapply(d, <span class="keyword">function</span>(x) <span class="built_in">sum</span>(x^<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<p>Map()比lapply()增强的地方在于它允许对多个列表的对应元素逐一处理。 例如，为了求出d中每一行的最大值，可以用</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">Map(<span class="built_in">max</span>, d$x, d$y)</span><br></pre></td></tr></table></figure>
+<p>mapply()函数与Map()类似， 但是可以自动简化结果类型， 可以看成是sapply()推广到了可以对多个输入的对应元素逐项处理。 mapply()可以用参数MoreArgs指定逐项处理时一些共同的参数。 如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">mapply(<span class="built_in">max</span>, d$x, d$y)</span><br></pre></td></tr></table></figure>
+<p>当d数据框有多列时为了求每行的最大值， 可以用Reduce函数将两两求最大值的运算推广到多个之间的运算。</p>
+<p>Reduce函数功能与purrr::reduce类似， 把输入列表（或向量）的元素逐次地用给定的函数进行合并计算。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">set.seed(<span class="number">98</span>)</span><br><span class="line">x &lt;- replicate(<span class="number">3</span>, sample(</span><br><span class="line">  <span class="number">1</span>:<span class="number">5</span>, size=<span class="number">5</span>, replace=<span class="literal">TRUE</span>), simplify=<span class="literal">FALSE</span>); x</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">Reduce(intersect, x)</span><br></pre></td></tr></table></figure>
+<p>Reduce函数对多个输入默认从左向右计算， 可以用right参数选择是否从右向左合并。 参数init给出合并初值， 参数accumulate要求保留每一步合并的结果（累计）。 这个函数可以把很多仅适用于两个运算元的运算推广到多个参数的情形。<br>
+Filter(f, x)与purrr::keep作用类似， 用一个示性函数f作为筛选规则， 从列表或向量x中筛选出用f作用后为真值的元素子集。 例如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">f &lt;- <span class="keyword">function</span>(x) x &gt; <span class="number">0</span> &amp; x &lt; <span class="number">1</span></span><br><span class="line">Filter(f, <span class="built_in">c</span>(-<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.9</span>, <span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<p>改写：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- <span class="built_in">c</span>(-<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.9</span>, <span class="number">2</span>)</span><br><span class="line">x[x&gt;<span class="number">0</span> &amp; x&lt;<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>当x是列表且其元素本身也是复合类型的时候， 就需要把判断写成一个函数， 然后可以用Filter比较简单地表达按照判断规则取子集的操作。<br>
+Find()功能与purrr::detect类似， 返回满足条件的第一个元素， 也可以用参数right=TRUE要求返回满足条件的最后一个。<br>
+Position()功能与purrr::detect_index类似， 返回第一个满足条件的元素所在的下标位置。</p>
+<p><strong>自定义泛函</strong></p>
+<p>用户也可以自定义泛函。 比如，希望对一个数据框中所有的数值型变量计算某些统计量， 要计算的统计量由用户决定而不是由此自定义函数决定， 输入的函数的结果总是数值型向量， 编写自定义的泛函为：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">df.numeric &lt;- <span class="keyword">function</span>(df, FUN, ...)&#123;</span><br><span class="line">  sapply(Filter(<span class="built_in">is.numeric</span>, df), FUN, ...)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里参数FUN是用来计算统计量的函数。<br>
+例如对d.class中每个数值型变量计算最小值：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># na.rm为去掉缺失值</span></span><br><span class="line">df.numeric(d.class, summary, na.rm=<span class="built_in">T</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="函数工厂">函数工厂</h3>
+<p>函数的返回值可以是函数， 为此只要在函数内部定义嵌套函数并以嵌套函数为返回值。 返回函数的函数称为函数工厂， 函数工厂的输出结果称为一个闭包(closer)。 因为函数由形参表、函数体和定义环境三个部分组成， 函数工厂输出的闭包的定义环境是函数工厂的内部环境， 即函数工厂运行时产生的运行环境， 所以闭包包含了生产它的函数工厂的运行环境， 可以将闭包的一些状态信息保存在该环境中， 实现带有状态的函数。</p>
+<p><strong>闭包例子</strong></p>
+<p>符号测试：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">fe1 &lt;- <span class="keyword">function</span>(x)&#123;</span><br><span class="line">  t &lt;-  0</span><br><span class="line">  <span class="keyword">for</span> (i <span class="keyword">in</span> seq(x))&#123;</span><br><span class="line">    t &lt;- t + i</span><br><span class="line">    print(t)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">fe1(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>tr=runtimes</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">f.gen &lt;- <span class="keyword">function</span>()&#123;</span><br><span class="line">  tr &lt;- 0</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span>()&#123;</span><br><span class="line">   tr &lt;&lt;- tr + <span class="number">1</span></span><br><span class="line">    print(tr)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">f &lt;- f.gen()</span><br><span class="line">f()</span><br><span class="line">f()</span><br><span class="line">f()</span><br></pre></td></tr></table></figure>
+<p>下面的这种写法不能使每次运行的结果递增。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">f.gen &lt;- <span class="keyword">function</span>()&#123;</span><br><span class="line">  tr &lt;- 0</span><br><span class="line">  tr &lt;- tr + <span class="number">1</span></span><br><span class="line">  print(tr)</span><br><span class="line">&#125;</span><br><span class="line">f.gen()</span><br><span class="line">f.gen()</span><br></pre></td></tr></table></figure>
+<p>函数f.gen中定义了内嵌函数并以内嵌函数为输出， f.gen是一个函数工厂, 其返回值是一个闭包， 闭包也是一个R函数， 这个返回值“绑定”(bind)到变量名f上， 所以f是一个函数。</p>
+<p>函数f.gen中定义了内嵌函数并以内嵌函数为输出， f.gen是一个函数工厂, 其返回值是一个闭包， 闭包也是一个R函数， 这个返回值“绑定”(bind)到变量名f上， 所以f是一个函数。</p>
+<p>An object is data with functions. A closure is a function with data.<br>
+对象就是带着函数的数据，闭包就是带着数据的函数。闭包就是在原有函数的基础上去生产新的函数，或者简称为函数的函数，也就是函数本身可以作为参数代入新的函数里。</p>
+<p>调用函数f时用到变量tr， 用了&lt;&lt;-这种格式给这个变量赋值， 这样赋值的含义是在定义时的环境中逐层向上(向外，向父环境方向)查找变量是否存在， 在哪一层找到变量就给那里的变量赋值。 这样查找的结果是变量tr在f.gen的运行环境中。 调用f的时候f.gen已经结束运行了， 一般说来f.gen的运行环境应该已经不存在了； 但是， 函数的定义环境是随函数本身一同保存的， 因为函数工厂f.gen输出了函数f， f的定义环境是f.gen的运行环境， 所以起到了把f.gen的运行环境保存在f中的效果， 而f.gen运行环境中的变量值tr也就保存在了函数f中， 可以持续被f访问， 不像f的局部变量那样每次运行结束就会被清除掉。</p>
+<p>下面是一个类似的函数工厂例子, 产生的闭包可以显示从上次调用到下次调用之间经过的时间：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="built_in">proc.time</span>()</span><br><span class="line"><span class="comment"># 获取流逝时间</span></span><br><span class="line"><span class="built_in">proc.time</span>()[<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">make_stop_watch &lt;- <span class="keyword">function</span>()&#123;</span><br><span class="line">  saved.time &lt;- <span class="built_in">proc.time</span>()[<span class="number">3</span>]</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">function</span>()&#123;</span><br><span class="line">    t1 &lt;- <span class="built_in">proc.time</span>()[<span class="number">3</span>]</span><br><span class="line">    td &lt;- t1 - saved.time</span><br><span class="line">    saved.time &lt;&lt;- t1</span><br><span class="line">    cat(<span class="string">&quot;流逝时间（秒）：&quot;</span>, td, <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">    <span class="built_in">invisible</span>(td)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">ticker &lt;- make_stop_watch()</span><br><span class="line">ticker()</span><br><span class="line"><span class="comment">## 流逝时间（秒）： 0 </span></span><br><span class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">1000</span>) sort(runif(<span class="number">10000</span>))</span><br><span class="line">ticker()</span><br><span class="line"><span class="comment">## 流逝时间（秒）： 1.53 </span></span><br></pre></td></tr></table></figure>
+<p>其中proc.time()返回当前的R会话已运行的时间， 结果在MS Windows系统中有三个值，分别是用户时间、系统时间、流逝时间， 其中流逝时间比较客观。</p>
+<p><strong>动态查找和懒惰求值引起的问题</strong></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">make.pf &lt;- <span class="keyword">function</span>(power)&#123;</span><br><span class="line">  <span class="keyword">function</span>(x) x^power</span><br><span class="line">&#125;</span><br><span class="line">squ &lt;- make.pf(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">squ(<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">make.pf &lt;- <span class="keyword">function</span>(power)&#123;</span><br><span class="line">  <span class="keyword">function</span>(x) x^power</span><br><span class="line">&#125;</span><br><span class="line">p &lt;- 2</span><br><span class="line"><span class="comment"># 现在相当于square函数是求输入值x的平方</span></span><br><span class="line">square &lt;- make.pf(p)</span><br><span class="line"><span class="comment"># 给p重新赋值后，make.pf的power值变为3,现在square函数是求输入值的立方。</span></span><br><span class="line">p &lt;- 3</span><br><span class="line"><span class="comment"># </span></span><br><span class="line">square(<span class="number">4</span>)</span><br><span class="line">square(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>在生产出square函数时， 选项p的值是2， 所以函数square应该是做平方变换的函数， 虽然在调用之前p的值被改成了3， 但是按理说不应该修改已经生产出来的square定义。 程序结果说明调用square时用的是p=3的值， 这是怎么回事？</p>
+<p>R函数有懒惰求值规则， 在生产出square的那一步， 因为并不需要实际计算x^power， 所以实参p的值并没有被计算， 而是将square的定义环境中的power指向了全局空间的变量p， 调用square(4)的时候才实际需要power的值， 这时power才求值， 其值为p的当前值。</p>
+<p>避免这样的问题的办法是在函数工厂内用force()函数命令输入的参数当场求值而不是懒惰求值。 如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">make.pf &lt;- <span class="keyword">function</span>(power)&#123;</span><br><span class="line">  force(power)</span><br><span class="line">  <span class="keyword">function</span>(x) x^power</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 给定一个P值</span></span><br><span class="line">p &lt;- 3</span><br><span class="line">square &lt;- make.pf(p)</span><br><span class="line"><span class="comment"># 再给p赋值时，p值也不会发生改变</span></span><br><span class="line">p &lt;- 2</span><br><span class="line">square(<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<p>因为函数工厂生产出的闭包函数保存了函数工厂的运行环境， 如果这个运行环境很大， 就会造成较大的不必要的内存占用。 所以， 函数工厂内应尽量不要有占用大量内存的变量。 可以在函数工厂内用rm()删除不再使用的变量。</p>
+<p><strong>函数算子</strong></p>
+<p>函数算子输入函数，输出函数， 通常用来对输入函数的行为进行改进或做细微的修改。 基本R的Vectorize函数输入一个函数， 将其改造成支持向量化的版本。</p>
+<p>下面的dot_every函数输入一个函数， 将其改造为被循环调用时可以每调用一定次数就显示一个小数点， 这样可以用来显示循环的进度</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">dot_every &lt;- <span class="keyword">function</span>(f, n) &#123;</span><br><span class="line">  <span class="comment"># 输入一次f和n之后，这个值会固定，再次赋值时不发生改变</span></span><br><span class="line">  force(f)</span><br><span class="line">  force(n)</span><br><span class="line">  </span><br><span class="line">  i &lt;- 0</span><br><span class="line">  <span class="keyword">function</span>(...) &#123;</span><br><span class="line">    i &lt;&lt;- i + <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> (i %% n == <span class="number">0</span>) cat(<span class="string">&quot;.&quot;</span>)</span><br><span class="line">    f(...)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">sim &lt;- <span class="keyword">function</span>(i)&#123;</span><br><span class="line">  x &lt;- runif(<span class="number">1E6</span>)</span><br><span class="line">  <span class="built_in">invisible</span>(sort(x))</span><br><span class="line">&#125;</span><br><span class="line">library(purrr)</span><br><span class="line">walk(<span class="number">1</span>:<span class="number">100</span>, dot_every(sim, <span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="环境">环境</h3>
+<p><strong>基本认识</strong><br>
+环境作为一个数据结构与有名的列表相似， 但是其中的名字必须都互不相同， 且没有次序（类似集合）， 环境都有一个父环境， 修改环境内容时都不制作副本。</p>
+<p>rlang扩展包可以比较方便地操作R的语法内容。 可以用rlang::env()生成新的环境， 这类似于list()函数的用法， 如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">e1 &lt;- rlang::env(</span><br><span class="line">  a = <span class="literal">FALSE</span>,</span><br><span class="line">  b = <span class="string">&quot;a&quot;</span>,</span><br><span class="line">  <span class="built_in">c</span> = <span class="number">2.3</span>,</span><br><span class="line">  d = <span class="number">1</span>:<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>环境的作用是将一系列的名字（变量名、函数名等）与R对象绑定起来， 即建立从名字到对象的对应关系， 不计次序。 对环境的修改是直接进行而不制作副本的。 如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">e1$e &lt;- <span class="built_in">list</span>(x=<span class="number">1</span>, y=<span class="string">&quot;abcd&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 显示环境， 只会显示一个地址信息，</span></span><br><span class="line">e1</span><br></pre></td></tr></table></figure>
+<p>rlang包的env_print()函数可以给出较多的信息：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">rlang::env_print(e1)</span><br></pre></td></tr></table></figure>
+<p>rlang::env_names()可以获得环境中绑定的名字组成的字符型向量：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">rlang::env_names(e1)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>父环境</strong></p>
+<p>用rlang::env_parent()获得父环境， 用rlang::env_parents()获得各层父环境，如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">rlang::env_print(e1)</span><br><span class="line">cat(<span class="string">&#x27;-----\n&#x27;</span>)</span><br><span class="line">rlang::env_parent(e1)</span><br><span class="line">cat(<span class="string">&#x27;-----\n&#x27;</span>)</span><br><span class="line">rlang::env_parents(e1)</span><br></pre></td></tr></table></figure>
+<p><strong>在上层环境中赋值</strong></p>
+<p>用“&lt;&lt;-”在各级父环境中赋值， 最先在那一层父环境中找到变量就在那一层中赋值， 如果直到全局环境都没有找到变量， 就在全局环境中新建一个变量。 全局变量应谨慎使用， 它使得程序之间的数据输入输出变得不明晰。 在使用闭包时常常需要使用这种赋值方式保存并修改一个闭包的状态。</p>
+<p>如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">f0 &lt;- function()&#123;</span><br><span class="line">  x &lt;- 0</span><br><span class="line">  f1 &lt;- function()&#123;</span><br><span class="line">    f2 &lt;- function()&#123;</span><br><span class="line">      x &lt;&lt;- x+1</span><br><span class="line">      x</span><br><span class="line">    &#125;</span><br><span class="line">    f2()</span><br><span class="line">  &#125;</span><br><span class="line">  f1</span><br><span class="line">&#125;</span><br><span class="line">f01 &lt;- f0()</span><br><span class="line">f01()</span><br><span class="line">f01()</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中， &lt;&lt;-首先在f1环境内查找x， 没有找到就继续向上在f0的环境内查找x。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 输入数字x,求0~x所有整数相加的和</span><br><span class="line">f2 &lt;- function(x)&#123;</span><br><span class="line">  t &lt;- 0</span><br><span class="line">  for (i in seq(x))&#123;</span><br><span class="line">    t &lt;- t + i</span><br><span class="line">  &#125;</span><br><span class="line">  t</span><br><span class="line">&#125;</span><br><span class="line">f2(4)</span><br></pre></td></tr></table></figure>
+<p>library()调用的包会形成一个全局环境的父环境。使用search()函数可以查看当前启用包的环境。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">石晓强</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://steven-shixq.github.io/2020/05/09/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B013/">https://steven-shixq.github.io/2020/05/09/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B013/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://steven-shixq.github.io" target="_blank">衷深学习</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/tags/R%E8%AF%AD%E8%A8%80/">R语言</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/shixq_wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/shixq_alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/05/09/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB93/"><img class="prev-cover" src="https://media.nature.com/lw800/magazine-assets/d41586-020-01152-8/d41586-020-01152-8_17930896.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">每日外闻93</div></div></a></div><div class="next-post pull-right"><a href="/2020/05/10/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB94/"><img class="next-cover" src="https://media.nature.com/lw800/magazine-assets/d41586-020-01402-9/d41586-020-01402-9_17964588.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">每日外闻94</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/02/15/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/" title="R语言学习笔记1"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-15</div><div class="title">R语言学习笔记1</div></div></a></div><div><a href="/2020/04/18/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B010/" title="R语言学习笔记10"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-18</div><div class="title">R语言学习笔记10</div></div></a></div><div><a href="/2020/04/25/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B011/" title="R语言学习笔记11"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-25</div><div class="title">R语言学习笔记11</div></div></a></div><div><a href="/2020/05/02/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B012/" title="R语言学习笔记12"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-02</div><div class="title">R语言学习笔记12</div></div></a></div><div><a href="/2020/05/16/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B014/" title="R语言学习笔记14"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-16</div><div class="title">R语言学习笔记14</div></div></a></div><div><a href="/2020/05/23/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B015/" title="R语言学习笔记15"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-23</div><div class="title">R语言学习笔记15</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E8%BF%9B%E9%98%B6"><span class="toc-text">函数进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B"><span class="toc-text">函数式编程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%ACR%E7%9A%84%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E6%94%AF%E6%8C%81"><span class="toc-text">基本R的函数式编程支持</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%B7%A5%E5%8E%82"><span class="toc-text">函数工厂</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-text">环境</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 石晓强</div><div class="footer_custom_text">欢迎来到我的<a href="https://steven-shixq.github.io/">博客</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'NFoxKw5kAkzXk9OujXdPn1Qp-gzGzoHsz',
+      appKey: '9awzk7TAM6SBvkG1Sn28h7Qf',
+      placeholder: '说点什么吧',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>R语言学习笔记2 | 衷深学习</title><meta name="keywords" content="计算机,编程,R语言"><meta name="author" content="石晓强"><meta name="copyright" content="石晓强"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="R语言的基本数据类型与运算1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R语言学习笔记2">
+<meta property="og:url" content="https://steven-shixq.github.io/2020/02/22/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/index.html">
+<meta property="og:site_name" content="衷深学习">
+<meta property="og:description" content="R语言的基本数据类型与运算1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png">
+<meta property="article:published_time" content="2020-02-22T15:19:24.000Z">
+<meta property="article:modified_time" content="2020-02-29T13:21:42.643Z">
+<meta property="article:author" content="石晓强">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="R语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png"><link rel="shortcut icon" href="/img/avatar_reader.jpg"><link rel="canonical" href="https://steven-shixq.github.io/2020/02/22/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 石晓强","link":"链接: ","source":"来源: 衷深学习","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'R语言学习笔记2',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-02-29 21:21:42'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar_reader.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">331</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">174</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">衷深学习</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">R语言学习笔记2</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-02-22T15:19:24.000Z" title="发表于 2020-02-22 23:19:24">2020-02-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-02-29T13:21:42.643Z" title="更新于 2020-02-29 21:21:42">2020-02-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/R%E8%AF%AD%E8%A8%80/">R语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>28分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="R语言学习笔记2"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>R语言教程-R数据类型与运算1</strong></p>
+<h2 id="3-常亮与变量">3. 常亮与变量</h2>
+<h3 id="3-1-常量">3.1 常量</h3>
+<p>R语言基本的数据类型有数值型， 逻辑型（TRUE, FALSE），文本（字符串）。 支持缺失值，有专门的复数类型。</p>
+<p>数值型常量包括整型、单精度、双精度等，一般不需要区分。写法如<code>123</code>, <code>123.45</code>, <code>-123.45</code>, <code>-0.012</code>, <code>1.23E2</code>, <code>-1.2E-2</code>等。 为了表示<code>123</code>是整型，可以写成<code>123L</code>。</p>
+<p>字符型常量用两个双撇号或两个单撇号包围，如<code>&quot;Li Ming&quot;</code>或<code>'Li Ming'</code>。 字符型支持中文，如<code>&quot;李明&quot;</code>或<code>'李明'</code>。 国内的中文编码主要有GBK编码和UTF-8编码， 有时会遇到编码错误造成乱码的问题，MS Windows下R程序一般用GBK编码，但是RStudio软件采用UTF-8编码。 在R软件内字符串一般用UTF-8编码保存。</p>
+<p>逻辑型常量只有TRUE和FALSE。</p>
+<p>缺失值用NA表示。统计计算中经常会遇到缺失值，表示记录丢失、因为错误而不能用、节假日没有数据等。 除了数值型，逻辑型和字符型也可以有缺失值， 而且字符型的空白值不会自动辨识为缺失值，需要自己规定。 R支持特殊的Inf值，这是实数型值，表示正无穷大，不算缺失值。</p>
+<p>复数常量写法如<code>2.2 + 3.5i</code>, <code>1i</code>等。</p>
+<h3 id="3-2-变量">3.2 变量</h3>
+<p>程序语言中的变量用来保存输入的值或者计算得到的值。 在R中，变量可以保存所有的数据类型， 比如标量、向量、矩阵、数据框、函数等。</p>
+<p>变量都有变量名，R变量名必须以字母、数字、下划线和句点组成， 变量名的第一个字符不能取为数字。 在中文环境下，汉字也可以作为变量名的合法字符使用。 变量名是区分大小写的， <code>y</code>和<code>Y</code>是两个不同的变量名。</p>
+<p>赋值：<code> &lt;-</code>或<code>=</code>，一般用第一种形式</p>
+<p>R的变量没有固定的类型， 给已有变量赋值为新的类型， 该变量就变成新的类型， 但一般应避免这样的行为。 R是“动态类型”语言， 赋值实际上是“绑定”（binding）， 即将一个变量名与一个存储地址联系在一起， 同一个存储地址可以有多个变量名与其联系。</p>
+<h3 id="3-3-R数据类型">3.3 R数据类型</h3>
+<p>R语言数据结构包括向量，矩阵和数据框，多维数组， 列表，对象等。数据中元素、行、列还可以用名字访问。 最基本的是向量类型。 向量类型数据的访问方式也是其他数据类型访问方式的基础。<br>
+<img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/R%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png" alt="R中的数据结构"></p>
+<h2 id="4-数值型向量及其运算">4. 数值型向量及其运算</h2>
+<h3 id="4-1-数值型向量">4.1 数值型向量</h3>
+<p><strong>向量</strong>是将若干个<u>基础类型相同的值</u>存储在一起， 各个元素可以按序号访问。 如果将若干个数值存储在一起可以用序号访问， 就叫做一个数值型向量。</p>
+<p>用<code>c()</code>函数把多个元素或向量组合成一个向量。如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- <span class="built_in">c</span>(<span class="number">1</span>:<span class="number">3</span>, <span class="number">10</span>:<span class="number">13</span>)</span><br><span class="line">x</span><br><span class="line">x1 &lt;- <span class="built_in">c</span>(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">x2 &lt;- <span class="built_in">c</span>(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">x &lt;- <span class="built_in">c</span>(x1, x2)</span><br><span class="line">x</span><br></pre></td></tr></table></figure>
+<p>10:13这样的写法表示从10到13的整数组成的向量。<br>
+显示结果中，每行显示的行首会有方括号和数字序号， 代表该行显示的第一个向量元素的下标。<br>
+<code>length(x)</code>可以求x的长度。<code>numeric(10)</code>会生成元素为10个零的向量。</p>
+<h3 id="4-2-向量运算">4.2 向量运算</h3>
+<p><strong>标量和标量运算</strong><br>
+单个数值称为<code>标量</code>， R没有单独的标量类型， 标量实际是长度为1的向量。<br>
+用<code>%/%</code>表示整除，用<code>%%</code>表示求余。</p>
+<p><strong>向量与标量的运算</strong><br>
+一个向量乘以一个标量， 就是线性代数中的数乘运算。</p>
+<p>四则运算时如果有缺失值，缺失元素参加的运算相应结果元素仍缺失。</p>
+<p><strong>等长向量运算</strong><br>
+等长向量的运算为对应元素两两运算。<br>
+两个等长向量的加、减运算就是线性代数中两个向量的加、减运算。</p>
+<p><strong>不等长向量的运算</strong><br>
+两个不等长向量的四则运算， 如果其长度为倍数关系，规则是每次从头重复利用短的一个。 如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x1 &lt;- <span class="built_in">c</span>(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line">x2 &lt;- <span class="built_in">c</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>)</span><br><span class="line">x1 + x2</span><br><span class="line">x1 * x2</span><br></pre></td></tr></table></figure>
+<p>不仅是四则运算，R中有两个或多个向量按照元素一一对应参与某种运算或函数调用时， 如果向量长度不同，一般都采用这样的规则。</p>
+<p>如果两个向量的长度不是倍数关系，会给出警告信息。如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>) + <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-向量函数">4.3 向量函数</h3>
+<p><strong>向量化的函数</strong><br>
+R中的函数一般都是向量化的: 在R中， 如果普通的一元函数以向量为自变量，一般会对每个元素计算。 这样的函数包括sqrt, log10, log, exp, sin, cos, tan等许多。 如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sqrt</span>(<span class="built_in">c</span>(<span class="number">1</span>, <span class="number">4</span>, <span class="number">6.25</span>))</span><br></pre></td></tr></table></figure>
+<p>运行命令<code>help.start()</code>,可查看这些基础的数学函数的列表。</p>
+<p>如果自己编写的函数没有考虑向量化问题， 可以用<code>Vectorize()</code>函数将其转换成向量化版本。</p>
+<p><strong>排序函数</strong><br>
+sort(x)返回排序结果。 rev(x)返回把各元素排列次序反转后的结果。 order(x)返回排序用的下标。如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- <span class="built_in">c</span>(<span class="number">33</span>, <span class="number">55</span>, <span class="number">11</span>)</span><br><span class="line">sort(x)</span><br><span class="line">rev(sort(x))</span><br><span class="line">order(x)</span><br><span class="line">x[order(x)]</span><br></pre></td></tr></table></figure>
+<p><strong>统计函数</strong></p>
+<p><code>sum</code>(求和), <code>mean</code>(求平均值), <code>var</code>(求样本方差), <code>sd</code>(求样本标准差), <code>min</code>(求最小值), <code>max</code>(求最大值), <code>range</code>(求最小值和最大值)等函数称为统计函数， 把输入向量看作样本，计算样本统计量。 <code>prod</code>求所有元素的乘积。</p>
+<p><code>cumsum</code>和<code>cumprod</code>计算累加和累乘积。如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cumsum</span>(<span class="number">1</span>:<span class="number">5</span>)</span><br><span class="line"><span class="built_in">cumprod</span>(<span class="number">1</span>:<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p>在命令行界面用“?函数名”的方法查询函数的帮助文档</p>
+<p><strong>生成规则序列的函数</strong></p>
+<p>seq函数是冒号运算符的推广。 比如，seq(5)等同于1:5。 seq(2,5)等同于2:5。 seq(11, 15, by=2)产生11,13,15。 seq(0, 2*pi, length.out=100)产生从0到的等间隔序列， 序列长度指定为100。</p>
+<p>seq(to=5, from=2)仍等同于2:5。</p>
+<p><code>rep()</code>函数用来产生重复数值。 为了产生一个初值为零的长度为n的向量， 用<code>x &lt;- rep(0, n)</code>。 <code>rep(c(1,3), 2)</code>把第一个自变量重复两次， 结果相当于<code>c(1,3,1,3)</code>。<br>
+<code>rep(c(1,3), c(2,4))</code>则需要利用R的一般向量化规则， 把第一自变量的第一个元素1按照第二自变量中第一个元素2的次数重复， 把第一自变量中第二个元素3按照第二自变量中第二个元素4的次数重复， 结果相当于<code>c(1,1,3,3,3,3)</code>。</p>
+<p>如果希望重复完一个元素后再重复另一元素，用<code>each=</code>选项， 比如<code>rep(c(1,3), each=2)</code>结果相当于<code>c(1,1,3,3)</code>。</p>
+<p><strong>复数向量</strong><br>
+复数常数表示如<code>3.5+2.4i</code>, <code>1i</code>。 用函数<code>complex()</code>生成复数向量， 指定实部和虚部。 如<code>complex(real = c(1,0,-1,0), imaginary = c(0,1,0,-1))</code>相当于<code>c(1+0i, 1i, -1+0i, -1i)</code>。</p>
+<p><strong>练习</strong></p>
+<ol>
+<li>
+<p>示1到100的整数的平方根和立方根（提示：立方根就是三分之一次方）。</p>
+</li>
+<li>
+<p>设有10个人的小测验成绩为:<br>
+77,60,91,73,85,82,35,100,66,75</p>
+<ol>
+<li>把这10个成绩存入变量x;</li>
+<li>从小到大排序；</li>
+<li>计算<code>order(x)</code>，解释<code>order(x)</code>结果中第3项代表的意义。</li>
+<li>计算这些成绩的平均值、标准差、最小值、最大值、中位数。</li>
+</ol>
+</li>
+<li>
+<p>生成区间上等间隔的100个格子点存入变量x中。</p>
+</li>
+</ol>
+<h2 id="5-逻辑型向量及其运算">5. 逻辑型向量及其运算</h2>
+<h3 id="5-1-逻辑型向量与比较运算">5.1 逻辑型向量与比较运算</h3>
+<p>逻辑型是R的基本数据类型之一，只有两个值TRUE和FALSE, 缺失时为NA。逻辑值一般产生自比较<br>
+向量比较结果为逻辑型向量。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="built_in">c</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>) &gt; <span class="number">2</span></span><br><span class="line">(<span class="number">1</span>:<span class="number">4</span>) &gt;= (<span class="number">4</span>:<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>从例子可以看出，向量比较也遵从R的向量间运算的一般规则： 向量与标量的运算是向量每个元素与标量都分别运算一次， 等长向量的运算时对应元素的运算， 不等长但长度为倍数关系的向量运算是把短的从头重复利用。</p>
+<p>与NA比较产生NA，为了判断向量每个元素是否NA， <a target="_blank" rel="noopener" href="http://xn--is-1e7e.na">用is.na</a>()函数，如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="built_in">is.na</span>(<span class="built_in">c</span>(<span class="number">1</span>,<span class="literal">NA</span>, <span class="number">3</span>) &gt; <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>用is.finite()判断向量每个元素是否Inf值。<br>
+%in%是比较特殊的比较， x %in% y的运算把向量y看成集合， 运算结果是一个逻辑型向量， 第个元素的值为x的第元素是否属于y的逻辑型值。 如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="built_in">c</span>(<span class="number">1</span>,<span class="number">3</span>,<span class="literal">NA</span>) %in% <span class="built_in">c</span>(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="literal">NA</span>)</span><br></pre></td></tr></table></figure>
+<p>函数match(x, y)起到和x %in% y运算类似的作用， 但是其返回结果不是找到与否， 而是对x的每个元素， 找到其在y中首次出现的下标，找不到时取缺失值，如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">match(<span class="built_in">c</span>(<span class="number">1</span>, <span class="number">3</span>), <span class="built_in">c</span>(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="5-2">5.2</h3>
+<p>为了表达如“而且”, “或者”之类的复合比较， 需要使用逻辑运算把两个比较连接起来。 逻辑运算符为<code>&amp;</code>, <code>|</code>和<code>!</code>, 分别表示“同时成立”、“两者至少其一成立”、“条件的反面”。 比如，设<code>age&lt;=3</code>表示婴儿，<code>sex=='女'</code>表示女性，则 <code>age&lt;=3 &amp; sex=='女'</code>表示女婴, <code>age&lt;=3 | sex=='女'</code>表示婴儿或妇女, <code>!(age&lt;=3 | sex=='女')</code>表示既非婴儿也非妇女。 为了确定运算的先后次序可以用圆括号<code>()</code>指定。</p>
+<p><code>&amp;&amp;</code>和<code>||</code>分别为短路的标量逻辑与和短路的标量逻辑或， 仅对两个标量进行运算，如果有向量也仅使用第一个元素。</p>
+<h3 id="5-3-逻辑运算函数">5.3 逻辑运算函数</h3>
+<p>函数which()返回真值对应的所有下标，如\</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">which(<span class="built_in">c</span>(<span class="literal">FALSE</span>, <span class="literal">TRUE</span>, <span class="literal">TRUE</span>, <span class="literal">FALSE</span>, <span class="literal">NA</span>))</span><br><span class="line">which((<span class="number">11</span>:<span class="number">15</span>) &gt; <span class="number">12</span>)</span><br></pre></td></tr></table></figure>
+<p>函数all.equal()与identical()类似， 但是在比较数值型时不区分整数型与实数型， 而且相同时返回标量TRUE， 但是不同时会返回一个说明有何不同的字符串。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">all.equal(<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>), <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="literal">NA</span>))</span><br></pre></td></tr></table></figure>
+<p>函数duplicated()返回每个元素是否为重复值的结果，用函数unique()可以返回去掉重复值的结果.如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">duplicated(<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="literal">NA</span>,<span class="number">4</span>,<span class="literal">NA</span>))</span><br><span class="line">unique(<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="literal">NA</span>,<span class="number">4</span>,<span class="literal">NA</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="6-字符型数据及其处理">6. 字符型数据及其处理</h2>
+<p><strong>字符型向量</strong><br>
+字符型向量是元素为字符串的向量。如</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">s1 &lt;- c(&#x27;abc&#x27;, &#x27;&#x27;, &#x27;a cat&#x27;, NA, &#x27;李明&#x27;)</span><br></pre></td></tr></table></figure>
+<p>注意空字符串并不能自动认为是缺失值， 字符型的缺失值仍用NA表示。</p>
+<p><strong>一些函数</strong></p>
+<ol>
+<li>针对字符型数据最常用的R函数是paste()函数。 paste()用来连接两个字符型向量， 元素一一对应连接， 默认用空格连接。</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 一下两种结果相等</span></span><br><span class="line">paste(<span class="built_in">c</span>(<span class="string">&quot;ab&quot;</span>, <span class="string">&quot;cd&quot;</span>), <span class="built_in">c</span>(<span class="string">&quot;ef&quot;</span>, <span class="string">&quot;gh&quot;</span>))</span><br><span class="line"><span class="built_in">c</span>(<span class="string">&quot;ab ef&quot;</span>, <span class="string">&quot;cd gh&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><code>paste()</code>在连接两个字符型向量时采用R的一般向量间运算规则， 而且可以自动把数值型向量转换为字符型向量。 可以作一对多连接， 如<code>paste(&quot;x&quot;, 1:3)</code>结果相当于<code>c(&quot;x 1&quot;, &quot;x 2&quot;, &quot;x 3&quot;)</code>。</p>
+<p>用<code>sep=</code>指定分隔符， 如<code>paste(&quot;x&quot;, 1:3, sep=&quot;&quot;)</code>结果相当于<code>c(&quot;x1&quot;, &quot;x2&quot;, &quot;x3&quot;)</code>。<br>
+使用collapse=参数可以把字符型向量的各个元素连接成一个单一的字符串, 如paste(c(“a”, “b”, “c”), collapse=“”)结果相当于&quot;abc&quot;。</p>
+<ol start="2">
+<li>
+<p><code>toupper()</code>函数把字符型向量内容转为大写， <code>tolower()</code>函数转为小写。<br>
+这两个函数可以用于不区分大小写的比较， 比如，不论x的值是’JAN’, ‘Jan’还是’jan’， toupper(x)=='JAN’的结果都为TRUE。</p>
+</li>
+<li>
+<p>用nchar(x, type=‘bytes’)计算字符型向量x中每个字符串的以字节为单位的长度，这一点对中英文是有差别的， 中文通常一个汉字占两个字节，英文字母、数字、标点占一个字节。 用nchar(x, type=‘chars’)计算字符型向量x中每个字符串的以字符个数为单位的长度，这时一个汉字算一个单位。</p>
+</li>
+<li>
+<p>substr(x, start, stop)从字符串x中取出从第start个到第stop个的子串，不同于python（计数从0开始），R的技术从1开始。</p>
+</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">substr(<span class="string">&#x27;JAN07&#x27;</span>, <span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line"><span class="comment"># 如果x是一个字符型向量，substr将对每个元素取子串。</span></span><br><span class="line">substr(<span class="built_in">c</span>(<span class="string">&#x27;JAN07&#x27;</span>, <span class="string">&#x27;MAR66&#x27;</span>), <span class="number">1</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>用substring(x, start)可以从字符串x中取出从第start个到末尾的子串。</p>
+<p><strong>类型转换</strong></p>
+<p>用as.numeric()把内容是数字的字符型值转换为数值，如<br>
+substr(‘JAN07’, 4, 5) + 2000不能相加，substr取出的值时字符型，不能与数值相加，需要转换为数值</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="built_in">as.numeric</span>(substr(<span class="string">&#x27;JAN07&#x27;</span>, <span class="number">4</span>, <span class="number">5</span>)) + <span class="number">2000</span></span><br><span class="line">substr(<span class="built_in">c</span>(<span class="string">&#x27;JAN07&#x27;</span>, <span class="string">&#x27;MAR66&#x27;</span>),<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line"><span class="built_in">as.numeric</span>(substr(<span class="built_in">c</span>(<span class="string">&#x27;JAN07&#x27;</span>, <span class="string">&#x27;MAR66&#x27;</span>), <span class="number">4</span>, <span class="number">5</span>))</span><br></pre></td></tr></table></figure>
+<p>as.numeric()是向量化的， 可以转换一个向量的每个元素为数值型。</p>
+<p>用as.character()函数把数值型转换为字符型</p>
+<p>为了用指定的格式数值型转换成字符型， 可以使用sprintf()函数， 其用法与C语言的sprintf()函数相似， 只不过是向量化的。例如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">sprintf(<span class="string">&#x27;file%04d.txt&#x27;</span>, <span class="built_in">c</span>(<span class="number">1</span>, <span class="number">99</span>, <span class="number">100</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>字符串拆分</strong><br>
+用strsplit()函数可以把一个字符串按照某种分隔符拆分开，例如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- <span class="string">&#x27;10,8,7&#x27;</span></span><br><span class="line">strsplit(x, <span class="string">&#x27;,&#x27;</span>, fixed = <span class="literal">TRUE</span>)[[<span class="number">1</span>]]</span><br><span class="line"><span class="built_in">as.numeric</span>(strsplit(x,<span class="string">&#x27;,&#x27;</span>,fixed = <span class="literal">TRUE</span>)[[<span class="number">1</span>]])</span><br></pre></td></tr></table></figure>
+<p><strong>字符串替换功能</strong><br>
+用gsub()可以替换字符串中的子串， 这样的功能经常用在数据清理中。 比如，把数据中的中文标点改为英文标点， 去掉空格，等等。 如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- <span class="string">&#x27;1, 3; 5&#x27;</span></span><br><span class="line"><span class="comment"># 替换</span></span><br><span class="line">a &lt;- gsub(<span class="string">&#x27;;&#x27;</span>, <span class="string">&#x27;,&#x27;</span>, x, fixed=<span class="literal">TRUE</span>)</span><br><span class="line">a</span><br><span class="line"><span class="comment"># 将字符串按逗号分隔分开</span></span><br><span class="line">b &lt;- strsplit(a, <span class="string">&quot;,&quot;</span>,fixed = <span class="built_in">T</span>)[[<span class="number">1</span>]]</span><br><span class="line">b</span><br><span class="line"><span class="comment"># 转化为数值型向量</span></span><br><span class="line">c &lt;- <span class="built_in">as.numeric</span>(b)</span><br><span class="line"><span class="built_in">c</span></span><br></pre></td></tr></table></figure>
+<p><strong>正则表达式</strong></p>
+<p>正则表达式(regular expression)是一种匹配某种字符串模式的方法。 用这样的方法，可以从字符串中查找某种模式的出现位置， 替换某种模式，等等。 这样的技术可以用于文本数据的预处理， 比如用网络爬虫下载的大量网页文本数据。 R中支持perl语言格式的正则表达式， grep()和grepl()函数从字符串中查询某个模式， sub()和gsub()替换某模式。 比如， 下面的程序把多于一个空格替换成一个空格</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">gsub(<span class="string">&#x27;[[:space:]]+&#x27;</span>, <span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;a   cat  in a box&#x27;</span>, perl=<span class="literal">TRUE</span>)</span><br></pre></td></tr></table></figure>
+<p>后面会有更加详细的介绍。</p>
+<h2 id="7-R向量下标和子集">7. R向量下标和子集</h2>
+<p>变量可归结为名义型、有序型或连续型变量。</p>
+<ul>
+<li><code>名义型变量</code>是没有顺序之分的类别变量。糖尿病类型Diabetes（Type1、Type2）是名义型变量的一例。即使在数据中Type1编码为1而Type2编码为2，这也并不意味着二者是有序的。</li>
+<li><code>有序型变量</code>表示一种顺序关系，而非数量关系。病情Status（poor、improved、excellent）是顺序型变量的一个上佳示例。我们明白，病情为poor（较差）病人的状态不如improved（病情好转）的病人，但并不知道相差多少。</li>
+<li><code>连续型变量</code>可以呈现为某个范围内的任意值，并同时表示了顺序和数量。年龄Age就是一个连续型变量，它能够表示像14.5或22.8这样的值以及其间的其他任意值。</li>
+</ul>
+<p>类别（名义型）变量和有序类别（有序型）变量在R中称为<code>因子（factor）</code>。</p>
+<p><strong>正整数下标</strong></p>
+<p>对向量x, 在后面加方括号和下标可以访问向量的元素和子集。<br>
+设x &lt;- c(1, 4, 6.25)。 x[2]取出第二个元素； x[2] &lt;- 99修改第二个元素。 x[c(1,3)]取出第1、3号元素； x[c(1,3)] &lt;- c(11, 13)修改第1、3号元素。 下标可重复。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">4</span>,<span class="number">6.25</span>)</span><br><span class="line"><span class="comment"># 下标从1开始计数</span></span><br><span class="line">x[<span class="number">0</span>]</span><br><span class="line"><span class="comment"># 修改1,3号元素为11,13</span></span><br><span class="line">x[<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">3</span>)] &lt;- <span class="built_in">c</span>(<span class="number">11</span>, <span class="number">13</span>)</span><br><span class="line">print(x)</span><br><span class="line">x[<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">3</span>,<span class="number">1</span>)]</span><br></pre></td></tr></table></figure>
+<p><strong>负整数下标</strong></p>
+<p>负下标表示扣除相应的元素后的子集</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">4</span>,<span class="number">6.25</span>)</span><br><span class="line">x[-<span class="number">2</span>]</span><br><span class="line"><span class="comment">## 1.00 6.25</span></span><br><span class="line">x[-<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">3</span>)]</span><br><span class="line"><span class="comment">## 4</span></span><br></pre></td></tr></table></figure>
+<p>负整数下标不能与正整数下标同时用来从某一向量中取子集， 比如，x[c(1,-2)]没有意义。</p>
+<p><strong>空下标与零下标</strong></p>
+<p>x[]表示取x的全部元素作为子集。 这与x本身不同</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">4</span>,<span class="number">6.25</span>)</span><br><span class="line">x[]</span><br><span class="line">x[] &lt;- <span class="number">999</span></span><br><span class="line">x</span><br><span class="line">x &lt;- <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">4</span>,<span class="number">6.25</span>)</span><br><span class="line">x &lt;- 999</span><br><span class="line">x</span><br></pre></td></tr></table></figure>
+<p><strong>下标超界</strong></p>
+<p>设向量x长度为n, 则使用正整数下标时下标应在1…n中取值。 如果使用大于的下标， 读取时返回缺失值，并不出错。 给超出的下标元素赋值， 则向量自动变长， 中间没有赋值的元素为缺失值。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">4</span>,<span class="number">6.25</span>)</span><br><span class="line">x[<span class="number">5</span>]</span><br><span class="line">x</span><br><span class="line">x[<span class="number">5</span>] &lt;- <span class="number">9</span></span><br><span class="line">x</span><br></pre></td></tr></table></figure>
+<p>虽然R的语法对下标超界不视作错误， 但是这样的做法往往来自不良的程序思路， 而且对程序效率有影响，所以实际编程中应避免下标超界。</p>
+<p><strong>逻辑下标</strong></p>
+<p>下标可以是与向量等长的逻辑表达式， 一般是关于本向量或者与本向量等长的其它向量的比较结果</p>
+<p>要注意的是，如果逻辑下标中有缺失值， 对应结果也是缺失值。 所以，在用逻辑下标作子集选择时， 一定要考虑到缺失值问题。正确的做法是加上!is.na前提</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">4</span>,<span class="number">6.25</span>)</span><br><span class="line">x[x &gt; <span class="number">3</span>]</span><br><span class="line">x &lt;- <span class="built_in">c</span>(<span class="number">1</span>, <span class="number">4</span>, <span class="number">6.25</span>, <span class="literal">NA</span>)</span><br><span class="line">x[x &gt; <span class="number">2</span>]</span><br><span class="line">x[!<span class="built_in">is.na</span>(x) &amp; x &gt; <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<p><strong>which()、which.min()、which.max()函数</strong></p>
+<p>函数which()可以用来找到满足条件的下标,其他两个函数分别找最小与最大值的下标。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- <span class="built_in">c</span>(<span class="number">3</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">9</span>)</span><br><span class="line">which(x &gt; <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>元素名</strong></p>
+<p>向量可以为每个元素命名。如</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ages &lt;- c(&quot;李明&quot;=30, &quot;张聪&quot;=25, &quot;刘颖&quot;=28)</span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ages &lt;- c(30, 25, 28)</span><br><span class="line">names(ages) &lt;- c(&quot;李明&quot;, &quot;张聪&quot;, &quot;刘颖&quot;)</span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ages &lt;- setNames(c(30, 25, 28), c(&quot;李明&quot;, &quot;张聪&quot;, &quot;刘颖&quot;))</span><br></pre></td></tr></table></figure>
+<p>这时可以用元素名或元素名向量作为向量的下标，如</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ages[&quot;张聪&quot;]</span><br><span class="line">## 张聪 </span><br><span class="line">##   25</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ages[c(&quot;李明&quot;, &quot;刘颖&quot;)]</span><br><span class="line">## 李明 刘颖 </span><br><span class="line">##   30   28</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ages[&quot;张聪&quot;] &lt;- 26</span><br></pre></td></tr></table></figure>
+<p>这实际上建立了字符串到数值的映射表。</p>
+<p>用unname(x)返回去掉了元素名的x的副本， 用names(x) &lt;- NULL可以去掉x的元素名。</p>
+<p><strong>练习</strong></p>
+<p>设文件class.csv内容如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">name,sex,age,height,weight</span><br><span class="line">Alice,F,13,56.5,84</span><br><span class="line">Becka,F,13,65.3,98</span><br><span class="line">Gail,F,14,64.3,90</span><br><span class="line">Karen,F,12,56.3,77</span><br><span class="line">Kathy,F,12,59.8,84.5</span><br><span class="line">Mary,F,15,66.5,112</span><br><span class="line">Sandy,F,11,51.3,50.5</span><br><span class="line">Sharon,F,15,62.5,112.5</span><br><span class="line">Tammy,F,14,62.8,102.5</span><br><span class="line">Alfred,M,14,69,112.5</span><br><span class="line">Duke,M,14,63.5,102.5</span><br><span class="line">Guido,M,15,67,133</span><br><span class="line">James,M,12,57.3,83</span><br><span class="line">Jeffrey,M,13,62.5,84</span><br><span class="line">John,M,12,59,99.5</span><br><span class="line">Philip,M,16,72,150</span><br><span class="line">Robert,M,12,64.8,128</span><br><span class="line">Thomas,M,11,57.5,85</span><br><span class="line">William,M,15,66.5,112</span><br></pre></td></tr></table></figure>
+<p>用如下程序可以把上述文件读入为R数据框d.class, 并取出其中的name和age列到变量name和age中：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d.class &lt;- read.csv(<span class="string">&#x27;class.csv&#x27;</span>, header=<span class="literal">TRUE</span>, stringsAsFactors=<span class="literal">FALSE</span>)</span><br><span class="line">name &lt;- d.class[,<span class="string">&#x27;name&#x27;</span>]</span><br><span class="line">name</span><br><span class="line">age &lt;- d.class[,<span class="string">&#x27;age&#x27;</span>]</span><br><span class="line">age</span><br></pre></td></tr></table></figure>
+<ol>
+<li>求出age中第3, 5, 7号的值；</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">age[<span class="built_in">c</span>(<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>)]</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>用变量age, 求出达到15岁及以上的那些值；</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">which(age &gt; <span class="number">15</span>)</span><br><span class="line">age[age &gt; <span class="number">15</span>]</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>用变量name和age, 求出Mary与James的年龄。</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="built_in">names</span>(age) &lt;- name</span><br><span class="line">name</span><br><span class="line">age</span><br><span class="line">age[<span class="string">&quot;Mary&quot;</span>]</span><br><span class="line">age[<span class="string">&quot;James&quot;</span>]</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>求age中除Mary与James这两人之外的那些人的年龄值，保存到变量age1中。</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">age</span><br><span class="line">age1 &lt;- age[-<span class="built_in">c</span>(<span class="number">6</span>,<span class="number">13</span>)]</span><br><span class="line">age1</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>假设向量x长度为n, 其元素是{1,2,…,n}的一个重排。 可以把x看成一个i到x[i]的映射(i在{1,2,…,n}中取值)。 求向量y, 保存了上述映射的逆映射，即： 如果x[i]=j, 则y[j]=i。</li>
+</ol>
+<h2 id="8-R数据类型的性质">8. R数据类型的性质</h2>
+<p>在R语言中数值一般看作double, 如果需要明确表明某些数值是整数， 可以在数值后面附加字母L</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="built_in">is.double</span>(<span class="built_in">c</span>(<span class="number">1</span>,-<span class="number">3</span>))</span><br><span class="line"><span class="built_in">is.integer</span>(<span class="built_in">c</span>(<span class="number">1L</span>, -<span class="number">3L</span>))</span><br></pre></td></tr></table></figure>
+<p>在R的向量类型中， integer类型、double类型、logical类型、character类型、还有complex类型和raw类型称为原子类型(atomic types)， 原子类型的向量中元素都是同一基本类型的。 比如， double型向量的元素都是double或者缺失值。 除了原子类型的向量， 在R语言的定义中， 向量还包括后面要讲到的列表（list）， 列表的元素不需要属于相同的基本类型， 而且列表的元素可以不是单一基本类型元素。 用typeof()函数可以返回向量的类型， 列表返回结果为&quot;list&quot;:</p>
+<p>原子类型的各个元素除了基本类型相同， 还不包含任何嵌套结构，如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="built_in">c</span>(<span class="number">1</span>, <span class="built_in">c</span>(<span class="number">2</span>,<span class="number">3</span>, <span class="built_in">c</span>(<span class="number">4</span>,<span class="number">5</span>)))</span><br></pre></td></tr></table></figure>
+<p>R有一个特殊的NULL类型， 这个类型只有唯一的一个NULL值， 表示不存在。 要把NULL与NA区分开来， NA是有类型的（integer、double、logical、character等), NA表示存在但是未知。 用is.null()函数判断某个变量是否取NULL。</p>
+<p>在用c()函数合并若干元素时， 如果元素基本类型不同， 将统一转换成最复杂的一个，复杂程度从简单到复杂依次为： logical&lt;integer&lt;double&lt;character。 如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="built_in">c</span>(<span class="literal">FALSE</span>, <span class="number">1L</span>, <span class="number">2.5</span>, <span class="string">&quot;3.6&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>不同类型参与要求类型相同的运算时，也会统一转换为最复杂的类型， 如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="literal">TRUE</span> + <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<p>不同类型参与要求类型相同的运算时，也会统一转换为最复杂的类型， 如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">paste(<span class="string">&quot;abc&quot;</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>属性</strong></p>
+<p>除了NULL以外， R的变量都可以看成是对象， 都可以有属性。 在R语言中， 属性是把变量看成对象后， 除了其存储内容（如元素）之外的其它附加信息， 如维数、类属等。 对象x的所有属性可以用attributes()读取， 如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- table(<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>)); </span><br><span class="line">print(x)</span><br><span class="line"><span class="built_in">attributes</span>(x)</span><br></pre></td></tr></table></figure>
+<p>用print()函数可以显示对象内容。 如果内容很多， 显示行数可能也很多。 用str()函数可以显示对象的类型和主要结构及典型内容。例如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">s &lt;- 101:<span class="number">200</span></span><br><span class="line"><span class="built_in">attr</span>(s,<span class="string">&#x27;author&#x27;</span>) &lt;- <span class="string">&#x27;李小明&#x27;</span></span><br><span class="line"><span class="built_in">attr</span>(s,<span class="string">&#x27;date&#x27;</span>) &lt;- <span class="string">&#x27;2016-09-12&#x27;</span></span><br><span class="line">str(s)</span><br></pre></td></tr></table></figure>
+<p>str函数<br>
+即structure，紧凑的显示对象内部结构，即对象里有什么。</p>
+<h2 id="9-R日期时间">9. R日期时间</h2>
+<p>主要为lubridate()函数的使用</p>
+<blockquote>
+<p>详细讲解：<a target="_blank" rel="noopener" href="http://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/prog-type-date.html">R日期时间</a></p>
+</blockquote>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">library(lubridate)</span><br><span class="line"><span class="comment"># 函数lubridate::today()返回当前日期</span></span><br><span class="line">today()</span><br><span class="line"><span class="comment"># 函数lubridate::now()返回当前日期时间：</span></span><br><span class="line">now()</span><br><span class="line"><span class="comment"># </span></span><br><span class="line">ymd(<span class="built_in">c</span>(<span class="string">&quot;1998-3-10&quot;</span>, <span class="string">&quot;2018-01-17&quot;</span>, <span class="string">&quot;18-1-17&quot;</span>))</span><br></pre></td></tr></table></figure>
+<p>lubridate包的如下函数可以取出日期型或日期时间型数据中的组成部分：</p>
+<ul>
+<li><code>year()</code>取出年</li>
+<li><code>month()</code>取出月份数值</li>
+<li><code>mday()</code>取出日数值</li>
+<li><code>yday()</code>取出日期在一年中的序号，元旦为1</li>
+<li><code>wday()</code>取出日期在一个星期内的序号， 但是一个星期从星期天开始， 星期天为1,星期一为2，星期六为7。</li>
+<li><code>hour()</code>取出小时</li>
+<li><code>minute()</code>取出分钟</li>
+<li><code>second()</code>取出秒</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 取出月份</span></span><br><span class="line">month(as.POSIXct(<span class="string">&quot;2018-1-17 13:15:40&quot;</span>))</span><br><span class="line"><span class="comment"># 取出日</span></span><br><span class="line">mday(as.POSIXct(<span class="string">&quot;2018-1-17 13:15:40&quot;</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="10-R因子类型">10 R因子类型</h2>
+<h3 id="10-1-因子">10.1 因子</h3>
+<p>R中用因子代表数据中分类变量, 如性别、省份、职业。 有序因子代表有序量度，如打分结果，疾病严重程度等。</p>
+<p>用factor()函数把字符型向量转换成因子</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- <span class="built_in">c</span>(<span class="string">&quot;男&quot;</span>, <span class="string">&quot;女&quot;</span>, <span class="string">&quot;男&quot;</span>, <span class="string">&quot;男&quot;</span>,  <span class="string">&quot;女&quot;</span>)</span><br><span class="line">sex &lt;- factor(x)</span><br><span class="line">sex</span><br><span class="line"><span class="comment"># 查看属性</span></span><br><span class="line"><span class="built_in">attributes</span>(sex)</span><br></pre></td></tr></table></figure>
+<p>因子有class属性，取值为&quot;factor&quot;， 还有一个levels(水平值)属性， 此属性可以用levels()函数访问</p>
+<p>事实上， <code>read.csv()</code>函数的默认操作会把输入文件的字符型列自动转换成因子， 这对于性别、职业、地名这样的列是合适的， 但是对于姓名、日期、详细地址这样的列则不合适。 所以，在<code>read.csv()</code>调用中经常加选项<code>stringsAsFactors=FALSE</code>选项禁止这样的自动转换，还可以用<code>colClasses</code>选项逐个指定每列的类型。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 把因子转换为纯粹的整数值</span></span><br><span class="line"><span class="built_in">as.numeric</span>(sex)</span><br><span class="line"><span class="comment"># 把因子转换成原来的字符型</span></span><br><span class="line"><span class="built_in">as.character</span>(sex)</span><br></pre></td></tr></table></figure>
+<p>为了对因子执行字符型操作（如取子串）， 保险的做法是先用as.character()函数强制转换为字符型。</p>
+<p>factor()函数的一般形式为：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">factor(x, levels = sort(unique(x), na.last = <span class="literal">TRUE</span>), </span><br><span class="line">       labels, exclude = <span class="literal">NA</span>, ordered = <span class="literal">FALSE</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>levels</code>自行指定各水平值, 不指定时由x的不同值来求得。</li>
+<li><code>labels</code>指定各水平的标签, 不指定时用各水平值的对应字符串。</li>
+<li><code>exclude</code>选项指定要转换为缺失值(NA)的元素值集合。</li>
+<li><code>ordered</code>取真值时表示因子水平是有次序的(按编码次序)。</li>
+</ul>
+<p>在使用factor()函数定义因子时， 如果知道自变量元素的所有可能取值， 应尽可能使用levels=参数指定这些不同可能取值， 这样， 即使某个取值没有出现， 此变量代表的含义和频数信息也是完整的。 自己指定levels=的另一好处是可以按正确的次序显示因子的分类统计值。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">li1 &lt;- factor(<span class="built_in">c</span>(<span class="string">&#x27;男&#x27;</span>, <span class="string">&#x27;女&#x27;</span>), levels=<span class="built_in">c</span>(<span class="string">&#x27;男&#x27;</span>, <span class="string">&#x27;女&#x27;</span>))</span><br><span class="line">li2 &lt;- factor(<span class="built_in">c</span>(<span class="string">&#x27;男&#x27;</span>, <span class="string">&#x27;男&#x27;</span>), levels=<span class="built_in">c</span>(<span class="string">&#x27;男&#x27;</span>, <span class="string">&#x27;女&#x27;</span>))</span><br><span class="line"><span class="comment"># 这种合并方法会出错，结果不在是因子</span></span><br><span class="line"><span class="built_in">c</span>(li1, li2)</span><br><span class="line"><span class="comment"># 恢复成字符型后合并， 然后再转换为因子。 在合并两个数据框时也存在这样的问题。</span></span><br><span class="line">factor(<span class="built_in">c</span>(<span class="built_in">as.character</span>(li1), <span class="built_in">as.character</span>(li2)))</span><br><span class="line">print(levels(factor(<span class="string">&quot;------&quot;</span>)))</span><br><span class="line"><span class="built_in">attributes</span>(li1)</span><br><span class="line">print(<span class="string">&quot;------&quot;</span>)</span><br><span class="line">levels(li1)</span><br></pre></td></tr></table></figure>
+<h3 id="10-2-table-函数">10.2 <code>table()</code>函数</h3>
+<p>用table()函数统计因子各水平的出现次数（称为频数或频率）。 也可以对一般的向量统计每个不同元素的出现次数。 如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- <span class="built_in">c</span>(<span class="string">&quot;男&quot;</span>, <span class="string">&quot;女&quot;</span>, <span class="string">&quot;男&quot;</span>, <span class="string">&quot;男&quot;</span>,  <span class="string">&quot;女&quot;</span>)</span><br><span class="line">sex &lt;- factor(x)</span><br><span class="line">table(sex)</span><br></pre></td></tr></table></figure>
+<h3 id="10-3-tapply-函数">10.3 <code>tapply()</code>函数</h3>
+<p>可以按照因子分组然后每组计算另一变量的概括统计。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">sex &lt;- factor(<span class="built_in">c</span>(<span class="string">&quot;男&quot;</span>, <span class="string">&quot;女&quot;</span>, <span class="string">&quot;男&quot;</span>, <span class="string">&quot;男&quot;</span>,  <span class="string">&quot;女&quot;</span>))</span><br><span class="line"><span class="comment"># h与sex等长</span></span><br><span class="line">h &lt;- <span class="built_in">c</span>(<span class="number">165</span>, <span class="number">170</span>, <span class="number">168</span>, <span class="number">172</span>, <span class="number">159</span>)</span><br><span class="line"><span class="comment"># 按照sex分组，然后统计h变量的Mean值</span></span><br><span class="line">tapply(h, sex, mean)</span><br></pre></td></tr></table></figure>
+<h3 id="10-4-forcats包的因子函数">10.4 forcats包的因子函数</h3>
+<ul>
+<li>tapply()函数可以按照因子分组然后每组计算另一变量的概括统计。</li>
+<li>R语言中set.seed()作用是设定生成随机数的种子，种子是为了让结果具有重复性，重现结果。如果不设定种子，生成的随机数无法重现。如set.seed(1),中的1知识一个标记符号</li>
+<li>round函数用于舍入到最接近的整数。</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">library(forcats)</span><br><span class="line">set.seed(<span class="number">1</span>)</span><br><span class="line">fac &lt;- sample(<span class="built_in">c</span>(<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>), <span class="number">30</span>, replace = <span class="literal">TRUE</span>)</span><br><span class="line">fac &lt;- factor(fac, levels = <span class="built_in">c</span>(<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>))</span><br><span class="line">x &lt;- <span class="built_in">round</span>(<span class="number">100</span>*(<span class="number">10</span>+rt(<span class="number">30</span>,<span class="number">2</span>)))</span><br><span class="line">res1 &lt;- tapply(x,fac,sd);res1</span><br><span class="line">barplot(res1)</span><br></pre></td></tr></table></figure>
+<p>如果希望按照统计量次序对因子排序， 可以用forcats::fct_reorder()函数</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">fac2 &lt;- fct_reorder(fac, x, sd)</span><br><span class="line">res2 &lt;- tapply(x, fac2, sd);barplot(res2)</span><br></pre></td></tr></table></figure>
+<p>有时在因子水平数较多时仅想将特定的一个或几个水平次序放到因子水平最前面， 可以用forcats::fct_relevel()函数</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">levels(fac)</span><br><span class="line">fac3 &lt;- fct_relevel(fac, <span class="string">&quot;blue&quot;</span>,<span class="string">&quot;green&quot;</span>)</span><br><span class="line">levels(fac3)</span><br><span class="line">fac3 &lt;- fct_relevel(fac, <span class="string">&quot;blue&quot;</span>)</span><br><span class="line">levels(fac3)</span><br></pre></td></tr></table></figure>
+<p>fct_relevel()第一个参数是要修改次序的因子， 后续可以有多个字符型参数表示要提前的水平。</p>
+<p>forcats::fct_reorder2(f, x, y)也调整因子f的水平的次序， 但是根据与每组中最大的x值相对应的y值大小调整次序， 这样在作多个因子水平对应的曲线图时可以比较容易地区分多条曲线。</p>
+<p>forcats::fct_recode()可以修改每个水平的名称</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">fac4 &lt;- fct_recode(</span><br><span class="line">  fac,</span><br><span class="line">  <span class="string">&quot;红&quot;</span>=<span class="string">&quot;red&quot;</span>, <span class="string">&quot;绿&quot;</span>=<span class="string">&quot;green&quot;</span>, <span class="string">&quot;蓝&quot;</span>=<span class="string">&quot;blue&quot;</span>)</span><br><span class="line">table(fac4)</span><br><span class="line">levels(fac4)</span><br></pre></td></tr></table></figure>
+<p>fct_recode()在修改水平名时允许多个旧水平对应到一个新水平， 从而合并原来的水平。 如果合并很多， 可以用fct_collapse()函数， 如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">exam &lt;- factor(<span class="built_in">c</span>(<span class="string">&quot;其他&quot;</span>,<span class="string">&quot;联想&quot;</span>,<span class="string">&quot;百度&quot;</span>),levels = <span class="built_in">c</span>(<span class="string">&quot;其他&quot;</span>,<span class="string">&quot;联想&quot;</span>,<span class="string">&quot;百度&quot;</span>))</span><br><span class="line">levels(exam)</span><br><span class="line">exam1 &lt;- fct_recode(</span><br><span class="line">  exam,</span><br><span class="line">  <span class="string">&quot;other&quot;</span>=<span class="string">&quot;其他&quot;</span>, <span class="string">&quot;lenovo&quot;</span>=<span class="string">&quot;联想&quot;</span>, <span class="string">&quot;baidu&quot;</span>=<span class="string">&quot;百度&quot;</span></span><br><span class="line">)</span><br><span class="line">levels(exam1)</span><br><span class="line">exam2 &lt;- fct_collapse(</span><br><span class="line">  exam,</span><br><span class="line">  <span class="string">&quot;其它&quot;</span>=<span class="built_in">c</span>(<span class="string">&quot;无名&quot;</span>, <span class="string">&quot;无应答&quot;</span>),</span><br><span class="line">  <span class="string">&quot;联想&quot;</span>=<span class="built_in">c</span>(<span class="string">&quot;联想&quot;</span>, <span class="string">&quot;联想集团&quot;</span>),</span><br><span class="line">  <span class="string">&quot;百度&quot;</span>=<span class="built_in">c</span>(<span class="string">&quot;百度&quot;</span>, <span class="string">&quot;百度集团&quot;</span>)</span><br><span class="line">)</span><br><span class="line">levels(exam2)</span><br></pre></td></tr></table></figure>
+<p><strong>练习</strong></p>
+<p>设文件class.csv中包含如下内容:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">name,sex,age,height,weight</span><br><span class="line">Alice,F,13,56.5,84</span><br><span class="line">Becka,F,13,65.3,98</span><br><span class="line">Gail,F,14,64.3,90</span><br><span class="line">Karen,F,12,56.3,77</span><br><span class="line">Kathy,F,12,59.8,84.5</span><br><span class="line">Mary,F,15,66.5,112</span><br><span class="line">Sandy,F,11,51.3,50.5</span><br><span class="line">Sharon,F,15,62.5,112.5</span><br><span class="line">Tammy,F,14,62.8,102.5</span><br><span class="line">Alfred,M,14,69,112.5</span><br><span class="line">Duke,M,14,63.5,102.5</span><br><span class="line">Guido,M,15,67,133</span><br><span class="line">James,M,12,57.3,83</span><br><span class="line">Jeffrey,M,13,62.5,84</span><br><span class="line">John,M,12,59,99.5</span><br><span class="line">Philip,M,16,72,150</span><br><span class="line">Robert,M,12,64.8,128</span><br><span class="line">Thomas,M,11,57.5,85</span><br><span class="line">William,M,15,66.5,112</span><br></pre></td></tr></table></figure>
+<p>用如下程序把该文件读入为R数据框d.class, 其中的sex列已经自动转换为因子。 取出其中的sex和age列到变量sex和age中</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d.class &lt;- read.csv(<span class="string">&#x27;class.csv&#x27;</span>, header=<span class="literal">TRUE</span>)</span><br><span class="line">sex &lt;- d.class[,<span class="string">&#x27;sex&#x27;</span>]</span><br><span class="line">age &lt;- d.class[,<span class="string">&#x27;age&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<ol>
+<li>统计并显示列出sex的不同值频数；</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">table(sex)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>分男女两组分别求年龄最大值；</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">tapply(age,sex,<span class="built_in">max</span>)</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>把sex变量转换为一个新的因子，F显示成“Female”，M显示成“Male”。</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">sex</span><br><span class="line">sexf1 &lt;- factor(sex)</span><br><span class="line">library(forcats)</span><br><span class="line">sexf2 &lt;- fct_recode(</span><br><span class="line">  sexf1,</span><br><span class="line">  <span class="string">&quot;Femal&quot;</span>=<span class="string">&quot;F&quot;</span>, <span class="string">&quot;Male&quot;</span>=<span class="string">&quot;M&quot;</span></span><br><span class="line">)</span><br><span class="line">sexf2</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">石晓强</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://steven-shixq.github.io/2020/02/22/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/">https://steven-shixq.github.io/2020/02/22/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://steven-shixq.github.io" target="_blank">衷深学习</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/tags/R%E8%AF%AD%E8%A8%80/">R语言</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/shixq_wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/shixq_alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/02/22/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB16/"><img class="prev-cover" src="https://media.gatesnotes.com/-/media/Images/Books/How-Not-to-be-Wrong/how-not-to-be-wrong_2016_780.ashx" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">每日外闻16</div></div></a></div><div class="next-post pull-right"><a href="/2020/02/23/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB17/"><img class="next-cover" src="https://media.gatesnotes.com/-/media/Images/Books/Hillbilly-Elegy/summer-books_2017_hillbilly-elegy_1200px_v1.ashx" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">每日外闻17</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/02/15/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/" title="R语言学习笔记1"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-15</div><div class="title">R语言学习笔记1</div></div></a></div><div><a href="/2020/04/18/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B010/" title="R语言学习笔记10"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-18</div><div class="title">R语言学习笔记10</div></div></a></div><div><a href="/2020/04/25/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B011/" title="R语言学习笔记11"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-25</div><div class="title">R语言学习笔记11</div></div></a></div><div><a href="/2020/05/02/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B012/" title="R语言学习笔记12"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-02</div><div class="title">R语言学习笔记12</div></div></a></div><div><a href="/2020/05/09/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B013/" title="R语言学习笔记13"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-09</div><div class="title">R语言学习笔记13</div></div></a></div><div><a href="/2020/05/16/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B014/" title="R语言学习笔记14"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-16</div><div class="title">R语言学习笔记14</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%B8%B8%E4%BA%AE%E4%B8%8E%E5%8F%98%E9%87%8F"><span class="toc-text">3. 常亮与变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%B8%B8%E9%87%8F"><span class="toc-text">3.1 常量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%8F%98%E9%87%8F"><span class="toc-text">3.2 变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-R%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">3.3 R数据类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%95%B0%E5%80%BC%E5%9E%8B%E5%90%91%E9%87%8F%E5%8F%8A%E5%85%B6%E8%BF%90%E7%AE%97"><span class="toc-text">4. 数值型向量及其运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%95%B0%E5%80%BC%E5%9E%8B%E5%90%91%E9%87%8F"><span class="toc-text">4.1 数值型向量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%90%91%E9%87%8F%E8%BF%90%E7%AE%97"><span class="toc-text">4.2 向量运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0"><span class="toc-text">4.3 向量函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E9%80%BB%E8%BE%91%E5%9E%8B%E5%90%91%E9%87%8F%E5%8F%8A%E5%85%B6%E8%BF%90%E7%AE%97"><span class="toc-text">5. 逻辑型向量及其运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E9%80%BB%E8%BE%91%E5%9E%8B%E5%90%91%E9%87%8F%E4%B8%8E%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97"><span class="toc-text">5.1 逻辑型向量与比较运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2"><span class="toc-text">5.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E5%87%BD%E6%95%B0"><span class="toc-text">5.3 逻辑运算函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%AD%97%E7%AC%A6%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%8F%8A%E5%85%B6%E5%A4%84%E7%90%86"><span class="toc-text">6. 字符型数据及其处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-R%E5%90%91%E9%87%8F%E4%B8%8B%E6%A0%87%E5%92%8C%E5%AD%90%E9%9B%86"><span class="toc-text">7. R向量下标和子集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-R%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-text">8. R数据类型的性质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-R%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4"><span class="toc-text">9. R日期时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-R%E5%9B%A0%E5%AD%90%E7%B1%BB%E5%9E%8B"><span class="toc-text">10 R因子类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10-1-%E5%9B%A0%E5%AD%90"><span class="toc-text">10.1 因子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-table-%E5%87%BD%E6%95%B0"><span class="toc-text">10.2 table()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-3-tapply-%E5%87%BD%E6%95%B0"><span class="toc-text">10.3 tapply()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-4-forcats%E5%8C%85%E7%9A%84%E5%9B%A0%E5%AD%90%E5%87%BD%E6%95%B0"><span class="toc-text">10.4 forcats包的因子函数</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 石晓强</div><div class="footer_custom_text">欢迎来到我的<a href="https://steven-shixq.github.io/">博客</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'NFoxKw5kAkzXk9OujXdPn1Qp-gzGzoHsz',
+      appKey: '9awzk7TAM6SBvkG1Sn28h7Qf',
+      placeholder: '说点什么吧',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>

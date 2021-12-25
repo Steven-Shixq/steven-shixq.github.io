@@ -1,0 +1,284 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>R语言学习笔记7 | 衷深学习</title><meta name="keywords" content="计算机,编程,R语言"><meta name="author" content="石晓强"><meta name="copyright" content="石晓强"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="R基本编程4">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R语言学习笔记7">
+<meta property="og:url" content="https://steven-shixq.github.io/2020/03/28/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07/index.html">
+<meta property="og:site_name" content="衷深学习">
+<meta property="og:description" content="R基本编程4">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png">
+<meta property="article:published_time" content="2020-03-28T14:55:52.000Z">
+<meta property="article:modified_time" content="2020-04-04T16:58:21.438Z">
+<meta property="article:author" content="石晓强">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="R语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png"><link rel="shortcut icon" href="/img/avatar_reader.jpg"><link rel="canonical" href="https://steven-shixq.github.io/2020/03/28/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 石晓强","link":"链接: ","source":"来源: 衷深学习","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'R语言学习笔记7',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-04-05 00:58:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar_reader.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">331</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">174</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">衷深学习</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">R语言学习笔记7</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-03-28T14:55:52.000Z" title="发表于 2020-03-28 22:55:52">2020-03-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-04-04T16:58:21.438Z" title="更新于 2020-04-05 00:58:21">2020-04-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/R%E8%AF%AD%E8%A8%80/">R语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="R语言学习笔记7"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>R语言教程-R编程4</strong></p>
+<h2 id="18-R程序效率">18 R程序效率</h2>
+<p><strong>R的运行效率</strong><br>
+R是解释型语言，在执行单个运算时， 效率与编译代码相近； 在执行迭代循环时， 效率较低， 与编译代码的速度可能相差几十倍。 在循环中对变量进行修改尤其低效。<br>
+R以向量、矩阵为基础运算单元， 在进行向量、矩阵运算时效率很高， 应尽量采用向量化编程。<br>
+R语言的设计为了方便进行数据分析和统计建模， 有意地使语言特别灵活， 比如， 变量为动态类型而且内容可修改， 变量查找在当前作用域查找不到可以向上层以及扩展包中查找， 函数调用时自变量仅在使用其值时才求值（懒惰求值）， 这样的设计都为运行带来了额外的负担， 使得运行变慢。</p>
+<p>在计算总和、元素乘积或者每个向量元素的函数变换时， 应使用相应的函数，如sum, prod, sqrt, log等。</p>
+<p>为了提高R程序的运行效率， 需要尽可能利用R的向量化特点， 尽可能使用已有的高效函数， 还可以把运行速度瓶颈部分改用C++等编译语言实现， 可以用R的profiler工具查找运行瓶颈。 对于大量数据的长时间计算， 可以借助于现代的并行计算工具。</p>
+<p>对已有的程序， 仅在运行速度不满意时才需要进行改进， 否则没必要花费宝贵的时间用来节省几秒钟的计算机运行时间。 要改善运行速度， 首先要找到运行的瓶颈， 这可以用专门的性能分析（profiling）功能实现。 R软件中的Rprof()函数可以执行性能分析的数据收集工作， 收集到的性能数据用summaryRprof()函数可以显示运行最慢的函数。 在RStudio中，可以用Profile菜单执行性能数据收集与分析， 可以在图形界面中显示程序中哪些部分运行花费时间最多。</p>
+<p>如果要实现一个比较单纯的不需要利用R已有功能的算法， 发现用R计算速度很慢的时候， 也可以考虑先用Julia语言实现。 Julia语言设计比R更先进，运算速度快得多， 运算速度经常能与编译代码相比， 缺点是刚刚诞生几年的时间， 可用的软件包还比较少。</p>
+<h3 id="向量化编程">向量化编程</h3>
+<p>计算：<img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200328234616.png" alt=""></p>
+<p>其中x1,x2,…xn是某总体的样本，m head 是样本中位数。 用传统的编程风格， 把这个统计量的计算变成一个R函数，可能会写成：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">f1 &lt;- <span class="keyword">function</span>(x)&#123;</span><br><span class="line">  mhad &lt;- median(x)</span><br><span class="line">  s &lt;- 0.0</span><br><span class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:<span class="built_in">length</span>(x))&#123;</span><br><span class="line">    s &lt;- s + <span class="built_in">abs</span>(x[i] - mhad)</span><br><span class="line">  &#125;</span><br><span class="line">  s &lt;- s/n</span><br><span class="line">  <span class="built_in">return</span>(s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用R的向量化编程，函数体只需要一个表达式：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">f2 &lt;- <span class="keyword">function</span>(x) mean(<span class="built_in">abs</span>(x-median(x)))</span><br></pre></td></tr></table></figure>
+<p>其中x - median(x)利用了向量与标量运算结果是向量每个元素与标量运算的规则， abs(x - median(x))利用了abs()这样的一元函数如果以向量为输入就输出每个元素的函数值组成的向量的规则，mean(…)避免了求和再除以n的循环也不需要定义多余的变量n。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">median(<span class="built_in">c</span>(<span class="number">2</span>,<span class="number">4</span>))</span><br><span class="line"><span class="built_in">abs</span>(<span class="built_in">c</span>(-<span class="number">2</span>,<span class="number">4</span>,<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+<p>在R中， 用system.time()函数可以求某个表达式的计算时间， 返回结果的第3项是流逝时间。比较两个程序的效率：这步需要一点时间才能运行完成</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 产生10000个随机数</span></span><br><span class="line">x &lt;- runif(<span class="number">10000</span>)</span><br><span class="line">y1 &lt;- numeric(<span class="number">10000</span>)</span><br><span class="line">y2 &lt;- y1</span><br><span class="line">system.time(<span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">10000</span>) y1[i] &lt;- f1(x))[<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">system.time(<span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">10000</span>) y2[i] &lt;- f2(x))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>我的电脑运行结果显示时间相差5.2倍</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">17.49/<span class="number">3.36</span></span><br><span class="line"><span class="comment"># microbenchmark计算时间倍数差，mean</span></span><br><span class="line"><span class="number">1651.645</span>/<span class="number">343.181</span></span><br></pre></td></tr></table></figure>
+<p>有一个R扩展包microbenchmark可以用来测量比较两个表达式的运行时间。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">install.packages(<span class="string">&#x27;microbenchmark&#x27;</span>)</span><br><span class="line">x &lt;- runif(<span class="number">10000</span>)</span><br><span class="line">microbenchmark::microbenchmark(</span><br><span class="line">  f1(x),</span><br><span class="line">  f2(x)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>示例2<br>
+<img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200329001700.png" alt=""></p>
+<p>一般程序写成：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">f1 &lt;- <span class="keyword">function</span>(x)&#123;</span><br><span class="line">    n &lt;- <span class="built_in">length</span>(x)</span><br><span class="line">    y &lt;- numeric(n)</span><br><span class="line"><span class="comment"># seq_along()函数产生对应数量的序列</span></span><br><span class="line">    <span class="keyword">for</span>(i <span class="keyword">in</span> <span class="built_in">seq_along</span>(x))&#123;</span><br><span class="line">        <span class="keyword">if</span>(x[i] &gt;= <span class="number">0</span>) y[i] &lt;- <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span> y[i] &lt;- <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也可以写为：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">f2 &lt;- <span class="keyword">function</span>(x)&#123;</span><br><span class="line">    n &lt;- <span class="built_in">length</span>(x)</span><br><span class="line">    <span class="comment"># 这里是因为numeric()函数产生的元素厨师都为0，所以上一个程序中的else语句可以去掉。</span></span><br><span class="line">    y &lt;- numeric(n)</span><br><span class="line">    y[x &gt;= <span class="number">0</span>] &lt;- <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>利用R中内建函数ifelse()， 可以把函数体压缩到仅用一个语句：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">f3 &lt;- <span class="keyword">function</span>(x) ifelse(x &gt;= <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>示例3<br>
+<img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200329002411.png" alt=""></p>
+<p>普通循环写成：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">f1 &lt;- <span class="keyword">function</span>()&#123;</span><br><span class="line">  ny &lt;- 365</span><br><span class="line">  x &lt;- numeric(ny)</span><br><span class="line">  <span class="keyword">for</span>(n <span class="keyword">in</span> <span class="number">1</span>:ny)&#123;</span><br><span class="line">    s &lt;- 1</span><br><span class="line">    <span class="keyword">for</span>(j <span class="keyword">in</span> <span class="number">0</span>:(n-<span class="number">1</span>))&#123;</span><br><span class="line">      s &lt;- s * (<span class="number">365</span>-j)/<span class="number">365</span></span><br><span class="line">    &#125;</span><br><span class="line">    x[n] &lt;- <span class="number">1</span> - s</span><br><span class="line">  &#125;</span><br><span class="line">  x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用prod()函数可以向量化内层循环：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">f2 &lt;- <span class="keyword">function</span>()&#123;</span><br><span class="line">  ny &lt;- 365</span><br><span class="line">  x &lt;- numeric(ny)</span><br><span class="line">  <span class="keyword">for</span>(n <span class="keyword">in</span> <span class="number">1</span>:ny)&#123;</span><br><span class="line">    x[n] &lt;- <span class="number">1</span> - <span class="built_in">prod</span>((<span class="number">365</span>:(<span class="number">365</span>-n+<span class="number">1</span>))/<span class="number">365</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>把程序用cumprod()函数改写， 可以完全避免循环：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">f3 &lt;- <span class="keyword">function</span>()&#123;</span><br><span class="line">  ny &lt;- 365</span><br><span class="line">  x &lt;- 1 - <span class="built_in">cumprod</span>((ny:<span class="number">1</span>)/ny)</span><br><span class="line">  x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>sum，prod：向量元素和，积 cumsum，cumprod：累加、累乘</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 返回2*3*4*5的积</span></span><br><span class="line"><span class="built_in">prod</span>(<span class="number">2</span>:<span class="number">5</span>)</span><br><span class="line"><span class="comment"># 返回和向量长度个数一样的乘积向量值</span></span><br><span class="line"><span class="built_in">cumprod</span>(<span class="number">2</span>:<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p>用microbenchmark比较速度：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">microbenchmark::microbenchmark(</span><br><span class="line">  f1(),</span><br><span class="line">  f2(), </span><br><span class="line">  f3()</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>f3()比f1()快2千多倍</p>
+<h3 id="减少显示循环">减少显示循环</h3>
+<p>显式循环是R运行速度较慢的部分， 有循环的程序也比较冗长， 与R的向量化简洁风格不太匹配。 另外， 在循环内修改数据子集，例如数据框子集， 可能会先制作副本再修改， 这当然会损失很多效率。 R 3.1.0版本以后列表元素在修改时不制作副本， 但数据框还会制作副本。<br>
+R中的有些运算可以用内建函数完成， 如sum, prod, cumsum, cumprod, mean, var, sd等。 这些函数以编译程序的速度运行， 不存在效率损失。</p>
+<p><strong>replicate()函数</strong><br>
+replicate()函数用来执行某段程序若干次， 类似于for()循环但是没有计数变量。 常用于随机模拟。</p>
+<p>语法为:</p>
+<blockquote>
+<p>replicate(重复次数, 要重复的表达式)</p>
+</blockquote>
+<p>其中的表达式可以是复合语句, 也可以是执行一次模拟的函数。</p>
+<p>其中的表达式可以是复合语句, 也可以是执行一次模拟的函数。</p>
+<p>set.seed()用于设定随机数种子，让产生的随机数能够再次出现<br>
+set.seed( ) 括号的数只是一个编号，作为标记使用，取值可以随意<br>
+当以后需要取得与上次相同的随机数时， set.seed( ) 中填写回上面设置的值即可。</p>
+<p>例子：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">set.seed(<span class="number">1</span>)</span><br><span class="line">replicate(<span class="number">6</span>, &#123;</span><br><span class="line">  x &lt;- rnorm(<span class="number">5</span>, <span class="number">0</span>, <span class="number">1</span>); </span><br><span class="line">  <span class="built_in">c</span>(mean(x), sd(x)) &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>避免制作副本</strong><br>
+类似于x &lt;- c(x, y), x &lt;- rbind(x, y)这样的累积结果每次运行都会制作一个x的副本， 在x存储量较大或者重复修改次数很多时会减慢程序。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">set.seed(<span class="number">101</span>)</span><br><span class="line">system.time(&#123;</span><br><span class="line">  <span class="comment"># 模拟10000次</span></span><br><span class="line">  M &lt;- 1E4</span><br><span class="line">  x &lt;- <span class="built_in">c</span>()</span><br><span class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> seq(M))&#123;</span><br><span class="line">    <span class="comment"># 每次模拟求10个U(0,1)均匀随机数的极差</span></span><br><span class="line">    x &lt;- <span class="built_in">c</span>(x, diff(<span class="built_in">range</span>(runif(<span class="number">10</span>))))</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment"># 求平均极差</span></span><br><span class="line">  mean(x)</span><br><span class="line">&#125;)[<span class="number">3</span>]</span><br><span class="line"><span class="comment"># 后面的[3]是只取出结果的第三项：流逝时间</span></span><br></pre></td></tr></table></figure>
+<p>上面的程序不仅是低效率的做法， 也没有预先精心设计用来保存结果的数据结构。 数据建模或随机模拟的程序都应该事先分配好用来保存结果的数据结构，在每次循环中填入相应结果。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">set.seed(<span class="number">333</span>)</span><br><span class="line">system.time(&#123;</span><br><span class="line">  M &lt;- 1E4</span><br><span class="line">  x &lt;- numeric(M)</span><br><span class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> seq(M))&#123;</span><br><span class="line">    x[i] &lt;- diff(<span class="built_in">range</span>(runif(<span class="number">10</span>)))</span><br><span class="line">  &#125;</span><br><span class="line">  mean(x)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在循环内修改数据框的值也会制作数据框副本， 当数据框很大或者循环次数很多时会使得程序很慢。如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">set.seed(<span class="number">2</span>)</span><br><span class="line">m &lt;- 2E4; n &lt;- 100</span><br><span class="line">x &lt;- as.data.frame(matrix(</span><br><span class="line">  runif(n*M), nrow=n, ncol=m))</span><br><span class="line">system.time(&#123;</span><br><span class="line">  <span class="keyword">for</span>(j <span class="keyword">in</span> seq(m))&#123;</span><br><span class="line">    x[[j]] &lt;- x[[j]] + <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)[<span class="number">3</span>]</span><br><span class="line"><span class="comment"># 用时22.87秒</span></span><br></pre></td></tr></table></figure>
+<p>在循环内修改列表/矩阵元素就不会制作副本， 从而可以避免这样的效率问题，如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">set.seed(<span class="number">101</span>)</span><br><span class="line">m &lt;- 2E4; n &lt;- 100</span><br><span class="line"><span class="comment"># 使用矩阵不会制作副本</span></span><br><span class="line">x &lt;- matrix(</span><br><span class="line">  runif(n*M), nrow=n, ncol=m)</span><br><span class="line">system.time(&#123;</span><br><span class="line">  <span class="keyword">for</span>(j <span class="keyword">in</span> seq(m))&#123;</span><br><span class="line">    x[[j]] &lt;- x[[j]] + <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment"># 用时0.02秒</span></span><br><span class="line"><span class="comment"># 再将输出数据转化为数据框</span></span><br><span class="line">x &lt;- as.data.frame(x)</span><br></pre></td></tr></table></figure>
+<p>也可以写为：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">set.seed(<span class="number">101</span>)</span><br><span class="line">m &lt;- 2E4; n &lt;- 100</span><br><span class="line">x &lt;- replicate(m, </span><br><span class="line">  runif(n),</span><br><span class="line">  simplify=<span class="literal">FALSE</span>)</span><br><span class="line">system.time(&#123;</span><br><span class="line">  <span class="keyword">for</span>(j <span class="keyword">in</span> seq(m))&#123;</span><br><span class="line">    x[[j]] &lt;- x[[j]] + <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment"># 用时0。03秒</span></span><br><span class="line"></span><br><span class="line">x &lt;- as.data.frame(x)</span><br></pre></td></tr></table></figure>
+<p>replicate()函数中用simplify=FALSE使结果总是返回列表。 要注意的是， 最后数据转为数据框后也是效率较差的。 将数据保存在列表中比保存在数据框中访问效率高， 数据框提供的功能更丰富。</p>
+<h3 id="R的计算函数">R的计算函数</h3>
+<p>R中提供了大量的数学函数、统计函数和特殊函数， 可以打开R的HTML帮助页面， 进入“Search Enging &amp; Keywords”链接， 查看其中与算术、数学、优化、线性代数等有关的专题。</p>
+<p><strong>例举几个函数：</strong><br>
+sum对向量求和, prod求乘积。</p>
+<p>cumsum和cumprod计算累计， 得到和输入等长的向量结果。</p>
+<p>diff计算前后两项的差分（后一项减去前一项）。</p>
+<p>mean计算均值，var计算样本方差或协方差矩阵， sd计算样本标准差, median计算中位数， quantile计算样本分位数。 cor计算相关系数。</p>
+<p>colSums, colMeans, rowSums, rowMeans对矩阵的每列或每行计算总和或者平均值， 效率比用apply函数要高</p>
+<hr>
+<p>max和min求最大和最小， cummax和cummin累进计算。</p>
+<p>range返回最小值和最大值两个元素。<br>
+pmax(x1,x2,…)对若干个等长向量计算对应元素的最大值， 不等长时短的被重复使用。 pmin类似。 比如，pmax(0, pmin(1,x))把x限制到内。</p>
+<p><strong>排序</strong><br>
+sort返回排序结果。 可以用decreasing=TRUE选项进行降序排序。 sort可以有一个partial=选项， 这样只保证结果中partial=指定的下标位置是正确的。 比如:</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 第三个数的排序是正确的</span></span><br><span class="line">sort(<span class="built_in">c</span>(<span class="number">3</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">5</span>), partial=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>在sort()中用选项na.last指定缺失值的处理， 取NA则删去缺失值， 取TRUE则把缺失值排在最后面， 取FALSE则把缺失值排在最前面。</p>
+<p>order, sort.list, rank也可以有 na.last选项，只能为TRUE或FALSE。</p>
+<p>unique()返回去掉重复元素的结果， duplicated()对每个元素用一个逻辑值表示是否与前面某个元素重复。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">unique(<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>))</span><br><span class="line">duplicated(<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<p><strong>一元函数求根uniroot</strong></p>
+<p>uniroot(f, interval)对函数f在给定区间内求一个根， interval为区间的两个端点。 要求f在两个区间端点的值异号。 即使有多个根也只能给出一个。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">uniroot(<span class="keyword">function</span>(x) x*(x-<span class="number">1</span>), <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">4</span>))</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">石晓强</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://steven-shixq.github.io/2020/03/28/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07/">https://steven-shixq.github.io/2020/03/28/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://steven-shixq.github.io" target="_blank">衷深学习</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/tags/R%E8%AF%AD%E8%A8%80/">R语言</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/shixq_wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/shixq_alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/03/28/%E5%81%A5%E8%BA%AB/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/意境.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">健身</div></div></a></div><div class="next-post pull-right"><a href="/2020/03/29/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB52/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200329215013.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">每日外闻52</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/02/15/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/" title="R语言学习笔记1"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-15</div><div class="title">R语言学习笔记1</div></div></a></div><div><a href="/2020/04/18/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B010/" title="R语言学习笔记10"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-18</div><div class="title">R语言学习笔记10</div></div></a></div><div><a href="/2020/04/25/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B011/" title="R语言学习笔记11"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-25</div><div class="title">R语言学习笔记11</div></div></a></div><div><a href="/2020/05/02/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B012/" title="R语言学习笔记12"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-02</div><div class="title">R语言学习笔记12</div></div></a></div><div><a href="/2020/05/09/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B013/" title="R语言学习笔记13"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-09</div><div class="title">R语言学习笔记13</div></div></a></div><div><a href="/2020/05/16/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B014/" title="R语言学习笔记14"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-16</div><div class="title">R语言学习笔记14</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#18-R%E7%A8%8B%E5%BA%8F%E6%95%88%E7%8E%87"><span class="toc-text">18 R程序效率</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E5%8C%96%E7%BC%96%E7%A8%8B"><span class="toc-text">向量化编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%8F%E5%B0%91%E6%98%BE%E7%A4%BA%E5%BE%AA%E7%8E%AF"><span class="toc-text">减少显示循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#R%E7%9A%84%E8%AE%A1%E7%AE%97%E5%87%BD%E6%95%B0"><span class="toc-text">R的计算函数</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 石晓强</div><div class="footer_custom_text">欢迎来到我的<a href="https://steven-shixq.github.io/">博客</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'NFoxKw5kAkzXk9OujXdPn1Qp-gzGzoHsz',
+      appKey: '9awzk7TAM6SBvkG1Sn28h7Qf',
+      placeholder: '说点什么吧',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>

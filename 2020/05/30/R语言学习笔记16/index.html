@@ -1,0 +1,2071 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>R语言学习笔记16 | 衷深学习</title><meta name="keywords" content="计算机,编程,R语言"><meta name="author" content="石晓强"><meta name="copyright" content="石晓强"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="数据整理-2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R语言学习笔记16">
+<meta property="og:url" content="https://steven-shixq.github.io/2020/05/30/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B016/index.html">
+<meta property="og:site_name" content="衷深学习">
+<meta property="og:description" content="数据整理-2">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png">
+<meta property="article:published_time" content="2020-05-30T07:27:14.000Z">
+<meta property="article:modified_time" content="2020-06-06T16:11:12.695Z">
+<meta property="article:author" content="石晓强">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="R语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png"><link rel="shortcut icon" href="/img/avatar_reader.jpg"><link rel="canonical" href="https://steven-shixq.github.io/2020/05/30/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B016/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 石晓强","link":"链接: ","source":"来源: 衷深学习","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'R语言学习笔记16',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-06-07 00:11:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar_reader.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">331</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">174</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">衷深学习</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">R语言学习笔记16</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-05-30T07:27:14.000Z" title="发表于 2020-05-30 15:27:14">2020-05-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-06-06T16:11:12.695Z" title="更新于 2020-06-07 00:11:12">2020-06-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/R%E8%AF%AD%E8%A8%80/">R语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>20分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="R语言学习笔记16"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><code>Data Summarisation</code></p>
+<h2 id="数据整理">数据整理</h2>
+<h3 id="用select-选择列子集">用select()选择列子集</h3>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">select(d.class, name, age) %&gt;%</span><br><span class="line">  head(<span class="number">5</span>) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">name</th>
+<th style="text-align:right">age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Alice</td>
+<td style="text-align:right">13</td>
+</tr>
+<tr>
+<td style="text-align:left">Becka</td>
+<td style="text-align:right">13</td>
+</tr>
+<tr>
+<td style="text-align:left">Gail</td>
+<td style="text-align:right">14</td>
+</tr>
+<tr>
+<td style="text-align:left">Karen</td>
+<td style="text-align:right">12</td>
+</tr>
+<tr>
+<td style="text-align:left">Kathy</td>
+<td style="text-align:right">12</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用列名取age到weight的所有列</span></span><br><span class="line">select(d.class, age:weight) %&gt;%</span><br><span class="line">  head(<span class="number">5</span>) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">age</th>
+<th style="text-align:right">height</th>
+<th style="text-align:right">weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">13</td>
+<td style="text-align:right">56.5</td>
+<td style="text-align:right">84.0</td>
+</tr>
+<tr>
+<td style="text-align:right">13</td>
+<td style="text-align:right">65.3</td>
+<td style="text-align:right">98.0</td>
+</tr>
+<tr>
+<td style="text-align:right">14</td>
+<td style="text-align:right">64.3</td>
+<td style="text-align:right">90.0</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td style="text-align:right">56.3</td>
+<td style="text-align:right">77.0</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td style="text-align:right">59.8</td>
+<td style="text-align:right">84.5</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 也可使用数字序列，结果一致</span></span><br><span class="line">select(d.class, <span class="number">3</span>:<span class="number">5</span>) %&gt;%</span><br><span class="line">  head(<span class="number">5</span>) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">age</th>
+<th style="text-align:right">height</th>
+<th style="text-align:right">weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">13</td>
+<td style="text-align:right">56.5</td>
+<td style="text-align:right">84.0</td>
+</tr>
+<tr>
+<td style="text-align:right">13</td>
+<td style="text-align:right">65.3</td>
+<td style="text-align:right">98.0</td>
+</tr>
+<tr>
+<td style="text-align:right">14</td>
+<td style="text-align:right">64.3</td>
+<td style="text-align:right">90.0</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td style="text-align:right">56.3</td>
+<td style="text-align:right">77.0</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td style="text-align:right">59.8</td>
+<td style="text-align:right">84.5</td>
+</tr>
+</tbody>
+</table>
+<p>参数中前面写负号表示扣除</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d.class %&gt;%</span><br><span class="line">  select(-name, -age) %&gt;%</span><br><span class="line">  head(<span class="number">3</span>) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">sex</th>
+<th style="text-align:right">height</th>
+<th style="text-align:right">weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">F</td>
+<td style="text-align:right">56.5</td>
+<td style="text-align:right">84</td>
+</tr>
+<tr>
+<td style="text-align:left">F</td>
+<td style="text-align:right">65.3</td>
+<td style="text-align:right">98</td>
+</tr>
+<tr>
+<td style="text-align:left">F</td>
+<td style="text-align:right">64.3</td>
+<td style="text-align:right">90</td>
+</tr>
+</tbody>
+</table>
+<p>如果要选择的变量名已经保存为一个字符型向量， 可以用one_of()函数引入，如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">vars &lt;- <span class="built_in">c</span>(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;sex&quot;</span>)</span><br><span class="line">d.class %&gt;%</span><br><span class="line">  select(one_of(vars)) %&gt;%</span><br><span class="line">  head(<span class="number">3</span>) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">name</th>
+<th style="text-align:left">sex</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Alice</td>
+<td style="text-align:left">F</td>
+</tr>
+<tr>
+<td style="text-align:left">Becka</td>
+<td style="text-align:left">F</td>
+</tr>
+<tr>
+<td style="text-align:left">Gail</td>
+<td style="text-align:left">F</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># similar to:</span></span><br><span class="line">head(select(d.class, <span class="built_in">c</span>(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;sex&quot;</span>)),<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>R的字符串函数（如<code>paste()</code>）和正则表达式函数可以用来生成变量名子集， 然后在<code>select</code>中配合<code>one_of</code>使用。</p>
+<p><code>select()</code>有若干个配套函数可以按名字的模式选择变量列， 如</p>
+<ul>
+<li><code>starts_with(&quot;se&quot;): 选择名字以</code>“se”`开头的变量列；</li>
+<li><code>ends_with(&quot;ght&quot;): 选择名字以</code>“ght”`结尾的变量列；</li>
+<li><code>contains(&quot;no&quot;): 选择名字中含有子串</code>“no”`的变量列；</li>
+<li><code>matches(&quot;^[[:alpha:]]+[[:digit:]]+$&quot;)</code>， 选择列名匹配某个正则表达式模式的变量列， 这里匹配前一部分是字母，后一部分是数字的变量名，如<code>abc12</code>。</li>
+<li><code>num_range(&quot;x&quot;, 1:3)</code>，选择<code>x1</code>, <code>x2</code>, <code>x3</code>。</li>
+<li><code>everything()</code>: 代指所有选中的变量， 这可以用来将指定的变量次序提前， 其它变量排在后面。</li>
+</ul>
+<p>R函数subset也能对数据框选取列子集和行子集。</p>
+<h3 id="取出单个变量为向量">取出单个变量为向量</h3>
+<p>如果需要选择单个变量并使得结果为普通向量， 可以用dplyr包的pull()函数，</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># paste(pull(head(d.class,3),name), collapse = &quot;:&quot;)</span></span><br><span class="line">d.class %&gt;% </span><br><span class="line">  head(<span class="number">3</span>) %&gt;%</span><br><span class="line">  pull(<span class="number">1</span>) %&gt;%</span><br><span class="line">  paste(collapse = <span class="string">&#x27;:&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>pull()可以指定单个变量名， 也可以指定变量序号， 负的变量序号从最后一个变量数起。 缺省变量名和序号时取出最后一个变量。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">varname &lt;- <span class="string">&quot;name&quot;</span></span><br><span class="line">d.class %&gt;%</span><br><span class="line">  head(<span class="number">3</span>) %&gt;%</span><br><span class="line">  select(one_of(varname)) %&gt;%</span><br><span class="line">  pull() %&gt;%</span><br><span class="line">  paste(collapse = <span class="string">&quot;:&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="用arrange-排序">用arrange()排序</h3>
+<p>dplyr包的arrange()按照数据框的某一列或某几列排序， 返回排序后的结果，如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d.class %&gt;%</span><br><span class="line">  <span class="comment"># 先用字母顺序把sex排序，然后在此基础上对age进行排序</span></span><br><span class="line">  arrange(sex,age) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">name</th>
+<th style="text-align:left">sex</th>
+<th style="text-align:right">age</th>
+<th style="text-align:right">height</th>
+<th style="text-align:right">weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Sandy</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">11</td>
+<td style="text-align:right">51.3</td>
+<td style="text-align:right">50.5</td>
+</tr>
+<tr>
+<td style="text-align:left">Karen</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">56.3</td>
+<td style="text-align:right">77.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Kathy</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">59.8</td>
+<td style="text-align:right">84.5</td>
+</tr>
+<tr>
+<td style="text-align:left">Alice</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">56.5</td>
+<td style="text-align:right">84.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Becka</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">65.3</td>
+<td style="text-align:right">98.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Gail</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">64.3</td>
+<td style="text-align:right">90.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Tammy</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">62.8</td>
+<td style="text-align:right">102.5</td>
+</tr>
+<tr>
+<td style="text-align:left">Mary</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">66.5</td>
+<td style="text-align:right">112.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Sharon</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">62.5</td>
+<td style="text-align:right">112.5</td>
+</tr>
+<tr>
+<td style="text-align:left">Thomas</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">11</td>
+<td style="text-align:right">57.5</td>
+<td style="text-align:right">85.0</td>
+</tr>
+<tr>
+<td style="text-align:left">James</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">57.3</td>
+<td style="text-align:right">83.0</td>
+</tr>
+<tr>
+<td style="text-align:left">John</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">59.0</td>
+<td style="text-align:right">99.5</td>
+</tr>
+<tr>
+<td style="text-align:left">Robert</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">64.8</td>
+<td style="text-align:right">128.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Jeffrey</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">62.5</td>
+<td style="text-align:right">84.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Alfred</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">69.0</td>
+<td style="text-align:right">112.5</td>
+</tr>
+<tr>
+<td style="text-align:left">Duke</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">63.5</td>
+<td style="text-align:right">102.5</td>
+</tr>
+<tr>
+<td style="text-align:left">Guido</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">67.0</td>
+<td style="text-align:right">133.0</td>
+</tr>
+<tr>
+<td style="text-align:left">William</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">66.5</td>
+<td style="text-align:right">112.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Philip</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">16</td>
+<td style="text-align:right">72.0</td>
+<td style="text-align:right">150.0</td>
+</tr>
+</tbody>
+</table>
+<p>用desc()包裹想要降序排列的变量，如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d.class %&gt;%</span><br><span class="line">  arrange(sex, desc(age)) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">name</th>
+<th style="text-align:left">sex</th>
+<th style="text-align:right">age</th>
+<th style="text-align:right">height</th>
+<th style="text-align:right">weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Mary</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">66.5</td>
+<td style="text-align:right">112.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Sharon</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">62.5</td>
+<td style="text-align:right">112.5</td>
+</tr>
+<tr>
+<td style="text-align:left">Gail</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">64.3</td>
+<td style="text-align:right">90.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Tammy</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">62.8</td>
+<td style="text-align:right">102.5</td>
+</tr>
+<tr>
+<td style="text-align:left">Alice</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">56.5</td>
+<td style="text-align:right">84.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Becka</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">65.3</td>
+<td style="text-align:right">98.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Karen</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">56.3</td>
+<td style="text-align:right">77.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Kathy</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">59.8</td>
+<td style="text-align:right">84.5</td>
+</tr>
+<tr>
+<td style="text-align:left">Sandy</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">11</td>
+<td style="text-align:right">51.3</td>
+<td style="text-align:right">50.5</td>
+</tr>
+<tr>
+<td style="text-align:left">Philip</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">16</td>
+<td style="text-align:right">72.0</td>
+<td style="text-align:right">150.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Guido</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">67.0</td>
+<td style="text-align:right">133.0</td>
+</tr>
+<tr>
+<td style="text-align:left">William</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">66.5</td>
+<td style="text-align:right">112.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Alfred</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">69.0</td>
+<td style="text-align:right">112.5</td>
+</tr>
+<tr>
+<td style="text-align:left">Duke</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">63.5</td>
+<td style="text-align:right">102.5</td>
+</tr>
+<tr>
+<td style="text-align:left">Jeffrey</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">62.5</td>
+<td style="text-align:right">84.0</td>
+</tr>
+<tr>
+<td style="text-align:left">James</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">57.3</td>
+<td style="text-align:right">83.0</td>
+</tr>
+<tr>
+<td style="text-align:left">John</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">59.0</td>
+<td style="text-align:right">99.5</td>
+</tr>
+<tr>
+<td style="text-align:left">Robert</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">64.8</td>
+<td style="text-align:right">128.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Thomas</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">11</td>
+<td style="text-align:right">57.5</td>
+<td style="text-align:right">85.0</td>
+</tr>
+</tbody>
+</table>
+<p>arrange默认从低到高排列</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用desc()降序排列</span></span><br><span class="line">arrange(d.class, desc(weight))</span><br></pre></td></tr></table></figure>
+<p>R函数order()可以用来给出数据框的排序次序， 然后以其输出为数据框行下标， 可以将数据框排序。</p>
+<h3 id="用rename-修改变量名">用rename()修改变量名</h3>
+<p>在dplyr包的rename()中用“新名字=旧名字”格式修改变量名， 如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d2.class &lt;- d.class %&gt;% </span><br><span class="line">  dplyr::rename(h=height, w = weight, n=name, a=age, s=sex)</span><br></pre></td></tr></table></figure>
+<p>注意这样改名字不是对原始数据框修改而是返回改了名字后的新数据框。</p>
+<p>rename()这个函数可能出现在其它包中， 保险起见写成dplyr::rename()。</p>
+<h3 id="用mutate-计算新变量">用mutate()计算新变量</h3>
+<p>dplyr包的mutate()可以为数据框计算新变量， 返回含有新变量以及原变量的新数据框。 如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d.class %&gt;%</span><br><span class="line">  mutate(</span><br><span class="line">    rwh=weight/height,</span><br><span class="line">    <span class="comment"># 将F等于女</span></span><br><span class="line">    sexc=ifelse(sex==<span class="string">&quot;F&quot;</span>, <span class="string">&quot;女&quot;</span>, <span class="string">&quot;男&quot;</span>)) %&gt;%</span><br><span class="line">  head(<span class="number">3</span>) %&gt;% </span><br><span class="line">  knitr::kable()</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">name</th>
+<th style="text-align:left">sex</th>
+<th style="text-align:right">age</th>
+<th style="text-align:right">height</th>
+<th style="text-align:right">weight</th>
+<th style="text-align:right">rwh</th>
+<th style="text-align:left">sexc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Alice</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">56.5</td>
+<td style="text-align:right">84</td>
+<td style="text-align:right">1.486726</td>
+<td style="text-align:left">女</td>
+</tr>
+<tr>
+<td style="text-align:left">Becka</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">65.3</td>
+<td style="text-align:right">98</td>
+<td style="text-align:right">1.500766</td>
+<td style="text-align:left">女</td>
+</tr>
+<tr>
+<td style="text-align:left">Gail</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">64.3</td>
+<td style="text-align:right">90</td>
+<td style="text-align:right">1.399689</td>
+<td style="text-align:left">女</td>
+</tr>
+</tbody>
+</table>
+<p>用mutate()计算新变量时如果计算比较复杂， 也可以用多个语句组成复合语句，如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d.class %&gt;%</span><br><span class="line">  mutate(</span><br><span class="line">    sexc = &#123;</span><br><span class="line">      x &lt;- <span class="built_in">rep</span>(<span class="string">&quot;男&quot;</span>, <span class="built_in">length</span>(sex))</span><br><span class="line">      x[sex == <span class="string">&quot;F&quot;</span>] &lt;- <span class="string">&quot;女&quot;</span></span><br><span class="line">      x</span><br><span class="line">    &#125;</span><br><span class="line">  ) %&gt;%</span><br><span class="line">  head(<span class="number">3</span>) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">name</th>
+<th style="text-align:left">sex</th>
+<th style="text-align:right">age</th>
+<th style="text-align:right">height</th>
+<th style="text-align:right">weight</th>
+<th style="text-align:left">sexc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Alice</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">56.5</td>
+<td style="text-align:right">84</td>
+<td style="text-align:left">女</td>
+</tr>
+<tr>
+<td style="text-align:left">Becka</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">65.3</td>
+<td style="text-align:right">98</td>
+<td style="text-align:left">女</td>
+</tr>
+<tr>
+<td style="text-align:left">Gail</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">64.3</td>
+<td style="text-align:right">90</td>
+<td style="text-align:left">女</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d.class %&gt;%</span><br><span class="line">  mutate(</span><br><span class="line">    <span class="comment"># 这里不能用 &lt;- ，要用=</span></span><br><span class="line">    sexp = &#123;</span><br><span class="line">      x &lt;- <span class="built_in">rep</span>(<span class="string">&quot;nv&quot;</span>, <span class="built_in">length</span>(sex))</span><br><span class="line">      x[sex == <span class="string">&quot;M&quot;</span>] &lt;- <span class="string">&quot;nan&quot;</span></span><br><span class="line">      x</span><br><span class="line">    &#125;</span><br><span class="line">  ) %&gt;%</span><br><span class="line">  knitr::kable()</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">name</th>
+<th style="text-align:left">sex</th>
+<th style="text-align:right">age</th>
+<th style="text-align:right">height</th>
+<th style="text-align:right">weight</th>
+<th style="text-align:left">sexp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Alice</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">56.5</td>
+<td style="text-align:right">84.0</td>
+<td style="text-align:left">nv</td>
+</tr>
+<tr>
+<td style="text-align:left">Becka</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">65.3</td>
+<td style="text-align:right">98.0</td>
+<td style="text-align:left">nv</td>
+</tr>
+<tr>
+<td style="text-align:left">Gail</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">64.3</td>
+<td style="text-align:right">90.0</td>
+<td style="text-align:left">nv</td>
+</tr>
+<tr>
+<td style="text-align:left">Karen</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">56.3</td>
+<td style="text-align:right">77.0</td>
+<td style="text-align:left">nv</td>
+</tr>
+<tr>
+<td style="text-align:left">Kathy</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">59.8</td>
+<td style="text-align:right">84.5</td>
+<td style="text-align:left">nv</td>
+</tr>
+<tr>
+<td style="text-align:left">Mary</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">66.5</td>
+<td style="text-align:right">112.0</td>
+<td style="text-align:left">nv</td>
+</tr>
+<tr>
+<td style="text-align:left">Sandy</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">11</td>
+<td style="text-align:right">51.3</td>
+<td style="text-align:right">50.5</td>
+<td style="text-align:left">nv</td>
+</tr>
+<tr>
+<td style="text-align:left">Sharon</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">62.5</td>
+<td style="text-align:right">112.5</td>
+<td style="text-align:left">nv</td>
+</tr>
+<tr>
+<td style="text-align:left">Tammy</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">62.8</td>
+<td style="text-align:right">102.5</td>
+<td style="text-align:left">nv</td>
+</tr>
+<tr>
+<td style="text-align:left">Alfred</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">69.0</td>
+<td style="text-align:right">112.5</td>
+<td style="text-align:left">nan</td>
+</tr>
+<tr>
+<td style="text-align:left">Duke</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">63.5</td>
+<td style="text-align:right">102.5</td>
+<td style="text-align:left">nan</td>
+</tr>
+<tr>
+<td style="text-align:left">Guido</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">67.0</td>
+<td style="text-align:right">133.0</td>
+<td style="text-align:left">nan</td>
+</tr>
+<tr>
+<td style="text-align:left">James</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">57.3</td>
+<td style="text-align:right">83.0</td>
+<td style="text-align:left">nan</td>
+</tr>
+<tr>
+<td style="text-align:left">Jeffrey</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">62.5</td>
+<td style="text-align:right">84.0</td>
+<td style="text-align:left">nan</td>
+</tr>
+<tr>
+<td style="text-align:left">John</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">59.0</td>
+<td style="text-align:right">99.5</td>
+<td style="text-align:left">nan</td>
+</tr>
+<tr>
+<td style="text-align:left">Philip</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">16</td>
+<td style="text-align:right">72.0</td>
+<td style="text-align:right">150.0</td>
+<td style="text-align:left">nan</td>
+</tr>
+<tr>
+<td style="text-align:left">Robert</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">64.8</td>
+<td style="text-align:right">128.0</td>
+<td style="text-align:left">nan</td>
+</tr>
+<tr>
+<td style="text-align:left">Thomas</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">11</td>
+<td style="text-align:right">57.5</td>
+<td style="text-align:right">85.0</td>
+<td style="text-align:left">nan</td>
+</tr>
+<tr>
+<td style="text-align:left">William</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">66.5</td>
+<td style="text-align:right">112.0</td>
+<td style="text-align:left">nan</td>
+</tr>
+</tbody>
+</table>
+<p>注意这样生成新变量不是在原来的数据框中添加， 原来的数据框没有被修改， 而是返回添加了新变量的新数据框。R软件的巧妙设计保证了这样虽然是生成了新数据框， 但是与原来数据框重复的列并不会重复保存。</p>
+<p>计算公式中可以包含对数据框中变量的统计函数结果，如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d.class %&gt;%</span><br><span class="line">  mutate(</span><br><span class="line">    cheight = height - mean(height)) %&gt;%</span><br><span class="line">  knitr::kable()</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">name</th>
+<th style="text-align:left">sex</th>
+<th style="text-align:right">age</th>
+<th style="text-align:right">height</th>
+<th style="text-align:right">weight</th>
+<th style="text-align:right">cheight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Alice</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">56.5</td>
+<td style="text-align:right">84.0</td>
+<td style="text-align:right">-5.8368421</td>
+</tr>
+<tr>
+<td style="text-align:left">Becka</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">65.3</td>
+<td style="text-align:right">98.0</td>
+<td style="text-align:right">2.9631579</td>
+</tr>
+<tr>
+<td style="text-align:left">Gail</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">64.3</td>
+<td style="text-align:right">90.0</td>
+<td style="text-align:right">1.9631579</td>
+</tr>
+<tr>
+<td style="text-align:left">Karen</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">56.3</td>
+<td style="text-align:right">77.0</td>
+<td style="text-align:right">-6.0368421</td>
+</tr>
+<tr>
+<td style="text-align:left">Kathy</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">59.8</td>
+<td style="text-align:right">84.5</td>
+<td style="text-align:right">-2.5368421</td>
+</tr>
+<tr>
+<td style="text-align:left">Mary</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">66.5</td>
+<td style="text-align:right">112.0</td>
+<td style="text-align:right">4.1631579</td>
+</tr>
+<tr>
+<td style="text-align:left">Sandy</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">11</td>
+<td style="text-align:right">51.3</td>
+<td style="text-align:right">50.5</td>
+<td style="text-align:right">-11.0368421</td>
+</tr>
+<tr>
+<td style="text-align:left">Sharon</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">62.5</td>
+<td style="text-align:right">112.5</td>
+<td style="text-align:right">0.1631579</td>
+</tr>
+<tr>
+<td style="text-align:left">Tammy</td>
+<td style="text-align:left">F</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">62.8</td>
+<td style="text-align:right">102.5</td>
+<td style="text-align:right">0.4631579</td>
+</tr>
+<tr>
+<td style="text-align:left">Alfred</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">69.0</td>
+<td style="text-align:right">112.5</td>
+<td style="text-align:right">6.6631579</td>
+</tr>
+<tr>
+<td style="text-align:left">Duke</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">63.5</td>
+<td style="text-align:right">102.5</td>
+<td style="text-align:right">1.1631579</td>
+</tr>
+<tr>
+<td style="text-align:left">Guido</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">67.0</td>
+<td style="text-align:right">133.0</td>
+<td style="text-align:right">4.6631579</td>
+</tr>
+<tr>
+<td style="text-align:left">James</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">57.3</td>
+<td style="text-align:right">83.0</td>
+<td style="text-align:right">-5.0368421</td>
+</tr>
+<tr>
+<td style="text-align:left">Jeffrey</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">62.5</td>
+<td style="text-align:right">84.0</td>
+<td style="text-align:right">0.1631579</td>
+</tr>
+<tr>
+<td style="text-align:left">John</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">59.0</td>
+<td style="text-align:right">99.5</td>
+<td style="text-align:right">-3.3368421</td>
+</tr>
+<tr>
+<td style="text-align:left">Philip</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">16</td>
+<td style="text-align:right">72.0</td>
+<td style="text-align:right">150.0</td>
+<td style="text-align:right">9.6631579</td>
+</tr>
+<tr>
+<td style="text-align:left">Robert</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">64.8</td>
+<td style="text-align:right">128.0</td>
+<td style="text-align:right">2.4631579</td>
+</tr>
+<tr>
+<td style="text-align:left">Thomas</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">11</td>
+<td style="text-align:right">57.5</td>
+<td style="text-align:right">85.0</td>
+<td style="text-align:right">-4.8368421</td>
+</tr>
+<tr>
+<td style="text-align:left">William</td>
+<td style="text-align:left">M</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">66.5</td>
+<td style="text-align:right">112.0</td>
+<td style="text-align:right">4.1631579</td>
+</tr>
+</tbody>
+</table>
+<p>新变量可以与老变量名相同， 这样就在输出中修改了老变量。</p>
+<h3 id="用tranmute-生成新变量的数据框">用tranmute()生成新变量的数据框</h3>
+<p>函数transmute()用法与mutate()类似， 但是仅保留新定义的变量， 不保留原来的所有变量。 如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d.class %&gt;%</span><br><span class="line">  transmute(</span><br><span class="line">    height_cm = <span class="built_in">round</span>(height*<span class="number">2.54</span>),</span><br><span class="line">    weight_kg = <span class="built_in">round</span>(weight*<span class="number">0.4535924</span>),</span><br><span class="line">    bmi =  weight_kg / (height_cm / <span class="number">100</span>)^<span class="number">2</span>) %&gt;%</span><br><span class="line">  head(n=<span class="number">3</span>) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">height_cm</th>
+<th style="text-align:right">weight_kg</th>
+<th style="text-align:right">bmi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">144</td>
+<td style="text-align:right">38</td>
+<td style="text-align:right">18.32562</td>
+</tr>
+<tr>
+<td style="text-align:right">166</td>
+<td style="text-align:right">44</td>
+<td style="text-align:right">15.96748</td>
+</tr>
+<tr>
+<td style="text-align:right">163</td>
+<td style="text-align:right">41</td>
+<td style="text-align:right">15.43152</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在数据框后加一列</span></span><br><span class="line">d.class[[<span class="string">&quot;rwh&quot;</span>]] &lt;- d.class[[<span class="string">&quot;weight&quot;</span>]] / d.class[[<span class="string">&quot;height&quot;</span>]]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="用管道连接多次操作">用管道连接多次操作</h3>
+<p>管道运算符特别适用于对同一数据集进行多次操作。 例如，对d.class数据，先选出所有女生， 再去掉性别和age变量：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d.class %&gt;%</span><br><span class="line">  filter(sex==<span class="string">&quot;F&quot;</span>) %&gt;%</span><br><span class="line">  select(-sex, -age) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">name</th>
+<th style="text-align:right">height</th>
+<th style="text-align:right">weight</th>
+<th style="text-align:right">rwh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Alice</td>
+<td style="text-align:right">56.5</td>
+<td style="text-align:right">84.0</td>
+<td style="text-align:right">1.4867257</td>
+</tr>
+<tr>
+<td style="text-align:left">Becka</td>
+<td style="text-align:right">65.3</td>
+<td style="text-align:right">98.0</td>
+<td style="text-align:right">1.5007657</td>
+</tr>
+<tr>
+<td style="text-align:left">Gail</td>
+<td style="text-align:right">64.3</td>
+<td style="text-align:right">90.0</td>
+<td style="text-align:right">1.3996890</td>
+</tr>
+<tr>
+<td style="text-align:left">Karen</td>
+<td style="text-align:right">56.3</td>
+<td style="text-align:right">77.0</td>
+<td style="text-align:right">1.3676732</td>
+</tr>
+<tr>
+<td style="text-align:left">Kathy</td>
+<td style="text-align:right">59.8</td>
+<td style="text-align:right">84.5</td>
+<td style="text-align:right">1.4130435</td>
+</tr>
+<tr>
+<td style="text-align:left">Mary</td>
+<td style="text-align:right">66.5</td>
+<td style="text-align:right">112.0</td>
+<td style="text-align:right">1.6842105</td>
+</tr>
+<tr>
+<td style="text-align:left">Sandy</td>
+<td style="text-align:right">51.3</td>
+<td style="text-align:right">50.5</td>
+<td style="text-align:right">0.9844055</td>
+</tr>
+<tr>
+<td style="text-align:left">Sharon</td>
+<td style="text-align:right">62.5</td>
+<td style="text-align:right">112.5</td>
+<td style="text-align:right">1.8000000</td>
+</tr>
+<tr>
+<td style="text-align:left">Tammy</td>
+<td style="text-align:right">62.8</td>
+<td style="text-align:right">102.5</td>
+<td style="text-align:right">1.6321656</td>
+</tr>
+</tbody>
+</table>
+<p>管道操作的结果可以保存为新的tibble，如:</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">class_F &lt;- d.class %&gt;%</span><br><span class="line">  filter(sex==<span class="string">&quot;F&quot;</span>) %&gt;%</span><br><span class="line">  select(-sex)</span><br></pre></td></tr></table></figure>
+<p>也可以将赋值用-&gt;写在最后，如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d.class %&gt;%</span><br><span class="line">  filter(sex==<span class="string">&quot;F&quot;</span>) %&gt;%</span><br><span class="line">  select(-sex) -&gt; class_F</span><br></pre></td></tr></table></figure>
+<p>如果管道传递的变量在下一层调用中不是第一自变量， 可以用.代表，如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d.class %&gt;%</span><br><span class="line">  lm(weight ~ height, data=.)  %&gt;%</span><br><span class="line">  coef()</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># ~的作用，算t2和t1的关系。t2=2t1+4</span></span><br><span class="line">t1 &lt;- <span class="built_in">c</span>(<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">t2 &lt;- <span class="built_in">c</span>(<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>)</span><br><span class="line">lm(t2 ~ t1)</span><br><span class="line"><span class="comment">## 以下为输出结果</span></span><br><span class="line"><span class="comment"># Call:</span></span><br><span class="line"><span class="comment"># lm(formula = t2 ~ t1)</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># Coefficients:</span></span><br><span class="line"><span class="comment"># (Intercept)           t1</span></span><br><span class="line"><span class="comment">#           4            2</span></span><br></pre></td></tr></table></figure>
+<p>为了明确表示不使用管道输入作为第一自变量， 可以将管道操作的那一层加上大括号，如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d.class %&gt;% &#123;</span><br><span class="line">  lm(weight ~ height, data=.) &#125; %&gt;%</span><br><span class="line">  coef()</span><br></pre></td></tr></table></figure>
+<h3 id="宽表转换为长表">宽表转换为长表</h3>
+<p><code>pivot_longer函数</code></p>
+<p>tidyr的pivot_longer()函数可以将横向的多次观测堆叠在一列中。 例如， 下面的数据：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">knitr::kable(dwide1)</span><br></pre></td></tr></table></figure>
+<p>显示没有对象dwide1，根据教程的输出结果，创建一个名为<code>dwid</code>一样的tibble</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">dwid &lt;- tibble(</span><br><span class="line">  subject = <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>),</span><br><span class="line">  <span class="string">&quot;1&quot;</span> = <span class="built_in">c</span>(<span class="number">1</span> , <span class="literal">NA</span>, <span class="number">5</span>, <span class="literal">NA</span>),</span><br><span class="line">  <span class="string">&#x27;2&#x27;</span> = <span class="built_in">c</span>(<span class="literal">NA</span>, <span class="number">7</span>, <span class="number">10</span>, <span class="literal">NA</span>),</span><br><span class="line">  <span class="string">&#x27;3&#x27;</span> = <span class="built_in">c</span>(<span class="literal">NA</span>, <span class="literal">NA</span>, <span class="literal">NA</span>, <span class="number">9</span>),</span><br><span class="line">  <span class="string">&quot;4&quot;</span> = <span class="built_in">c</span>(<span class="literal">NA</span>, <span class="number">4</span>, <span class="literal">NA</span>, <span class="literal">NA</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>subject是受试者编号， 每个受试者有4次随访， NA表示缺失。 数据分析和绘图用的函数一般不能直接使用这样的数据， 一般需要将测量值作为变量名， 将4次测量合并在一列中， 将随访序号单独放在另外一列中。 用pivot_longer()函数实现：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">dwid %&gt;% </span><br><span class="line">  pivot_longer(<span class="string">&#x27;1&#x27;</span>:<span class="string">&#x27;4&#x27;</span>,</span><br><span class="line">               names_to = <span class="string">&#x27;time&#x27;</span>,</span><br><span class="line">               values_to = <span class="string">&quot;response&quot;</span>) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">subject</th>
+<th style="text-align:left">time</th>
+<th style="text-align:right">response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">2</td>
+<td style="text-align:right">NA</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">3</td>
+<td style="text-align:right">NA</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">4</td>
+<td style="text-align:right">NA</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">1</td>
+<td style="text-align:right">NA</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">2</td>
+<td style="text-align:right">7</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">3</td>
+<td style="text-align:right">NA</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">4</td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">1</td>
+<td style="text-align:right">5</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">2</td>
+<td style="text-align:right">10</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">3</td>
+<td style="text-align:right">NA</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">4</td>
+<td style="text-align:right">NA</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:left">1</td>
+<td style="text-align:right">NA</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:left">2</td>
+<td style="text-align:right">NA</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:left">3</td>
+<td style="text-align:right">9</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:left">4</td>
+<td style="text-align:right">NA</td>
+</tr>
+</tbody>
+</table>
+<p>选项<code>names_to</code>指定一个新变量名， 将原来的列标题转换为该变量的值； 选项<code>values_to</code>指定一个新变量名， 将原来的各个列对应的测量值保存在该变量名的列中。</p>
+<p>注意原来的变量名不是合法R变量名， 所以在<code>pivot_longer()</code>中用反单撇号保护(也可以使用单引号或双引号)， 并用了冒号来表示变量范围， 也可以仿照<code>select</code>函数中指定变量名的方法将<code>1`:`4</code>写成:</p>
+<ul>
+<li><code>1`, `2`, `3`, `4</code></li>
+<li><code>-subject</code></li>
+<li><code>cols = one_of(vars)</code>, 其中<code>vars</code>是保存了1到4的字符串的字符型向量。</li>
+</ul>
+<p>如果转换结果中不希望保留那些NA， 可以加<code>values_drop_na=TRUE</code>:</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">dwid %&gt;%</span><br><span class="line">  pivot_longer(<span class="string">&#x27;1&#x27;</span>:<span class="string">&#x27;4&#x27;</span>,</span><br><span class="line">               names_to = <span class="string">&quot;time&quot;</span>,</span><br><span class="line">               values_to = <span class="string">&quot;response&quot;</span>,</span><br><span class="line">               values_drop_na = <span class="built_in">T</span>) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">subject</th>
+<th style="text-align:left">time</th>
+<th style="text-align:right">response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">2</td>
+<td style="text-align:right">7</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">4</td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">1</td>
+<td style="text-align:right">5</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">2</td>
+<td style="text-align:right">10</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:left">3</td>
+<td style="text-align:right">9</td>
+</tr>
+</tbody>
+</table>
+<p><strong>从列名中提取数值</strong></p>
+<p>有时要合并的列名中带有数值， 需要将这些数值部分提取出来， 这时可以用<code>names_prefix</code>指定要去掉的非数值前缀， 用<code>names_ptypes</code>指定将列名转换为值时， 转换的类型， <code>names_ptypes</code>是一个列表， 实现列表元素名到转换类型的映射。 例如，上述的dwid数据框变成这样：</p>
+<table>
+<thead>
+<tr>
+<th>subject</th>
+<th>FU1</th>
+<th>FU2</th>
+<th>FU3</th>
+<th>FU4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+</tr>
+<tr>
+<td>2</td>
+<td>NA</td>
+<td>7</td>
+<td>NA</td>
+<td>4</td>
+</tr>
+<tr>
+<td>3</td>
+<td>5</td>
+<td>10</td>
+<td>NA</td>
+<td>NA</td>
+</tr>
+<tr>
+<td>4</td>
+<td>NA</td>
+<td>NA</td>
+<td>9</td>
+<td>NA</td>
+</tr>
+</tbody>
+</table>
+<p>可以用如下程序将随访编号变成整数值存入一列：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">dwide2 %&gt;%</span><br><span class="line">  pivot_longer(cols = paste0(<span class="string">&quot;FU&quot;</span>, <span class="number">1</span>:<span class="number">4</span>), </span><br><span class="line">     names_to = <span class="string">&quot;time&quot;</span>, </span><br><span class="line">     values_to = <span class="string">&quot;response&quot;</span>,</span><br><span class="line">     names_prefix = <span class="string">&quot;FU&quot;</span>,</span><br><span class="line">     names_ptype = <span class="built_in">list</span>(time = integer()),</span><br><span class="line">     values_drop_na = <span class="literal">TRUE</span>) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>subject</th>
+<th>time</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>7</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>5</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>10</td>
+</tr>
+<tr>
+<td>4</td>
+<td>3</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+<p>其中的cols = paste0(“FU”, 1:4)也可以写成cols = starts_with(“FU”)。</p>
+<p><strong>一行中有多个属性的多次观测的情形</strong></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">dwide &lt;- anscombe[<span class="number">1</span>:<span class="number">3</span>,]</span><br><span class="line">dwide[[<span class="string">&quot;id&quot;</span>]] &lt;- seq(<span class="number">3</span>)</span><br><span class="line">knitr::kable(dwide)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">x1</th>
+<th style="text-align:right">x2</th>
+<th style="text-align:right">x3</th>
+<th style="text-align:right">x4</th>
+<th style="text-align:right">y1</th>
+<th style="text-align:right">y2</th>
+<th style="text-align:right">y3</th>
+<th style="text-align:right">y4</th>
+<th style="text-align:right">id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">10</td>
+<td style="text-align:right">10</td>
+<td style="text-align:right">10</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">8.04</td>
+<td style="text-align:right">9.14</td>
+<td style="text-align:right">7.46</td>
+<td style="text-align:right">6.58</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">6.95</td>
+<td style="text-align:right">8.14</td>
+<td style="text-align:right">6.77</td>
+<td style="text-align:right">5.76</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td style="text-align:right">13</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">7.58</td>
+<td style="text-align:right">8.74</td>
+<td style="text-align:right">12.74</td>
+<td style="text-align:right">7.71</td>
+<td style="text-align:right">3</td>
+</tr>
+</tbody>
+</table>
+<p>用names_pattern指定切分变量名和随访号的模式， 在对应的names_to中用特殊的&quot;.value&quot;名字表示切分出来的那一部分实际是变量名， 这时不需要values_to选项。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">dwide %&gt;% </span><br><span class="line">  pivot_longer(</span><br><span class="line">    -id,</span><br><span class="line">    <span class="comment"># 表示x或y接着数字的命名</span></span><br><span class="line">    names_pattern = <span class="string">&quot;(x|y)([[:digit:]])&quot;</span>,</span><br><span class="line">    names_to = <span class="built_in">c</span>(<span class="string">&quot;.value&quot;</span>, <span class="string">&quot;time&quot;</span>)</span><br><span class="line">  ) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">id</th>
+<th style="text-align:left">time</th>
+<th style="text-align:right">x</th>
+<th style="text-align:right">y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:right">10</td>
+<td style="text-align:right">8.04</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">2</td>
+<td style="text-align:right">10</td>
+<td style="text-align:right">9.14</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">3</td>
+<td style="text-align:right">10</td>
+<td style="text-align:right">7.46</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">4</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">6.58</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">1</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">6.95</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">2</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">8.14</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">3</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">6.77</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">4</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">5.76</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">1</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">7.58</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">2</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">8.74</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">3</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">12.74</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">4</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">7.71</td>
+</tr>
+</tbody>
+</table>
+<h3 id="长表转换为宽表">长表转换为宽表</h3>
+<p><strong>将多个混在一起的变量归类</strong></p>
+<p>tidyr包的pivot_wider函数可以将长表变成宽表。 这适用于将多个变量保存到了一列的情况。 例如，下面的长表将变量x和y放在了同一列中：</p>
+<p>比如先创建一个数据集：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">trl &lt;- tibble(</span><br><span class="line">  id = <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>),</span><br><span class="line">  bl = <span class="built_in">c</span>(<span class="string">&#x27;x&#x27;</span>,<span class="string">&#x27;y&#x27;</span>,<span class="string">&#x27;x&#x27;</span>,<span class="string">&#x27;y&#x27;</span>,<span class="string">&#x27;x&#x27;</span>,<span class="string">&#x27;y&#x27;</span>),</span><br><span class="line">  vl = <span class="built_in">c</span>(<span class="number">23</span>,<span class="number">32</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">67</span>,<span class="number">89</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>用pivot_wider函数将两个变量放到各自的列中， 用names_from选项指定区分不同变量的列，用values_from指定保存实际变量值的列：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 根据id，x,y分列</span></span><br><span class="line">trl %&gt;%</span><br><span class="line">  pivot_wider(</span><br><span class="line">    names_from = <span class="string">&quot;bl&quot;</span>,</span><br><span class="line">    values_from = <span class="string">&quot;vl&quot;</span></span><br><span class="line">  ) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">id</th>
+<th style="text-align:right">x</th>
+<th style="text-align:right">y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">23</td>
+<td style="text-align:right">32</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">5</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:right">67</td>
+<td style="text-align:right">89</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 以id为列名，以x,y为行</span></span><br><span class="line">trl %&gt;%</span><br><span class="line">  pivot_wider(</span><br><span class="line">    names_from = <span class="string">&quot;id&quot;</span>,</span><br><span class="line">    values_from = <span class="string">&#x27;vl&#x27;</span></span><br><span class="line">  ) %&gt;%</span><br><span class="line">  knitr::kable() -&gt; trlxy</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">bl</th>
+<th style="text-align:right">1</th>
+<th style="text-align:right">2</th>
+<th style="text-align:right">3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">x</td>
+<td style="text-align:right">23</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">67</td>
+</tr>
+<tr>
+<td style="text-align:left">y</td>
+<td style="text-align:right">32</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">89</td>
+</tr>
+</tbody>
+</table>
+<p>数据拆分时，有的数据没有收集到，如下面这个数据：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">trl1 &lt;- tibble(</span><br><span class="line">  id = <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>),</span><br><span class="line">  bl = <span class="built_in">c</span>(<span class="string">&#x27;x&#x27;</span>,<span class="string">&#x27;y&#x27;</span>,<span class="string">&#x27;x&#x27;</span>,<span class="string">&#x27;y&#x27;</span>),</span><br><span class="line">  vl = <span class="built_in">c</span>(<span class="number">23</span>,<span class="number">32</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line">) </span><br><span class="line">knitr::kable(trl1)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">id</th>
+<th style="text-align:left">bl</th>
+<th style="text-align:right">vl</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">x</td>
+<td style="text-align:right">23</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">y</td>
+<td style="text-align:right">32</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">x</td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">y</td>
+<td style="text-align:right">5</td>
+</tr>
+</tbody>
+</table>
+<p>这里2号id缺少y，3号id缺少x。 直接转换为宽表：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 其中的变量名一额可以不用引号保护</span></span><br><span class="line">trl1 %&gt;%</span><br><span class="line">  pivot_wider(</span><br><span class="line">    names_from = bl,</span><br><span class="line">    values_from = vl</span><br><span class="line">  ) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">id</th>
+<th style="text-align:right">x</th>
+<th style="text-align:right">y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">23</td>
+<td style="text-align:right">32</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">NA</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:right">NA</td>
+<td style="text-align:right">5</td>
+</tr>
+</tbody>
+</table>
+<p>产生了缺失值。 如果知道缺失值实际等于0， 可以用选项values_fill=选项指定，如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">trl1 %&gt;%</span><br><span class="line">  pivot_wider(</span><br><span class="line">    names_from = bl,</span><br><span class="line">    values_from = vl,</span><br><span class="line">    values_fill = <span class="built_in">list</span>(</span><br><span class="line">      vl = <span class="number">0</span></span><br><span class="line">    )</span><br><span class="line">  ) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">id</th>
+<th style="text-align:right">x</th>
+<th style="text-align:right">y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">23</td>
+<td style="text-align:right">32</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">0</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>将多个类别合并到一个观测</strong></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">dlong3 %&gt;%</span><br><span class="line">  pivot_wider(</span><br><span class="line">    names_from = time,</span><br><span class="line">    values_from = x,</span><br><span class="line">    names_prefix = <span class="string">&quot;x&quot;</span>) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<p>改tibble列名操作：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 复制一个trl 的tibble数据</span></span><br><span class="line">trl2 &lt;- trl</span><br><span class="line"><span class="built_in">names</span>(trl2)</span><br><span class="line"><span class="comment"># 更改v1为y1</span></span><br><span class="line"><span class="built_in">names</span>(trl2)[<span class="number">3</span>] &lt;- <span class="string">&quot;y1&quot;</span></span><br><span class="line"><span class="built_in">names</span>(trl2)</span><br></pre></td></tr></table></figure>
+<p>将多个类别合并到一个观测</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建一个简单的数据集</span></span><br><span class="line">trl3 &lt;- tibble(</span><br><span class="line">  id = <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>),</span><br><span class="line">  time = <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>),</span><br><span class="line">  x = <span class="built_in">c</span>(<span class="number">11</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">56</span>,<span class="number">67</span>)</span><br><span class="line">)</span><br><span class="line">knitr::kable(trl3)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">id</th>
+<th style="text-align:right">time</th>
+<th style="text-align:right">x</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">11</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">56</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">67</td>
+</tr>
+</tbody>
+</table>
+<p>将x的两次测量变成变量x1和x2：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">trl3 %&gt;%</span><br><span class="line">  pivot_wider(</span><br><span class="line">    names_from = <span class="string">&quot;time&quot;</span>,</span><br><span class="line">    values_from = <span class="string">&quot;x&quot;</span>,</span><br><span class="line">    names_prefix = <span class="string">&quot;x&quot;</span></span><br><span class="line">  ) %&gt;% </span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">id</th>
+<th style="text-align:right">x1</th>
+<th style="text-align:right">x2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">11</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:right">56</td>
+<td style="text-align:right">67</td>
+</tr>
+</tbody>
+</table>
+<p><strong>将交叉类别合并到一个观测</strong></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">trl4 &lt;- trl</span><br><span class="line">trl4[<span class="number">4</span>] &lt;- <span class="built_in">rep</span>(<span class="built_in">c</span>(<span class="number">2018</span>,<span class="number">2019</span>),<span class="number">3</span>)</span><br><span class="line"><span class="built_in">names</span>(trl4)[<span class="number">4</span>] &lt;- <span class="string">&quot;year&quot;</span></span><br><span class="line">knitr::kable(trl4)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">id</th>
+<th style="text-align:left">bl</th>
+<th style="text-align:right">vl</th>
+<th style="text-align:right">year</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">x</td>
+<td style="text-align:right">23</td>
+<td style="text-align:right">2018</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">y</td>
+<td style="text-align:right">32</td>
+<td style="text-align:right">2019</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">x</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">2018</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">y</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">2019</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">x</td>
+<td style="text-align:right">67</td>
+<td style="text-align:right">2018</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">y</td>
+<td style="text-align:right">89</td>
+<td style="text-align:right">2019</td>
+</tr>
+</tbody>
+</table>
+<p>将trl4按照year分组</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">trl4 %&gt;%</span><br><span class="line">  pivot_wider(</span><br><span class="line">    <span class="comment"># 第一行的列名为id_bl的值,这里可以省略双引号</span></span><br><span class="line">    names_from = <span class="built_in">c</span>(id,bl),</span><br><span class="line">    <span class="comment"># 填充的值来自vl(就是除了需要的列名和行名之外的值)，剩下的就是行名</span></span><br><span class="line">    values_from = vl</span><br><span class="line">  ) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">year</th>
+<th style="text-align:right">1_x</th>
+<th style="text-align:right">1_y</th>
+<th style="text-align:right">2_x</th>
+<th style="text-align:right">2_y</th>
+<th style="text-align:right">3_x</th>
+<th style="text-align:right">3_y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">2018</td>
+<td style="text-align:right">23</td>
+<td style="text-align:right">NA</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">NA</td>
+<td style="text-align:right">67</td>
+<td style="text-align:right">NA</td>
+</tr>
+<tr>
+<td style="text-align:right">2019</td>
+<td style="text-align:right">NA</td>
+<td style="text-align:right">32</td>
+<td style="text-align:right">NA</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">NA</td>
+<td style="text-align:right">89</td>
+</tr>
+</tbody>
+</table>
+<p><strong>多个变量的多种值</strong></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将trl4改造</span></span><br><span class="line">trl5 &lt;- trl4</span><br><span class="line"><span class="built_in">names</span>(trl5)[<span class="number">4</span>] &lt;- <span class="string">&quot;sd&quot;</span></span><br><span class="line">trl5[<span class="number">4</span>] &lt;- <span class="built_in">c</span>(<span class="number">0.5</span>,<span class="number">0.4</span>,<span class="number">0.8</span>,<span class="number">0.7</span>,<span class="number">0.9</span>,<span class="number">0.2</span>)</span><br><span class="line">trl5</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 填充两个value，列名也会自动适应更改</span></span><br><span class="line">trl5 %&gt;%</span><br><span class="line">  pivot_wider(</span><br><span class="line">    names_from = <span class="string">&quot;bl&quot;</span>,</span><br><span class="line">    values_from = <span class="built_in">c</span>(<span class="string">&quot;vl&quot;</span>,<span class="string">&quot;sd&quot;</span>)</span><br><span class="line">  ) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">id</th>
+<th style="text-align:right">vl_x</th>
+<th style="text-align:right">vl_y</th>
+<th style="text-align:right">sd_x</th>
+<th style="text-align:right">sd_y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">23</td>
+<td style="text-align:right">32</td>
+<td style="text-align:right">0.5</td>
+<td style="text-align:right">0.4</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">0.8</td>
+<td style="text-align:right">0.7</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:right">67</td>
+<td style="text-align:right">89</td>
+<td style="text-align:right">0.9</td>
+<td style="text-align:right">0.2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>长宽转换混合使用</strong></p>
+<p>要将以下数据：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">id</th>
+<th style="text-align:left">variable</th>
+<th style="text-align:right">2018</th>
+<th style="text-align:right">2019</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">x</td>
+<td style="text-align:right">0.5</td>
+<td style="text-align:right">11</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">y</td>
+<td style="text-align:right">0.4</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">x</td>
+<td style="text-align:right">0.8</td>
+<td style="text-align:right">3</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">y</td>
+<td style="text-align:right">0.7</td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">x</td>
+<td style="text-align:right">0.9</td>
+<td style="text-align:right">56</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">y</td>
+<td style="text-align:right">0.2</td>
+<td style="text-align:right">67</td>
+</tr>
+</tbody>
+</table>
+<p>整理为：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">id</th>
+<th style="text-align:left">year</th>
+<th style="text-align:right">x</th>
+<th style="text-align:right">y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">2018</td>
+<td style="text-align:right">0.5</td>
+<td style="text-align:right">0.4</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">2019</td>
+<td style="text-align:right">11.0</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">2018</td>
+<td style="text-align:right">0.8</td>
+<td style="text-align:right">0.7</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">2019</td>
+<td style="text-align:right">3.0</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">2018</td>
+<td style="text-align:right">0.9</td>
+<td style="text-align:right">0.2</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">2019</td>
+<td style="text-align:right">56.0</td>
+<td style="text-align:right">67.0</td>
+</tr>
+</tbody>
+</table>
+<p>首先先创建一个这样的数据集</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">trll &lt;- tibble(</span><br><span class="line">  id=<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>),</span><br><span class="line">  variable= <span class="built_in">rep</span>(<span class="built_in">c</span>(<span class="string">&quot;x&quot;</span>,<span class="string">&quot;y&quot;</span>),<span class="number">3</span>),</span><br><span class="line">  <span class="string">&#x27;2018&#x27;</span> =<span class="built_in">c</span>(<span class="number">0.5</span>,<span class="number">0.4</span>,<span class="number">0.8</span>,<span class="number">0.7</span>,<span class="number">0.9</span>,<span class="number">0.2</span>),</span><br><span class="line">  <span class="string">&#x27;2019&#x27;</span>= trl3[[<span class="string">&quot;x&quot;</span>]]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>数据转换：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">trll %&gt;%</span><br><span class="line">  pivot_longer(</span><br><span class="line">    <span class="string">&#x27;2018&#x27;</span>:<span class="string">&#x27;2019&#x27;</span>,</span><br><span class="line">    <span class="comment"># 将2018和2019列转为行，并将这两行对应的列名命名为year</span></span><br><span class="line">    names_to = <span class="string">&quot;year&quot;</span>,</span><br><span class="line">    <span class="comment"># 将2018，2019的列的值另取一列，命名为value</span></span><br><span class="line">    values_to = <span class="string">&quot;value&quot;</span></span><br><span class="line">  ) %&gt;%</span><br><span class="line">  <span class="comment"># 用pivot_wider函数将长表变成宽表。</span></span><br><span class="line">  pivot_wider(</span><br><span class="line">    names_from = <span class="string">&quot;variable&quot;</span>,</span><br><span class="line">    values_from = <span class="string">&quot;value&quot;</span></span><br><span class="line">  ) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">id</th>
+<th style="text-align:left">year</th>
+<th style="text-align:right">x</th>
+<th style="text-align:right">y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">2018</td>
+<td style="text-align:right">0.5</td>
+<td style="text-align:right">0.4</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">2019</td>
+<td style="text-align:right">11.0</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">2018</td>
+<td style="text-align:right">0.8</td>
+<td style="text-align:right">0.7</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">2019</td>
+<td style="text-align:right">3.0</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">2018</td>
+<td style="text-align:right">0.9</td>
+<td style="text-align:right">0.2</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">2019</td>
+<td style="text-align:right">56.0</td>
+<td style="text-align:right">67.0</td>
+</tr>
+</tbody>
+</table>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/tags/R%E8%AF%AD%E8%A8%80/">R语言</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/shixq_wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/shixq_alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/05/30/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB114/"><img class="prev-cover" src="https://drscdn.500px.org/photo/64597577/q%3D80_m%3D2000/v2?sig=cc438043c30f375df83c133ef9cb67374a03299679042abbddfdb2a5f2c3770d" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">每日外闻114</div></div></a></div><div class="next-post pull-right"><a href="/2020/05/31/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB115/"><img class="next-cover" src="https://assets.thehansindia.com/h-upload/2020/01/21/255964-balancing-work-and-leisure.webp?q=70&amp;w=480&amp;dpr=1.5" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">每日外闻115</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/02/15/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/" title="R语言学习笔记1"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-15</div><div class="title">R语言学习笔记1</div></div></a></div><div><a href="/2020/04/18/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B010/" title="R语言学习笔记10"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-18</div><div class="title">R语言学习笔记10</div></div></a></div><div><a href="/2020/04/25/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B011/" title="R语言学习笔记11"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-25</div><div class="title">R语言学习笔记11</div></div></a></div><div><a href="/2020/05/02/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B012/" title="R语言学习笔记12"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-02</div><div class="title">R语言学习笔记12</div></div></a></div><div><a href="/2020/05/09/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B013/" title="R语言学习笔记13"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-09</div><div class="title">R语言学习笔记13</div></div></a></div><div><a href="/2020/05/16/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B014/" title="R语言学习笔记14"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-16</div><div class="title">R语言学习笔记14</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86"><span class="toc-text">数据整理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8select-%E9%80%89%E6%8B%A9%E5%88%97%E5%AD%90%E9%9B%86"><span class="toc-text">用select()选择列子集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%96%E5%87%BA%E5%8D%95%E4%B8%AA%E5%8F%98%E9%87%8F%E4%B8%BA%E5%90%91%E9%87%8F"><span class="toc-text">取出单个变量为向量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8arrange-%E6%8E%92%E5%BA%8F"><span class="toc-text">用arrange()排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8rename-%E4%BF%AE%E6%94%B9%E5%8F%98%E9%87%8F%E5%90%8D"><span class="toc-text">用rename()修改变量名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8mutate-%E8%AE%A1%E7%AE%97%E6%96%B0%E5%8F%98%E9%87%8F"><span class="toc-text">用mutate()计算新变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8tranmute-%E7%94%9F%E6%88%90%E6%96%B0%E5%8F%98%E9%87%8F%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A1%86"><span class="toc-text">用tranmute()生成新变量的数据框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E7%AE%A1%E9%81%93%E8%BF%9E%E6%8E%A5%E5%A4%9A%E6%AC%A1%E6%93%8D%E4%BD%9C"><span class="toc-text">用管道连接多次操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%BD%E8%A1%A8%E8%BD%AC%E6%8D%A2%E4%B8%BA%E9%95%BF%E8%A1%A8"><span class="toc-text">宽表转换为长表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%95%BF%E8%A1%A8%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%AE%BD%E8%A1%A8"><span class="toc-text">长表转换为宽表</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 石晓强</div><div class="footer_custom_text">欢迎来到我的<a href="https://steven-shixq.github.io/">博客</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'NFoxKw5kAkzXk9OujXdPn1Qp-gzGzoHsz',
+      appKey: '9awzk7TAM6SBvkG1Sn28h7Qf',
+      placeholder: '说点什么吧',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>

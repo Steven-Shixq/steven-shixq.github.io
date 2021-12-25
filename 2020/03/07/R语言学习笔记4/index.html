@@ -1,0 +1,372 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>R语言学习笔记4 | 衷深学习</title><meta name="keywords" content="计算机,编程,R语言"><meta name="author" content="石晓强"><meta name="copyright" content="石晓强"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="R基本编程1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R语言学习笔记4">
+<meta property="og:url" content="https://steven-shixq.github.io/2020/03/07/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B04/index.html">
+<meta property="og:site_name" content="衷深学习">
+<meta property="og:description" content="R基本编程1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png">
+<meta property="article:published_time" content="2020-03-07T14:16:54.000Z">
+<meta property="article:modified_time" content="2020-03-07T16:19:32.059Z">
+<meta property="article:author" content="石晓强">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="R语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png"><link rel="shortcut icon" href="/img/avatar_reader.jpg"><link rel="canonical" href="https://steven-shixq.github.io/2020/03/07/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B04/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 石晓强","link":"链接: ","source":"来源: 衷深学习","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'R语言学习笔记4',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-03-08 00:19:32'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar_reader.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">331</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">174</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">衷深学习</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">R语言学习笔记4</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-03-07T14:16:54.000Z" title="发表于 2020-03-07 22:16:54">2020-03-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-03-07T16:19:32.059Z" title="更新于 2020-03-08 00:19:32">2020-03-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/R%E8%AF%AD%E8%A8%80/">R语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>18分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="R语言学习笔记4"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>R语言教程-R编程1</strong></p>
+<h2 id="13-列表类型">13. 列表类型</h2>
+<p>R中列表(list)类型来保存不同类型的数据。<br>
+数据框也是列表的一种， 但是数据框要求各列等长， 而列表不要求。<br>
+用typeof()函数判断一个列表， 返回结果为list。 可以用is.list()函数判断某个对象是否列表类型。</p>
+<h3 id="列表生成，列表元素修改与取值">列表生成，列表元素修改与取值</h3>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">rec &lt;- <span class="built_in">list</span>(name=<span class="string">&quot;李明&quot;</span>, age=<span class="number">28</span>, scores=<span class="built_in">c</span>(<span class="number">85</span>,<span class="number">89</span>,<span class="number">97</span>))</span><br><span class="line">rec</span><br><span class="line"><span class="comment"># 用typeof()函数判断一个列表</span></span><br><span class="line">typeof(rec)</span><br><span class="line"><span class="comment"># is.list()函数判断某个对象是否列表类型</span></span><br><span class="line"><span class="built_in">is.list</span>(rec[<span class="number">3</span>])</span><br><span class="line"><span class="built_in">is.list</span>(rec)</span><br></pre></td></tr></table></figure>
+<p>列表的一个元素也可以称为列表的一个“变量”， 单个列表元素必须用两重方括号格式访问</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">rec[[<span class="number">3</span>]]</span><br><span class="line">rec[[<span class="number">1</span>]]</span><br><span class="line">rec[[<span class="string">&quot;name&quot;</span>]]</span><br><span class="line">rec[[<span class="number">3</span>]][<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<p>如果使用单重方括号对列表取子集， 结果还是列表而不是列表元素</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">rec[<span class="number">1</span>]</span><br><span class="line">rec[<span class="number">3</span>]</span><br><span class="line">rec[<span class="string">&quot;age&quot;</span>]</span><br><span class="line"><span class="comment"># 列表的单个元素也可以用$格式访问</span></span><br><span class="line">rec$age</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 用names()函数查看和修改元素名</span></span><br><span class="line"><span class="built_in">names</span>(rec)</span><br><span class="line"><span class="built_in">names</span>(rec)[<span class="number">3</span>] &lt;- <span class="string">&quot;三科分数&quot;</span></span><br><span class="line"><span class="comment"># 另一种写法</span></span><br><span class="line"><span class="built_in">names</span>(rec)[<span class="built_in">names</span>(rec)==<span class="string">&#x27;name&#x27;</span>] &lt;- <span class="string">&quot;姓名&quot;</span></span><br><span class="line"><span class="built_in">names</span>(rec)</span><br><span class="line">rec[[<span class="string">&quot;三科分数&quot;</span>]]</span><br><span class="line"><span class="comment"># 修改元素内容</span></span><br><span class="line">rec[[<span class="string">&quot;三科分数&quot;</span>]][<span class="number">1</span>] &lt;- <span class="number">94</span></span><br><span class="line">rec</span><br></pre></td></tr></table></figure>
+<p>把某个列表元素赋值为NULL就删掉这个元素。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">rec[[<span class="string">&quot;age&quot;</span>]] &lt;- <span class="literal">NULL</span></span><br><span class="line">rec</span><br></pre></td></tr></table></figure>
+<p>在list()函数中允许定义元素为NULL，这样的元素是存在的</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">li &lt;- <span class="built_in">list</span>(a = <span class="number">20</span>, b=<span class="string">&quot;fba&quot;</span>, <span class="built_in">c</span>=<span class="literal">NULL</span>)</span><br><span class="line">li</span><br></pre></td></tr></table></figure>
+<p>但是，要把已经存在的元素修改为NULL值而不是删除此元素， 或者给列表增加一个取值为NULL的元素， 这时需要用单重的方括号取子集， 这样的子集会保持其列表类型， 给这样的子列表赋值为list(NULL)</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">li[<span class="string">&#x27;b&#x27;</span>] &lt;- <span class="built_in">list</span>(<span class="literal">NULL</span>)</span><br><span class="line">li[<span class="number">1</span>] &lt;- <span class="number">21</span></span><br><span class="line">li[<span class="string">&quot;d&quot;</span>] &lt;- <span class="built_in">list</span>(<span class="literal">NULL</span>)</span><br><span class="line">li</span><br></pre></td></tr></table></figure>
+<h3 id="列表类型转换">列表类型转换</h3>
+<p>用as.list()把一个其它类型的对象转换成列表； 用unlist()函数把列表转换成基本向量。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">lis1 &lt;- as.list(<span class="number">1</span>:<span class="number">4</span>)</span><br><span class="line">lis1</span><br><span class="line">lis2 &lt;- <span class="built_in">list</span>(<span class="string">&quot;姓名&quot;</span>=<span class="number">1</span>, test=<span class="number">2</span>, y=<span class="built_in">c</span>(<span class="number">3</span>:<span class="number">5</span>))</span><br><span class="line">lis2</span><br><span class="line">lis3 &lt;- unlist(lis2)</span><br><span class="line">lis3</span><br></pre></td></tr></table></figure>
+<h3 id="返回列表的函数–strsplit">返回列表的函数–strsplit()</h3>
+<p>strsplit()输入一个字符型向量并指定一个分隔符， 返回一个项数与字符型向量元素个数相同的列表。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">x &lt;- <span class="built_in">c</span>(<span class="string">&#x27;1, 2, 3&#x27;</span>, <span class="string">&#x27;11, 12, 13&#x27;</span>, <span class="string">&#x27;21, 22, 23&#x27;</span>, <span class="string">&#x27;31, 32, 33&#x27;</span>)</span><br><span class="line"><span class="comment"># 以逗号拆分</span></span><br><span class="line">res &lt;- strsplit(x, <span class="string">&#x27;,&#x27;</span>); res</span><br><span class="line"><span class="comment"># names()函数修改元素名</span></span><br><span class="line"><span class="built_in">names</span>(res)[<span class="number">1</span>:<span class="number">4</span>] &lt;- <span class="built_in">c</span>(<span class="string">&#x27;第一&#x27;</span>, <span class="string">&#x27;第二&#x27;</span>, <span class="string">&#x27;第三&#x27;</span>, <span class="string">&#x27;第四&#x27;</span>)</span><br><span class="line">res</span><br><span class="line"><span class="comment"># 使用sapply()函数进一步转换成数值型矩阵</span></span><br><span class="line">res2 &lt;- sapply(res,<span class="built_in">as.numeric</span>)</span><br><span class="line">res2</span><br><span class="line"><span class="comment"># 直接转换为数值会出错</span></span><br><span class="line">res1 &lt;- <span class="built_in">as.numeric</span>(res)</span><br><span class="line">res1</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="14-工作空间">14 工作空间</h2>
+<p>R把在命令行定义的变量都保存到工作空间中， 在退出R时可以选择是否保存工作空间。 这也是R与其他如C、Java这样的语言的区别之一。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 用ls()命令可以查看工作空间中的内容。</span></span><br><span class="line">ls()</span><br></pre></td></tr></table></figure>
+<p>在命令行定义的变量称为“全局变量”， 在编程实际中， 全局变量是需要慎用的。</p>
+<p>可以用rm()函数删除工作空间中的变量，</p>
+<p>要避免工作空间杂乱， 最好的办法还是所有的运算都写到自定义函数中。 自定义函数中定义的变量都是临时的， 不会保存到工作空间中。如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 定义一个sandbox()函数</span></span><br><span class="line">sandbox &lt;- <span class="keyword">function</span>()&#123;</span><br><span class="line">  cat(<span class="string">&#x27;沙盘：回车退出。\n&#x27;</span>)</span><br><span class="line">  brower()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行sandbox()函数,提示符变成了“Browser[n]”，其中n代表层次序号。 在这样的browser命令行中随意定义变量， 定义的变量不会保存到工作空间中。 用“Q”命令可以退出这个沙盘环境， 接连回车也可以退出。</p>
+<h2 id="15-R输入输出">15 R输入输出</h2>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 输出</span></span><br><span class="line">x &lt;- <span class="built_in">c</span>(<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>)</span><br><span class="line">x <span class="comment">#或者print()</span></span><br><span class="line">cat(<span class="string">&quot;x=&quot;</span>, x, <span class="string">&quot;\n&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>cat()默认显示在命令行窗口， 为了写入指定文件中， 在cat()调用中用file=选项， 这时如果已有文件会把原有内容覆盖， 为了在已有文件时不覆盖原有内容而是在末尾添加， 在cat()中使用append=TRUE选项。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">cat(<span class="string">&quot;=== 结果文件 ===\n&quot;</span>, file = <span class="string">&quot;cat_result.txt&quot;</span>)</span><br><span class="line"><span class="comment"># \n 会在结果会面有一个空行</span></span><br><span class="line">cat(<span class="string">&quot;x =&quot;</span>, x, <span class="string">&quot;\n&quot;</span>,file=<span class="string">&quot;cat_result.txt&quot;</span>, append=<span class="built_in">T</span>)</span><br></pre></td></tr></table></figure>
+<p>函数sink()可以用来把命令行窗口显示的运行结果转向保存到指定的文本文件中， 如果希望保存到文件的同时也在命令行窗口显示， 使用split=TRUE选项。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">sink(<span class="string">&quot;file.txt&quot;</span>, split=<span class="literal">TRUE</span>)</span><br><span class="line"><span class="comment"># 在此输入要保存命令结果的命令</span></span><br><span class="line">sink() <span class="comment"># 终止这样的命令结果输出记录</span></span><br></pre></td></tr></table></figure>
+<p>在R命令行环境中定义的变量、函数会保存在工作空间中， 并在退出R会话时可以保存到硬盘文件中。 用save()命令要求把指定的若干个变量（直接用名字，不需要表示成字符串） 保存到用file=指定的文件中， 随后可以用load()命令恢复到工作空间中。 虽然允许保存多个变量到同一文件中， 但尽可能仅保存一个变量， 而且使用变量名作为文件名。 用save()保存的R特殊格式的文件是通用的， 不依赖于硬件和操作系统。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">scores &lt;- <span class="built_in">c</span>(<span class="number">89</span>,<span class="number">94</span>,<span class="number">97</span>)</span><br><span class="line">save(scores, file=<span class="string">&quot;scores.RData&quot;</span>)</span><br><span class="line">load(<span class="string">&quot;scores.RData&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>对于一个数据框， 可以用write.csv()或readr::write_csv()将其保存为逗号分隔的文本文件， 这样的文件可以很容易地被其它软件识别访问， 如Microsoft Excel软件可以很容易地把这样的文件读成电子表格。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">library(tibble)</span><br><span class="line">library(readr)</span><br><span class="line">da &lt;- tibble(<span class="string">&#x27;name&#x27;</span>=<span class="built_in">c</span>(<span class="string">&#x27;liming&#x27;</span>,<span class="string">&#x27;晓强&#x27;</span>,<span class="string">&#x27;steven&#x27;</span>),</span><br><span class="line">             <span class="string">&#x27;age&#x27;</span>=<span class="built_in">c</span>(<span class="number">18</span>,<span class="number">24</span>,<span class="number">25</span>))</span><br><span class="line">write_csv(da, path=<span class="string">&#x27;write_csv file.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 用scan()函数可以输入文本文件中的数值向量</span></span><br><span class="line"><span class="comment"># 文件中数值之间以空格分开</span></span><br><span class="line">cat(<span class="number">1</span>:<span class="number">12</span>, file=<span class="string">&#x27;e:/shixq/R/scan.txt&#x27;</span>)</span><br><span class="line"><span class="comment"># 路径还可以写为&#x27;e:\\shixq\\R\\scan.txt&#x27;</span></span><br><span class="line">x &lt;- scan(<span class="string">&#x27;e:/shixq/R/scan.txt&#x27;</span>,quiet = <span class="built_in">T</span>)</span><br><span class="line">x</span><br><span class="line">M &lt;- matrix(x,ncol = <span class="number">3</span>,byrow = <span class="built_in">T</span>)</span><br><span class="line">M</span><br></pre></td></tr></table></figure>
+<p>scan()中的quite=TRUE选项使得读入时不自动显示读入的数值项数。这种方法可读取较大的数据。<br>
+read.table()或readr::read_table()函数也可以读入这样的数据， 但是会保存成数据框而不是矩阵， 而且read.table()函数在读入大规模的矩阵时效率很低。</p>
+<h3 id="读取CSV文件">读取CSV文件</h3>
+<p>对于保存在文本文件中的电子表格数据， R可以用read.csv(), read.table(), read.delim(), read.fwf()等函数读入, 但是建议在readr包的支持下用read_csv(), read_table2(), read_delim(), read_fwf()等函数读入， 这些将读入的数据框保存为tibble类型， tibble是数据框的一个变种， 改善了数据框的一些不适当的设计。 readr的读入速度比基本R软件的read.csv()等函数的速度快得多， 速度可以相差10倍， 也不自动将字符型列转换成因子， 不自动修改变量名为合法变量名， 不设置行名。</p>
+<p>对于中小规模的数据， CSV格式作为文件交换格式比较合适， 兼容性强， 各种数据管理软件与统计软件都可以很容易地读入和生成这样格式的文件， 但是特别大型的数据读入效率很低</p>
+<p>CSV格式的文件用逗号分隔开同一行的数据项， 一般第一行是各列的列名（变量名）。</p>
+<ul>
+<li>数值型数据：直接表示</li>
+<li>字符型数据：可以用双引号或者但引号包裹，或者不包裹</li>
+<li>数据本身含有逗号或者引号的情况：需要加引号</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">library(tibble)</span><br><span class="line">library(readr)</span><br><span class="line">d &lt;- read_csv(<span class="string">&quot;testcsv.csv&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>read_csv()还可以从字符串读入一个数据框</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d.small &lt;- read_csv(<span class="string">&quot;name,x,y</span></span><br><span class="line"><span class="string">                    john, 22, 45</span></span><br><span class="line"><span class="string">                    kim, 54, 87</span></span><br><span class="line"><span class="string">                    sandy, 34, 99&quot;</span>)</span><br><span class="line">d.small</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 指定列名的写法</span></span><br><span class="line">d.small &lt;- read_csv(<span class="string">&quot;john, 22, 45</span></span><br><span class="line"><span class="string">                    kim, 54, 87</span></span><br><span class="line"><span class="string">                    sandy, 34, 99</span></span><br><span class="line"><span class="string">&quot;</span>, col_names=<span class="built_in">c</span>(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;x&quot;</span>, <span class="string">&quot;y&quot;</span>) )</span><br><span class="line">d.small</span><br></pre></td></tr></table></figure>
+<p>read_csv()将空缺的值读入为缺失值， 将“NA”也读入为缺失值。</p>
+<p>CSV文件是文本文件，是有编码问题的， 尤其是中文内容的文件。 readr包的默认编码是UTF-8编码。如果以GBK等其他形式编码，则要加上Locale参数和locale()函数<br>
+如：一个.csv文件以GBK保存，文件内容如下</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">gbk_csv &lt;- <span class="built_in">c</span>(<span class="string">&quot;序号,收缩压</span></span><br><span class="line"><span class="string">1,145</span></span><br><span class="line"><span class="string">5,110</span></span><br><span class="line"><span class="string">6, 未测</span></span><br><span class="line"><span class="string">9,150</span></span><br><span class="line"><span class="string">10, 拒绝</span></span><br><span class="line"><span class="string">15,115&quot;</span>)</span><br><span class="line">d1 &lt;- read_csv(gbk_csv,locale=locale(encoding=<span class="string">&quot;GBK&quot;</span>))</span><br><span class="line">d1</span><br></pre></td></tr></table></figure>
+<p>对每列的类型， readr用前1000行猜测合理的类型， 并在读取后显示猜测的每列类型。</p>
+<p>但是有可能类型改变发生在1000行之后。 col_types选项可以指定每一列的类型， 如&quot;col_double()&quot;, “col_integer()”, “col_character()”, “col_factor()”, “col_date()”, &quot;col_datetime&quot;等。 cols()函数可以用来规定各列类型， 并且有一个.default参数指定缺省类型。 对因子，需要在col_factor()中用lelvels=指定因子水平。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d2 &lt;- read_csv(gbk_csv, locale=locale(encoding=<span class="string">&quot;GBK&quot;</span>),</span><br><span class="line">col_types=cols(`序号` = col_integer(),`收缩压` = col_character())</span><br><span class="line">)</span><br><span class="line">d2</span><br></pre></td></tr></table></figure>
+<p>当猜测的文件类型有问题的时候， 可以先将所有列都读成字符型， 然后用type_convert()函数转换，</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">d &lt;- read_csv(&quot;filename.csv&quot;,</span><br><span class="line">              col_types=cols(.default = col_character()))</span><br><span class="line">d &lt;- type_convert(d)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成表格的md格式</span></span><br><span class="line">knitr::kable(d2)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 例如读入一个包含名字，性别，年龄，身高和体重的class.csv数据</span></span><br><span class="line"><span class="comment">#其中年龄，身高和体重可默认是定为col_double()类型</span></span><br><span class="line">ct &lt;- cols(</span><br><span class="line">  .default = col_double(),</span><br><span class="line">  name=col_character(),</span><br><span class="line">  sex=col_factor(levels=<span class="built_in">c</span>(<span class="string">&quot;M&quot;</span>, <span class="string">&quot;F&quot;</span>))</span><br><span class="line">)</span><br><span class="line">d.class &lt;- read_csv(<span class="string">&#x27;class.csv&#x27;</span>, col_types=ct)</span><br><span class="line"><span class="comment"># 查看每列数据的指定类型（col_double()等）</span></span><br><span class="line">str(d.class)</span><br></pre></td></tr></table></figure>
+<p>其中str()函数可以显示数据框的行数(obs.)和变量数(variables)， 以及每个变量（列）的类属等信息<br>
+除了read_csv()函数以外， R扩展包readr还提供了其它的从文本数据读入数据框的函数：</p>
+<ul>
+<li>read_table2()读入用空格作为间隔的文本文件， 同一行的两个数据项之间可以用一个或多个空格分隔， 不需要空格个数相同， 也不需要上下对齐。</li>
+<li>read_tsv()读入用制表符分隔的文件。</li>
+<li>read_fwf()读入上下对齐的文本文件。</li>
+<li>read_lines()函数将文本文件各行读入为一个字符型向量。</li>
+<li>read_file()将文件内容读入成一整个字符串</li>
+<li>read_file_raw()可以不管文件编码将文件读入为一个二进制字符串。<br>
+对特别大的文本格式数据， data.table扩展包的fread()读入速度更快。<br>
+readr包的write_excel_csv()函数将tibble保存为csv文件， 总是使用UTF-8编码，结果可以被MS Office读取。</li>
+</ul>
+<h3 id="Excel表访问">Excel表访问</h3>
+<p>为了把Microsoft Excel格式的数据读入到R中， 最容易的办法是在Excel软件中把数据表转存为CSV格式， 然后用read.csv()读取。</p>
+<p>把R的数据框保存为Excel格式， 只要用write.csv()把数据框保存成CSV格式</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">library(tibble)</span><br><span class="line">d1 &lt;- tibble(<span class="string">&quot;学号&quot;</span>=<span class="built_in">c</span>(<span class="string">&quot;101&quot;</span>, <span class="string">&quot;103&quot;</span>, <span class="string">&quot;104&quot;</span>),</span><br><span class="line">             <span class="string">&quot;数学&quot;</span>=<span class="built_in">c</span>(<span class="number">85</span>, <span class="number">60</span>, <span class="number">73</span>), </span><br><span class="line">             <span class="string">&quot;语文&quot;</span>=<span class="built_in">c</span>(<span class="number">90</span>, <span class="number">78</span>, <span class="number">80</span>))</span><br><span class="line"></span><br><span class="line">write.csv(d1, file=<span class="string">&quot;writecsv_test.csv&quot;</span>, row.names=<span class="literal">FALSE</span>)</span><br><span class="line"><span class="comment"># 读取查看</span></span><br><span class="line">library(readr)</span><br><span class="line">d4 &lt;- read_csv(<span class="string">&quot;writecsv_test.csv&quot;</span>,locale=locale(encoding = <span class="string">&quot;GBK&quot;</span>), col_types = cols(`学号`= col_character()))</span><br><span class="line">d4</span><br><span class="line"><span class="comment"># 查看d4结构和变量属性</span></span><br><span class="line">str(d4)</span><br></pre></td></tr></table></figure>
+<h4 id="使用剪贴板">使用剪贴板</h4>
+<p>为了把Excel软件中数据表的选中区域读入到R中， 可以借助于剪贴板。 在Excel中复制选中的区域，然后在R中用</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 从excel粘贴数据</span></span><br><span class="line">mypast_EXcel &lt;- read.delim(<span class="string">&quot;clipboard&quot;</span>)</span><br><span class="line">mypast_EXcel</span><br></pre></td></tr></table></figure>
+<p>网页上类似于excel表格形式的数据也可以用read.delim(“clipboard”)读取</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 从网页生成的表格（markdown生成）粘贴数据</span></span><br><span class="line">mypast_web &lt;- read.delim(<span class="string">&quot;clipboard&quot;</span>)</span><br><span class="line">mypast_web</span><br></pre></td></tr></table></figure>
+<p>经过read.delim()函数把选中部分转换成一个R的数据框。 如果复制的区域不含列名， 应加上header=FALSE选项。</p>
+<p>这种方法也可以从R中复制数据到剪贴板中，然后可以把数据再粘贴到EXCEL中即可，例如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">write.table(iris, file=<span class="string">&quot;clipboard&quot;</span>, sep = <span class="string">&quot;\t&quot;</span>, col.names = <span class="literal">NA</span>)</span><br></pre></td></tr></table></figure>
+<p>这里把指定的数据框（这里是iris）写入到了剪贴板。<br>
+函数把指定的数据框写入到指定的文件中, 其中的col.names=NA选项是一个特殊的约定， 这时保存的文件中第一行是列名，如果有行名的话，行名所在的列对应的列名是空白的</p>
+<h3 id="利用readxl扩展包">利用readxl扩展包</h3>
+<p>readxl扩展包的readxl()函数利用独立的C和C++库函数读入.xls和.xlsx格式的Excel文件。一般格式为</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">read_excel(path, sheet = <span class="number">1</span>, col_names = <span class="literal">TRUE</span>, </span><br><span class="line">           col_types = <span class="literal">NULL</span>, na = <span class="string">&quot;&quot;</span>,  skip = <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>结果返回读入的表格为一个数据框。</p>
+<ul>
+<li><code>path</code>: 要读入的Excel文件名，可以是全路径，路径格式要符合所用操作系统要求。</li>
+<li><code>sheet</code>: 要读入哪一个工作簿(sheet)，可以是整数序号，也可以是工作簿名称的字符串。</li>
+<li><code>col_names</code>: 是否用第一行内容作为列名，缺省为是。</li>
+<li><code>col_types</code>:<br>
+和read_csv()中的col_types=clos(列名= blank/date/text/numeric),其中如果列名为中文，要使用``包裹。<br>
+可以在读入时人为指定各列的数据类型，缺省时从各列内容自动判断，有可能会不够准确。人为指定时，指定一个对应于各列的字符型向量，元素可取值为:
+<ul>
+<li><code>blank</code>: 自动判断该列；</li>
+<li><code>numeric</code>: 数值型；</li>
+<li><code>date</code>: 日期；</li>
+<li><code>text</code>: 字符型。</li>
+</ul>
+</li>
+</ul>
+<p><code>可以利用RODBC访问Excel文件</code>，这里不演示，用其他方法代替此方法。<br>
+参考：<a target="_blank" rel="noopener" href="http://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/prog-io.html">利用RODBC访问Excel文件</a></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d1 &lt;- data.frame(<span class="string">&quot;学号&quot;</span>=<span class="built_in">c</span>(<span class="string">&quot;101&quot;</span>, <span class="string">&quot;103&quot;</span>, <span class="string">&quot;104&quot;</span>),</span><br><span class="line">                <span class="string">&quot;数学&quot;</span>=<span class="built_in">c</span>(<span class="number">85</span>, <span class="number">60</span>, <span class="number">73</span>), </span><br><span class="line">                <span class="string">&quot;语文&quot;</span>=<span class="built_in">c</span>(<span class="number">90</span>, <span class="number">78</span>, <span class="number">80</span>))</span><br><span class="line">d2 &lt;- data.frame(<span class="string">&quot;学号&quot;</span>=<span class="built_in">c</span>(<span class="string">&quot;101&quot;</span>, <span class="string">&quot;103&quot;</span>, <span class="string">&quot;104&quot;</span>),</span><br><span class="line">                <span class="string">&quot;性别&quot;</span>=<span class="built_in">c</span>(<span class="string">&quot;女&quot;</span>, <span class="string">&quot;男&quot;</span>, <span class="string">&quot;男&quot;</span>))</span><br><span class="line"></span><br><span class="line">fname &lt;- <span class="string">&quot;testwrite.xls&quot;</span></span><br><span class="line"><span class="keyword">if</span>(file.exists(fname)) file.remove(fname)</span><br><span class="line"></span><br><span class="line"><span class="comment"># install.packages(&quot;RODBC&quot;)</span></span><br><span class="line">library(RODBC)</span><br><span class="line"><span class="comment"># odbcConnectExcel is only usable with 32-bit Windows</span></span><br><span class="line">con &lt;- odbcConnectExcel(fname, readOnly=<span class="literal">FALSE</span>)</span><br><span class="line">res &lt;- sqlSave(con, d1, tablename=<span class="string">&quot;成绩&quot;</span>,</span><br><span class="line">          rownames=<span class="built_in">F</span>, colnames=<span class="built_in">F</span>, safer=<span class="built_in">T</span>)</span><br><span class="line">res &lt;- sqlSave(con, d2, tablename=<span class="string">&quot;性别&quot;</span>,</span><br><span class="line">          rownames=<span class="built_in">F</span>, colnames=<span class="built_in">F</span>, safer=<span class="built_in">T</span>)</span><br><span class="line">close(con)</span><br><span class="line"></span><br><span class="line">require(RODBC)</span><br><span class="line">con &lt;- odbcConnectExcel(<span class="string">&#x27;testwrite.xls&#x27;</span>)</span><br><span class="line">rd1 &lt;- sqlFetch(con, sqtable=<span class="string">&#x27;成绩&#x27;</span>)</span><br><span class="line">close(con)</span><br></pre></td></tr></table></figure>
+<h4 id="MySQL数据库访问">MySQL数据库访问</h4>
+<p>平常基本上不用MySQL数据库，等用到时再实践</p>
+<h3 id="文件访问">文件访问</h3>
+<p>输入输出可以针对命令行，针对文件，R支持扩展的文件类型， 称为“连接(connection)”。</p>
+<p>函数file()生成到一个普通文件的连接， 函数url()生成一个到指定的URL的连接，函数gzfile, bzfile, xzfile, unz支持对 压缩过的文件的访问不是压缩包，只对一个文件压缩）。<br>
+这些函数的大概用法：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">file(<span class="string">&quot;path&quot;</span>, open=<span class="string">&quot;&quot;</span>, blocking=<span class="built_in">T</span>,</span><br><span class="line">     encoding = getOption(<span class="string">&quot;encoding&quot;</span>), </span><br><span class="line">     raw = <span class="literal">FALSE</span>)</span><br><span class="line"></span><br><span class="line">url(description, open = <span class="string">&quot;&quot;</span>, blocking = <span class="literal">TRUE</span>,</span><br><span class="line">    encoding = getOption(<span class="string">&quot;encoding&quot;</span>))</span><br><span class="line"></span><br><span class="line">textConnection(description, open=<span class="string">&quot;r&quot;</span>, </span><br><span class="line">    local = <span class="literal">FALSE</span>,</span><br><span class="line">    encoding = <span class="built_in">c</span>(<span class="string">&quot;&quot;</span>, <span class="string">&quot;bytes&quot;</span>, <span class="string">&quot;UTF-8&quot;</span>))</span><br><span class="line"></span><br><span class="line">gzfile(description, open = <span class="string">&quot;&quot;</span>, </span><br><span class="line">       encoding = getOption(<span class="string">&quot;encoding&quot;</span>),</span><br><span class="line">       compression = <span class="number">6</span>)</span><br><span class="line"></span><br><span class="line">bzfile(description, open = <span class="string">&quot;&quot;</span>, </span><br><span class="line">       encoding = getOption(<span class="string">&quot;encoding&quot;</span>),</span><br><span class="line">       compression = <span class="number">9</span>)</span><br><span class="line"></span><br><span class="line">xzfile(description, open = <span class="string">&quot;&quot;</span>, </span><br><span class="line">       encoding = getOption(<span class="string">&quot;encoding&quot;</span>),</span><br><span class="line">       compression = <span class="number">6</span>)</span><br><span class="line"></span><br><span class="line">unz(description, filename, open = <span class="string">&quot;&quot;</span>,</span><br><span class="line">    encoding = getOption(<span class="string">&quot;encoding&quot;</span>))</span><br></pre></td></tr></table></figure>
+<p>文件打开或者写入类型：</p>
+<ul>
+<li><code>r</code>：文本型只读;</li>
+<li><code>w</code>：文本型只写;</li>
+<li><code>a</code>：文本型末尾添加;</li>
+<li><code>rb</code>：二进制只读;</li>
+<li><code>wb</code>：二进制只写;</li>
+<li><code>ab</code>：二进制末尾添加;</li>
+<li><code>r+</code>或<code>r+b</code>：允许读和写;</li>
+<li><code>w+</code>或<code>w+b</code>：允许读和写，但刚打开时清空文件;</li>
+<li><code>a+</code>或<code>a+b</code>：末尾添加并允许读。</li>
+</ul>
+<h4 id="文本文件访问">文本文件访问</h4>
+<p>函数readLines(), scan()可以从一个文本型连接读取。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 以行读取数据</span></span><br><span class="line">D &lt;- readLines(file(<span class="string">&#x27;class.csv&#x27;</span>))</span><br><span class="line">print(D)</span><br></pre></td></tr></table></figure>
+<p>用writeLines函数可以把一个字符型向量各元素作为不同行写入一个文本型连接。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 取D的第一行</span></span><br><span class="line">vnames &lt;- strsplit(D, <span class="string">&#x27;,&#x27;</span>)[[<span class="number">1</span>]]</span><br><span class="line"><span class="comment"># con参数是指定一个写入文件名。</span></span><br><span class="line">writeLines(vnames, con=<span class="string">&#x27;class-names.txt&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>结果为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">name</span><br><span class="line">sex</span><br><span class="line">age</span><br><span class="line">height</span><br><span class="line">weight</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="字符型连接">字符型连接</h4>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">fstr &lt;-</span><br><span class="line"><span class="string">&quot;name,score</span></span><br><span class="line"><span class="string">王芳,78</span></span><br><span class="line"><span class="string">孙莉,85</span></span><br><span class="line"><span class="string">张聪,80</span></span><br><span class="line"><span class="string">&quot;</span></span><br><span class="line"><span class="comment"># 函数textConnection打开一个字符串用于读取或写入</span></span><br><span class="line">d &lt;- read.csv(textConnection(fstr), header=<span class="built_in">T</span>)</span><br><span class="line">print(d)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">tc &lt;- textConnection(<span class="string">&quot;sres&quot;</span>, open=<span class="string">&quot;w&quot;</span>)</span><br><span class="line">cat(<span class="string">&#x27;Trial of text connection.\n&#x27;</span>, file=tc)</span><br><span class="line">cat(<span class="number">1</span>:<span class="number">10</span>, <span class="string">&#x27;\n&#x27;</span>, file=tc, append=<span class="built_in">T</span>)</span><br><span class="line">close(tc)</span><br><span class="line">print(sres)</span><br></pre></td></tr></table></figure>
+<p>写入用的textConnection 的第一个参数是保存了将要写入的字符型变量名的字符串， 而不是变量名本身， 第二个参数表明是写入操作， 使用完毕需要用close关闭。</p>
+<h4 id="中文编码问题">中文编码问题</h4>
+<p>可以用iconvlist()查看R支持的编码名称<br>
+如果文件为GBK编码，则可以使用一些编辑器如notepad++,sublime text3等转换为UTF-8格式，或者在读入时用参数指明文件类型为GBK。<br>
+如上面提到的例子，假设gbk_csv的文件内容在excel中保存时是GBK格式，则用locale=locale(encoding=“GBK”)指定。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">gbk_csv &lt;- <span class="built_in">c</span>(<span class="string">&quot;序号,收缩压</span></span><br><span class="line"><span class="string">1,145</span></span><br><span class="line"><span class="string">5,110</span></span><br><span class="line"><span class="string">6, 未测</span></span><br><span class="line"><span class="string">9,150</span></span><br><span class="line"><span class="string">10, 拒绝</span></span><br><span class="line"><span class="string">15,115&quot;</span>)</span><br><span class="line">d1 &lt;- read_csv(gbk_csv,locale=locale(encoding=<span class="string">&quot;GBK&quot;</span>))</span><br><span class="line">d1</span><br></pre></td></tr></table></figure>
+<h4 id="用基本R的读取函数读取">用基本R的读取函数读取</h4>
+<p>读取UTF-8编码无BOM的文件时， 在read.csv()和read.table()等函数中加fileEncoding=&quot;UTF-8&quot;选项可以纠正编码问题；<br>
+UTF-8有BOM标志的文本文件不能被read.csv()识别</p>
+<p>读取UTF-8编码无BOM或者有BOM的文件时， 在readLines()函数中加encoding=&quot;UTF-8&quot;选项可以纠正编码问题。</p>
+<h4 id="用readr包读取">用readr包读取</h4>
+<p>readr包的read_csv()、read_table2()、read_lines()函数默认从UTF-8编码的文件中读取， 无BOM或者有BOM都可以。</p>
+<p>但是，对GBK编码的文件，不能直接读取，为了读取GBK(或GB18030)编码的文件， 需要在read_csv()和read_lines()函数中加入 locale=locale(encoding=“GBK”)选项</p>
+<h4 id="输出文件的编码">输出文件的编码</h4>
+<p>write.csv()、writeLines()生成的含有中文的文件的编码默认为操作系统的默认中文编码， 这里是GB18030。</p>
+<p>readr的write_csv()、write_lines()函数生成的含有中文的文件的编码默认UTF-8无BOM。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">library(tibble)</span><br><span class="line">library(readr)</span><br><span class="line">write_csv(tibble(<span class="string">&quot;姓名&quot;</span>=<span class="built_in">c</span>(<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;李四&quot;</span>)), <span class="string">&quot;tmp.csv&quot;</span>)</span><br><span class="line"><span class="comment"># 查看数据</span></span><br><span class="line">read_csv(<span class="string">&quot;tmp.csv&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>结果生成的文件编码为UTF-8无BOM， 这样的文件可以被R的readr::read_csv()正确读取， 但是不能被MS Excel软件正确读取。<br>
+write_excel_csv()可以生成带有<code>UTF-8有BOM</code>的CSV文件， 这样的文件可以被MS Office正确识别：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">write_excel_csv(tibble(<span class="string">&quot;姓名&quot;</span>=<span class="built_in">c</span>(<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;李四&quot;</span>)), <span class="string">&quot;tmp1.csv&quot;</span>)</span><br><span class="line"><span class="comment"># 查看数据</span></span><br><span class="line">read_csv(<span class="string">&quot;tmp1.csv&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="目录和文件管理">目录和文件管理</h4>
+<p>目录和文件管理函数:</p>
+<ul>
+<li><code>getwd()</code>：返回当前工作目录。</li>
+<li><code>setwd(path)</code>：设置当前工作目录。</li>
+<li><code>list.files()</code>或<code>dir()</code>：查看目录中内容。 <code>list.files(pattern=’.*[.]r$’)</code>可以列出所有以“.r”结尾的文件。<code>dir()</code>缺省为查看当前工作目录下的所有文件。</li>
+<li><code>file.info(filenames)</code>：显示文件的详细信息。</li>
+<li><code>file.exists()</code>：查看文件是否存在。</li>
+<li><code>file.access()</code>：考察文件的访问权限。</li>
+<li><code>create.dir()</code>：新建目录。</li>
+<li><code>file.create()</code>：生成文件。</li>
+<li><code>file.remove()</code>或<code>unlink()</code>：删除文件。<code>unlink()</code>可以删除目录。</li>
+<li><code>file.rename()</code>：为文件改名。</li>
+<li><code>file.append()</code>：把两个文件相连。</li>
+<li><code>file.copy()</code>：复制文件。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">石晓强</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://steven-shixq.github.io/2020/03/07/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B04/">https://steven-shixq.github.io/2020/03/07/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B04/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://steven-shixq.github.io" target="_blank">衷深学习</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/tags/R%E8%AF%AD%E8%A8%80/">R语言</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/shixq_wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/shixq_alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/03/07/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB30/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/success_that_lasts.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">每日外闻30</div></div></a></div><div class="next-post pull-right"><a href="/2020/03/08/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB31/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/success_that_lasts.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">每日外闻31</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/02/15/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/" title="R语言学习笔记1"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-15</div><div class="title">R语言学习笔记1</div></div></a></div><div><a href="/2020/04/18/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B010/" title="R语言学习笔记10"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-18</div><div class="title">R语言学习笔记10</div></div></a></div><div><a href="/2020/04/25/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B011/" title="R语言学习笔记11"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-25</div><div class="title">R语言学习笔记11</div></div></a></div><div><a href="/2020/05/02/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B012/" title="R语言学习笔记12"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-02</div><div class="title">R语言学习笔记12</div></div></a></div><div><a href="/2020/05/09/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B013/" title="R语言学习笔记13"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-09</div><div class="title">R语言学习笔记13</div></div></a></div><div><a href="/2020/05/16/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B014/" title="R语言学习笔记14"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-16</div><div class="title">R语言学习笔记14</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E5%88%97%E8%A1%A8%E7%B1%BB%E5%9E%8B"><span class="toc-text">13. 列表类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E7%94%9F%E6%88%90%EF%BC%8C%E5%88%97%E8%A1%A8%E5%85%83%E7%B4%A0%E4%BF%AE%E6%94%B9%E4%B8%8E%E5%8F%96%E5%80%BC"><span class="toc-text">列表生成，列表元素修改与取值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">列表类型转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%88%97%E8%A1%A8%E7%9A%84%E5%87%BD%E6%95%B0%E2%80%93strsplit"><span class="toc-text">返回列表的函数–strsplit()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4"><span class="toc-text">14 工作空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-R%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="toc-text">15 R输入输出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96CSV%E6%96%87%E4%BB%B6"><span class="toc-text">读取CSV文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Excel%E8%A1%A8%E8%AE%BF%E9%97%AE"><span class="toc-text">Excel表访问</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E6%9D%BF"><span class="toc-text">使用剪贴板</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8readxl%E6%89%A9%E5%B1%95%E5%8C%85"><span class="toc-text">利用readxl扩展包</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BF%E9%97%AE"><span class="toc-text">MySQL数据库访问</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E8%AE%BF%E9%97%AE"><span class="toc-text">文件访问</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E8%AE%BF%E9%97%AE"><span class="toc-text">文本文件访问</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E5%9E%8B%E8%BF%9E%E6%8E%A5"><span class="toc-text">字符型连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E6%96%87%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98"><span class="toc-text">中文编码问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E5%9F%BA%E6%9C%ACR%E7%9A%84%E8%AF%BB%E5%8F%96%E5%87%BD%E6%95%B0%E8%AF%BB%E5%8F%96"><span class="toc-text">用基本R的读取函数读取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8readr%E5%8C%85%E8%AF%BB%E5%8F%96"><span class="toc-text">用readr包读取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%96%87%E4%BB%B6%E7%9A%84%E7%BC%96%E7%A0%81"><span class="toc-text">输出文件的编码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E5%92%8C%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="toc-text">目录和文件管理</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 石晓强</div><div class="footer_custom_text">欢迎来到我的<a href="https://steven-shixq.github.io/">博客</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'NFoxKw5kAkzXk9OujXdPn1Qp-gzGzoHsz',
+      appKey: '9awzk7TAM6SBvkG1Sn28h7Qf',
+      placeholder: '说点什么吧',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>

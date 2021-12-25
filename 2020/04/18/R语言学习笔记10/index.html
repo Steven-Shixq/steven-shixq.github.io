@@ -1,0 +1,272 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>R语言学习笔记10 | 衷深学习</title><meta name="keywords" content="计算机,编程,R语言"><meta name="author" content="石晓强"><meta name="copyright" content="石晓强"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="R基本编程7">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R语言学习笔记10">
+<meta property="og:url" content="https://steven-shixq.github.io/2020/04/18/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B010/index.html">
+<meta property="og:site_name" content="衷深学习">
+<meta property="og:description" content="R基本编程7">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png">
+<meta property="article:published_time" content="2020-04-18T01:19:09.000Z">
+<meta property="article:modified_time" content="2020-07-24T16:47:23.029Z">
+<meta property="article:author" content="石晓强">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="R语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png"><link rel="shortcut icon" href="/img/avatar_reader.jpg"><link rel="canonical" href="https://steven-shixq.github.io/2020/04/18/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B010/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 石晓强","link":"链接: ","source":"来源: 衷深学习","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'R语言学习笔记10',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-07-25 00:47:23'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar_reader.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">331</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">174</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">衷深学习</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">R语言学习笔记10</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-04-18T01:19:09.000Z" title="发表于 2020-04-18 09:19:09">2020-04-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-07-24T16:47:23.029Z" title="更新于 2020-07-25 00:47:23">2020-07-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/R%E8%AF%AD%E8%A8%80/">R语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="R语言学习笔记10"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>R语言教程-R编程7</strong></p>
+<h2 id="函数进阶">函数进阶</h2>
+<h3 id="函数式编程">函数式编程</h3>
+<p>纯函数：</p>
+<ul>
+<li>没有副作用，全局变量在函数之间传递是不允许的，结果也是去确定的，不会产生不同的结果（如R的rnorm是随机产生正态分布的一组数据，每次运行产生不同的结果）</li>
+<li>不受外部影响，函数返回值只依赖于其自变量及函数的定义。不依赖于任何外部信息（也就不能依赖于全局变量与系统设置值）。</li>
+<li>不受赋值影响。函数定义不需要反复对内部对象（所谓“状态变量”）赋值或修改。</li>
+</ul>
+<p>绘图的函数中经常需要用par()修改绘图参数， 这会使得后续程序出错。 为此，可以在函数开头保存原始的绘图参数， 函数结束时恢复到原始的绘图参数。<br>
+<code>mfcol, mfrow</code> A vector of the form c(nr, nc). Subsequent figures will be drawn in an nr-by-nc array on the device by columns (mfcol), or rows (mfrow), respectively.</p>
+<p>R语言中的on.exit() 函数用来保证当函数退出时，函数把全局工作区恢复到原来的状态。<br>
+如</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">f &lt;- <span class="keyword">function</span>()&#123;</span><br><span class="line">  <span class="comment"># 设定opar参数,一行放2张图</span></span><br><span class="line">  opar &lt;- par(mfrow=<span class="built_in">c</span>(<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line">  <span class="comment"># 函数运行结束后退出opar设定，恢复到原始值</span></span><br><span class="line">  <span class="built_in">on.exit</span>(par(opar))</span><br><span class="line">  plot((-<span class="number">10</span>):<span class="number">10</span>)</span><br><span class="line">  plot(-<span class="number">10</span>:<span class="number">10</span>)</span><br><span class="line">  plot(<span class="number">10</span>:<span class="number">10</span>)</span><br><span class="line">  <span class="comment"># y = x^2</span></span><br><span class="line">  plot((-<span class="number">10</span>):<span class="number">10</span>, ((-<span class="number">10</span>):<span class="number">10</span>)^<span class="number">2</span>)</span><br><span class="line">&#125;</span><br><span class="line">f()</span><br></pre></td></tr></table></figure>
+<p>如果函数中需要多次调用on.exit()指定多个恢复动作， 除第一个调用的on.exit()以外都应该加上add=TRUE选项。<br>
+如果需要指定越晚添加的恢复动作越先执行， 在on.exit()中还要加上after=FALSE选项。</p>
+<p>泛函(functionals)：支持内嵌函数， 并可以输入函数作为函数的自变量， 称这样的函数为泛函(functionals)，如lapply类函数；</p>
+<p>函数工厂：可以输出函数作为函数结果，称这样的函数为函数工厂；</p>
+<p>函数算子(function operators)：可以输入函数， 进行一定修改后输出函数的函数。</p>
+<p>利用R的purrr扩展包，可以用统一的风格使用函数式编程， 比基本R的lapply类函数、Map、Reduce等更容易使用。</p>
+<h3 id="泛函">泛函</h3>
+<p>许多函数需要用函数作为参数，称这样的函数为泛函(functionals)。典型的泛函是lapply类函数。这样的函数具有很好的通用性，因为需要进行的操作可以输入一个函数来规定， 用输入的函数规定要进行什么样的操作。</p>
+<p><strong>purrr::map函数</strong></p>
+<p>设我们要对列表或向量x的每个元素x[[i]]调用函数f()， 将结果保存成一个列表。<br>
+其中的输入x是任意的，函数f是任意的。purrr包的map()函数可以用一条命令完成上述任务：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">y &lt;- map(x, f)</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d.class &lt;- readr::read_csv(<span class="string">&#x27;class.csv&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>typeof()函数求变量的存储类型</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d.class</span><br><span class="line">typeof(d.class[[<span class="string">&quot;sex&quot;</span>]])</span><br></pre></td></tr></table></figure>
+<p>d.class是一个tibble数据框， tibble也是一个列表， 每个列表元素是数据框的一列。</p>
+<p>如下程序使用purrr::map()求每一列的存储类型， map的结果总是列表，每个列表元素对应于输入的一个元素， 如:</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">library(purrr)</span><br><span class="line">class_ty &lt;- map(d.class, typeof)</span><br><span class="line">class_ty</span><br><span class="line"><span class="comment"># &gt; class(class_ty)</span></span><br><span class="line"><span class="comment"># [1] &quot;list&quot;</span></span><br><span class="line"><span class="comment"># &gt; mode(class_ty)</span></span><br><span class="line"><span class="comment"># [1] &quot;list&quot;</span></span><br></pre></td></tr></table></figure>
+<p>当结果比较简单时， 保存为列表不够方便， 函数unlist()可以将比较简单的列表转换为基本类型的向量</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">ve &lt;- unlist(class_ty)</span><br><span class="line">ve</span><br><span class="line">mode(ve)</span><br></pre></td></tr></table></figure>
+<p>关于一个数据框的结构， 用str()函数可以得到更为详细的信息：<br>
+str即structure的缩写，得到输入参数的结构信息</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">str(d.class)</span><br><span class="line">str(class_ty)</span><br><span class="line">str(ve)</span><br></pre></td></tr></table></figure>
+<p><code>purrr::map()</code>总是返回列表。 如果确知其调用的函数总是返回某种类型的标量值， 可以用<code>map</code>的变种：</p>
+<ul>
+<li><code>map_lgl()</code>：返回逻辑向量；</li>
+<li><code>map_int()</code>：返回整型向量；</li>
+<li><code>map_dbl()</code>: 返回双精度浮点型向量(double类型)；</li>
+<li><code>map_chr()</code>: 返回字符型向量。</li>
+</ul>
+<p>比如， 求<code>d.class</code>各列类型， 因为确知<code>typeof()</code>函数对每列返回一个标量字符串，所以可以写成：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">map_chr(d.class, typeof)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># is.numeric 判断是否为数值型，结果为逻辑向量</span></span><br><span class="line">map_lgl(d.class, <span class="built_in">is.numeric</span>)</span><br></pre></td></tr></table></figure>
+<p><strong><code>...</code>形参</strong><br>
+在R函数的形参中， 允许有一个特殊的…形参（三个小数点）， 这在调用泛函类型的函数时起到重要作用。 在调用泛函时， 所有没有形参与之匹配的实参， 不论是带有名字还是不带有名字的， 都自动归入这个参数， 将会由泛函传递给作为其自变量的函数。 …参数的类型相当于一个列表， 列表元素可以部分有名部分无名， 用list(…)可以将其转换成列表再访问。</p>
+<p>例如，函数mean()可以计算去掉部分最低、最高值之后的平均值， 用选项trim=指定一个两边分别舍弃的值的个数比例。 为了将d.class的三列数值型列计算上下各自扣除10%的平均值， 需要利用map_dbl()函数的…参数输入trim选项值，如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">library(purrr)</span><br><span class="line">map_dbl(d.class[,<span class="number">3</span>:<span class="number">5</span>], mean, trim=<span class="number">0.10</span>)</span><br></pre></td></tr></table></figure>
+<p>上面的数值型列是直接在程序中固定列号选出的， 也可以用map_lgl()选出：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">dsub &lt;- d.class[,map_lgl(d.class, <span class="built_in">is.numeric</span>)]</span><br><span class="line">map_dbl(dsub, mean, trim=<span class="number">0.10</span>)</span><br></pre></td></tr></table></figure>
+<p>purrr包提供了一个keep函数， 可以专门用来选择数据框各列或列表元素中满足某种条件的子集， 这个条件用一个返回逻辑值的函数来给出。如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">library(purrr)</span><br><span class="line">dsub &lt;- keep(d.class, <span class="built_in">is.numeric</span>)</span><br><span class="line">map_dbl(dsub, mean, trim=<span class="number">0.10</span>)</span><br></pre></td></tr></table></figure>
+<p>利用magrittr包的管道运算符<code>%&gt;%</code>可以将对一个数据框的删选、计算过程更清晰地表达出来， 不需要dsub这样存储中间结果的变量</p>
+<p><strong>利用<code>%&gt;%</code>管道传递数值：</strong></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">d.class %&gt;%</span><br><span class="line">  <span class="comment"># 将d.class作为keep函数的第一个参数</span></span><br><span class="line">  keep(<span class="built_in">is.numeric</span>) %&gt;%</span><br><span class="line">  <span class="comment"># 将keep函数的计算结果传送到map_dbl函数的第一个参数上。</span></span><br><span class="line">  map_dbl(mean, trim=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 相当于：map_dbl(keep(d.class, is.numeric), mean, trim=0.1)</span></span><br></pre></td></tr></table></figure>
+<p>在map类泛函中<code>...</code>仅用来将额外的选项传递给要调用的函数， 不支持向量化， 如果需要对两个或多个自变量的对应元素作变换， 需用用purrr包的map2等函数。 如果泛函中调用的是无名函数， 则<code>...</code>参数会造成变量作用域理解困难。</p>
+<p><strong>用map处理strsplit函数结果示例</strong></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 假设4个学生3次测验成绩</span></span><br><span class="line">s &lt;- <span class="built_in">c</span>(<span class="string">&#x27;10, 8, 7&#x27;</span>, </span><br><span class="line">      <span class="string">&#x27;5, 2, 2&#x27;</span>, </span><br><span class="line">      <span class="string">&#x27;3, 7, 8&#x27;</span>, </span><br><span class="line">      <span class="string">&#x27;8, 8, 9&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 可以使用strsplit()函数把三组成绩拆开</span></span><br><span class="line"></span><br><span class="line">t1 &lt;- strsplit(s, <span class="string">&#x27;,&#x27;</span>, fixed = <span class="built_in">T</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">names</span>(t1) &lt;- <span class="built_in">c</span>(<span class="string">&quot;James&quot;</span>, <span class="string">&#x27;Jack&#x27;</span>, <span class="string">&#x27;Steven&#x27;</span>, <span class="string">&#x27;Marry&#x27;</span>)</span><br><span class="line">t1</span><br><span class="line">mode(t1)</span><br><span class="line"><span class="comment">## list</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 求三次x小测验的总分</span></span><br><span class="line"><span class="built_in">as.numeric</span>(t1[[<span class="number">1</span>]]) %&gt;%</span><br><span class="line">  <span class="built_in">sum</span>() %&gt;%</span><br><span class="line">  <span class="comment"># 其中.就代表上一个参数传入的值</span></span><br><span class="line">  cat(.,<span class="string">&#x27;-&#x27;</span>, <span class="built_in">names</span>(t1[<span class="number">1</span>]))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>以上表达式等于：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">cat(<span class="built_in">sum</span>(<span class="built_in">as.numeric</span>(t1[[<span class="number">1</span>]])),<span class="string">&#x27;-&#x27;</span>, <span class="built_in">names</span>(t1[<span class="number">1</span>]))</span><br></pre></td></tr></table></figure>
+<p>或者写成：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 求三次x小测验的总分</span></span><br><span class="line"><span class="built_in">as.numeric</span>(t1[[<span class="number">1</span>]]) %&gt;%</span><br><span class="line">  <span class="built_in">sum</span>() %&gt;%</span><br><span class="line">  <span class="comment"># 其中.就代表上一个参数传入的值</span></span><br><span class="line">  cat(<span class="built_in">names</span>(t1[<span class="number">1</span>]),<span class="string">&#x27;的总分:&#x27;</span>, .)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>分别计算三个人的总分：</p>
+<ol>
+<li>写成一个循环：</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 分别打印三个人的总分</span></span><br><span class="line"><span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">3</span>)&#123;</span><br><span class="line"><span class="built_in">as.numeric</span>(t1[[i]]) %&gt;%</span><br><span class="line">  <span class="built_in">sum</span>() %&gt;%</span><br><span class="line">  <span class="comment"># 其中.就代表上一个参数传入的值</span></span><br><span class="line">  cat(<span class="built_in">names</span>(t1[i]),<span class="string">&#x27;的总分:&#x27;</span>, ., <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">## James 的总分: 25 </span></span><br><span class="line"><span class="comment">## Jack 的总分: 9 </span></span><br><span class="line"><span class="comment">## Steven 的总分: 18</span></span><br></pre></td></tr></table></figure>
+<p>用strsplit()处理有4个字符串的字符型向量s, 结果是长度为4的列表：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">tmpr &lt;- strsplit(s, <span class="string">&#x27;,&#x27;</span>, fixed=<span class="built_in">T</span>); tmpr</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>用map()和as.numeric()可以把列表中所有字符型转为数值型， 输出为一个列表， 然后再对各个列表元素中的向量求和。 使用管道运算符表达逐步的操作：</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 一句话的表达式</span></span><br><span class="line">map_dbl(map(strsplit(s,split = <span class="string">&quot;,&quot;</span>, fixed = <span class="built_in">T</span>),<span class="built_in">as.numeric</span>),<span class="built_in">sum</span>)</span><br></pre></td></tr></table></figure>
+<p>等同于：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">s %&gt;%</span><br><span class="line">  strsplit(split=<span class="string">&quot;,&quot;</span>, fixed=<span class="literal">TRUE</span>) %&gt;%</span><br><span class="line">  map(<span class="built_in">as.numeric</span>) %&gt;%</span><br><span class="line">  map_dbl(<span class="built_in">sum</span>)</span><br></pre></td></tr></table></figure>
+<p>受上面程序写法的启发，还可以写成：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">t2 &lt;- map(strsplit(s, split = <span class="string">&#x27;,&#x27;</span>,fixed = <span class="built_in">T</span>),<span class="built_in">as.numeric</span>)</span><br><span class="line"><span class="built_in">names</span>(t2) &lt;- <span class="built_in">c</span>(<span class="string">&#x27;李明&#x27;</span>,<span class="string">&#x27;小黄&#x27;</span>,<span class="string">&#x27;小吕&#x27;</span>,<span class="string">&#x27;小爱&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">3</span>)&#123;</span><br><span class="line">  <span class="comment"># 其中sep的默认值为空格，可以指定为空，这样字符之间连接就不会出现空格。</span></span><br><span class="line">  cat(<span class="built_in">names</span>(t2[i]), <span class="string">&quot;的总分：&quot;</span>,<span class="built_in">sum</span>(t2[[i]]),<span class="string">&quot;\n&quot;</span>, sep=<span class="string">&quot;&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">石晓强</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://steven-shixq.github.io/2020/04/18/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B010/">https://steven-shixq.github.io/2020/04/18/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B010/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://steven-shixq.github.io" target="_blank">衷深学习</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/tags/R%E8%AF%AD%E8%A8%80/">R语言</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/shixq_wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/shixq_alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/04/18/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB72/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200419003535.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">每日外闻72</div></div></a></div><div class="next-post pull-right"><a href="/2020/04/19/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB73/"><img class="next-cover" src="https://media.gatesnotes.com/-/media/Images/Books/Education/Education-Reform-and-KIPP/work-hard-be-nice_2010_780px.ashx" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">每日外闻73</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/02/15/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/" title="R语言学习笔记1"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-15</div><div class="title">R语言学习笔记1</div></div></a></div><div><a href="/2020/04/25/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B011/" title="R语言学习笔记11"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-25</div><div class="title">R语言学习笔记11</div></div></a></div><div><a href="/2020/05/02/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B012/" title="R语言学习笔记12"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-02</div><div class="title">R语言学习笔记12</div></div></a></div><div><a href="/2020/05/09/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B013/" title="R语言学习笔记13"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-09</div><div class="title">R语言学习笔记13</div></div></a></div><div><a href="/2020/05/16/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B014/" title="R语言学习笔记14"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-16</div><div class="title">R语言学习笔记14</div></div></a></div><div><a href="/2020/05/23/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B015/" title="R语言学习笔记15"><img class="cover" src="https://gitee.com/XiaoqiangShi/imagehosts/raw/master/1580900576_20200205190245532_24533.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-23</div><div class="title">R语言学习笔记15</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E8%BF%9B%E9%98%B6"><span class="toc-text">函数进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B"><span class="toc-text">函数式编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%87%BD"><span class="toc-text">泛函</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 石晓强</div><div class="footer_custom_text">欢迎来到我的<a href="https://steven-shixq.github.io/">博客</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'NFoxKw5kAkzXk9OujXdPn1Qp-gzGzoHsz',
+      appKey: '9awzk7TAM6SBvkG1Sn28h7Qf',
+      placeholder: '说点什么吧',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>
