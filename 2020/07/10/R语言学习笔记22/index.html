@@ -1,0 +1,306 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>R语言学习笔记22 | 衷深学习</title><meta name="keywords" content="计算机,编程,R语言"><meta name="author" content="石晓强 (Xiaoqiang Shi)"><meta name="copyright" content="石晓强 (Xiaoqiang Shi)"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="ggplot作图入门-3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R语言学习笔记22">
+<meta property="og:url" content="https://steven-shixq.github.io/2020/07/10/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B022/index.html">
+<meta property="og:site_name" content="衷深学习">
+<meta property="og:description" content="ggplot作图入门-3">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-1301686007.cos.ap-shanghai.myqcloud.com/default_top_img.jpg">
+<meta property="article:published_time" content="2020-07-10T16:32:31.000Z">
+<meta property="article:modified_time" content="2020-07-19T10:13:08.200Z">
+<meta property="article:author" content="石晓强 (Xiaoqiang Shi)">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="R语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog-1301686007.cos.ap-shanghai.myqcloud.com/default_top_img.jpg"><link rel="shortcut icon" href="/img/avatar_reader.jpg"><link rel="canonical" href="https://steven-shixq.github.io/2020/07/10/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B022/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 石晓强 (Xiaoqiang Shi)","link":"链接: ","source":"来源: 衷深学习","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'R语言学习笔记22',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-07-19 06:13:08'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar_reader.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">346</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">196</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书籍</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/messages/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://blog-1301686007.cos.ap-shanghai.myqcloud.com/default_top_img.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">衷深学习</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书籍</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/messages/"><i class="fa-fw fas fa-heart"></i><span> 留言板</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">R语言学习笔记22</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-07-10T16:32:31.000Z" title="发表于 2020-07-10 12:32:31">2020-07-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-07-19T10:13:08.200Z" title="更新于 2020-07-19 06:13:08">2020-07-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/R%E8%AF%AD%E8%A8%80/">R语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="R语言学习笔记22"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="数据变换与条形图">数据变换与条形图</h3>
+<p>ggplot2中的条形图函数geom_bar()可以对一个分类变量自动统计频数， 并作频数条形图。 比如对gss_sm数据集的bigregion变量作频数条形图：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">library(socviz)</span><br><span class="line">p &lt;- ggplot(data = gss_sm,</span><br><span class="line">  mapping = aes(x = bigregion))</span><br><span class="line">p + geom_bar()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200719171725.png" alt=""></p>
+<p>结果是每个大区的受访者人数的条形图。 图形中x映射是用户指定的， 而y轴则是自动计算的频数。 实际上， geom_bar()自动调用了统计函数stat_freq()对每个大区计算频数， 生成新变量count和prop。 geom_bar()默认使用count(频数)。</p>
+<p>虽然ggplot2能够自动统计频数， 但最好还是预先统计好频数， 仅用ggplot2绘图。 所以，上例可以用tidyverse的count和ggplot2的geom_col改写成：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># library(tidyverse)</span></span><br><span class="line">df1 &lt;- select(gss_sm,bigregion) %&gt;%</span><br><span class="line">  count(bigregion) %&gt;%</span><br><span class="line">  <span class="comment"># 增加一列ratio</span></span><br><span class="line">  mutate(ratio = n/<span class="built_in">sum</span>(n))</span><br><span class="line"></span><br><span class="line">head(df1)</span><br><span class="line">p &lt;- ggplot(data = df1,</span><br><span class="line">  mapping = aes(x = bigregion, y = n))</span><br><span class="line">p + geom_col() + </span><br><span class="line">  labs(y = <span class="string">&quot;Count&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200719171745.png" alt=""></p>
+<p>mutate用法参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/lanfengchalan/article/details/68946175">https://blog.csdn.net/lanfengchalan/article/details/68946175</a></p>
+<p>下面的程序将纵坐标改成了比例：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">p &lt;- ggplot(data = df1,</span><br><span class="line">  mapping = aes(x = bigregion, y = ratio))</span><br><span class="line">p + geom_col() + </span><br><span class="line">  labs(y = <span class="string">&quot;Ratio&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200719171757.png" alt=""><br>
+作gss_sm数据集中religion变量的频数条形图， 并给不同的条形自动分配不同的颜色， 方法是指定fill = religion：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">df2 &lt;- gss_sm %&gt;%</span><br><span class="line">  select(religion) %&gt;%</span><br><span class="line">  count(religion)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">p &lt;- ggplot(data = df2,</span><br><span class="line">  mapping = aes(</span><br><span class="line">    x = religion, </span><br><span class="line">    y = n, </span><br><span class="line">    fill = religion))</span><br><span class="line">p + geom_col() +</span><br><span class="line">  labs(y = <span class="string">&quot;Count&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200719171808.png" alt=""><br>
+因为将religion同时映射到x维与fill维， 所以对应fill维在图形右侧出现了图例，图例对应的函数是guides()。 调用guides(fill = FALSE)可以人为指定不做关于填充色的图例：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">p + geom_col() +</span><br><span class="line">  guides(fill = <span class="literal">FALSE</span>) +</span><br><span class="line">  labs(y = <span class="string">&quot;Count&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200719171814.png" alt=""></p>
+<p>从可视化理论的角度看， 上图中的不同颜色是多余的， 用同一颜色更能强调数据本身。</p>
+<h4 id="分段与并列条形图">分段与并列条形图</h4>
+<p>面的条形图展现了单个分类变量的频数分布。 两个分类变量的交叉频数分布可以用分段条形图或者并列条形图表现。</p>
+<p>例如，对gss_sm数据集， 按照bigregion分组计算频数， 每组内再按照religion计算频数， 用tidyverse统计后作图如下：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">df3 &lt;- gss_sm %&gt;%</span><br><span class="line">  select(bigregion, religion) %&gt;%</span><br><span class="line">  group_by(bigregion, religion) %&gt;%</span><br><span class="line">  summarise(n = n()) %&gt;%</span><br><span class="line">  mutate(ratio = n / <span class="built_in">sum</span>(n)) %&gt;%</span><br><span class="line">  ungroup()</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">p &lt;- ggplot(data = df3,</span><br><span class="line">  mapping = aes(</span><br><span class="line">    x = bigregion, </span><br><span class="line">    y = n,</span><br><span class="line">    fill = religion))</span><br><span class="line">p + geom_col()</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200719171827.png" alt=""></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将大类的高度拉平， 图形仅表示每一大类内部小类的比例， 没有大类频数信息， 也不能比较两个大类之间的小类频数， 但可以大致地在大类之间比较小类的比例</span></span><br><span class="line">p + geom_col(position = <span class="string">&quot;fill&quot;</span>) + </span><br><span class="line">  labs(y = <span class="literal">NULL</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200719171845.png" alt=""></p>
+<p>上面的程序在geom_col()中用了position = &quot;fill&quot;选项。</p>
+<p>并排的条形图可以表现每个交叉类的频数， 可以比较容易地比较每个大类内部的小类比例以及小类的频数， 但是不容易比较大类的比例：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将各小类分开展示</span></span><br><span class="line">p + geom_col(position = <span class="string">&quot;dodge&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200719171858.png" alt=""></p>
+<p>将上图中的纵轴改为大类内的比例（每个大区的比例之和等于1）：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">p &lt;- ggplot(data = df3,</span><br><span class="line">  mapping = aes(</span><br><span class="line">    x = bigregion, </span><br><span class="line">    y = ratio,</span><br><span class="line">    fill = religion))</span><br><span class="line">p + geom_col(position = <span class="string">&quot;dodge&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200719171907.png" alt=""></p>
+<p>为了在不同大区之间比较宗教比例分布， 可以借助于小图， 将每个大区分配到一个小图：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">p &lt;- ggplot(data = df3, </span><br><span class="line">    mapping = aes(x = religion, y = ratio, fill=religion))</span><br><span class="line">p + geom_col(position=<span class="string">&quot;dodge&quot;</span>) +</span><br><span class="line">  labs(x=<span class="literal">NULL</span>, y=<span class="string">&quot;比例&quot;</span>) + </span><br><span class="line">  <span class="comment"># 将图像翻转摆放</span></span><br><span class="line">  coord_flip() + </span><br><span class="line">  facet_grid(~ bigregion) + </span><br><span class="line">  guides(fill=<span class="literal">FALSE</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200719171914.png" alt=""></p>
+<p>有时用来绘图的数据已经是一个频数表， 比如泰坦尼克号乘客生存与性别的频数表：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">titanic</span><br><span class="line">p &lt;- ggplot(data = titanic, mapping = aes(</span><br><span class="line">  x = fate, y = n, fill = sex</span><br><span class="line">))</span><br><span class="line">p + geom_col(position = <span class="string">&quot;dodge&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200719171925.png" alt=""></p>
+<p>也可以按照性别分成大组：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">p &lt;- ggplot(data=titanic, mapping = aes(</span><br><span class="line">  x = sex, y = n, fill = fate))</span><br><span class="line">p + geom_col(position = <span class="string">&quot;dodge&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200719171936.png" alt=""></p>
+<p>用theme()函数的legend.position参数可以指定图例的位置，如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">p + geom_col(position = <span class="string">&quot;dodge&quot;</span>) +</span><br><span class="line">  theme(legend.position = <span class="string">&quot;top&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200719171950.png" alt=""></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 做成堆叠形式：</span></span><br><span class="line">p + geom_col(position = <span class="string">&quot;stack&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200719172000.png" alt=""></p>
+<p>position = &quot;stack&quot;也是geom_col()函数的默认选项。</p>
+<p>datasets包的Titanic数据集包含了泰坦尼克号乘客更详细的信息。 我们按照存亡结果和舱位等级分小图作男女频数条形图：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">titanic2 &lt;- as.data.frame(Titanic) %&gt;%</span><br><span class="line">  group_by(Class, Sex, Survived) %&gt;%</span><br><span class="line">  summarise(n = <span class="built_in">sum</span>(Freq)) %&gt;%</span><br><span class="line">  filter(Class != <span class="string">&quot;Crew&quot;</span>) %&gt;%</span><br><span class="line">  mutate(Survived = factor(</span><br><span class="line">    Survived, levels = <span class="built_in">c</span>(<span class="string">&quot;Yes&quot;</span>, <span class="string">&quot;No&quot;</span>), </span><br><span class="line">    labels = <span class="built_in">c</span>(<span class="string">&quot;survived&quot;</span>, <span class="string">&quot;perished&quot;</span>)))</span><br><span class="line">p &lt;- ggplot(data = titanic2, mapping = aes(</span><br><span class="line">  x = Sex, y = n, fill = Sex))</span><br><span class="line">p + geom_col() + </span><br><span class="line">  facet_grid(Class ~ Survived) +</span><br><span class="line">  guides(fill = <span class="literal">FALSE</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200719172011.png" alt=""></p>
+<p>这里将fill映射到了Sex， 使得表示男女的条形填充了不同的颜色。 如果不满意上面的颜色， 可以用scale_fill_manual()函数人为地指定颜色、对应离散值和图例标签。 R扩展包colourpicker提供了很好交互图形界面用来挑选颜色。</p>
+<h4 id="条形图的其它应用">条形图的其它应用</h4>
+<p><code>geom_col()</code>不仅限于画频数或者比例的条形图， 此函数可以将一般用折线图表现的内容画成条形图， 但一定要注意一点：y坐标轴必须从0开始， 这也是<code>geom_col()</code>和<code>geom_bar()</code>函数默认的设置。 如果坐标轴不从零开始， 则条形的长度就不能正确表示对应的y变量数值。</p>
+<p>举一个用条形图表示不是频数和比例的量的例子。 socviz包的oecd_sum数据集包含各年的美国以及OECD国家的期望寿命：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">head(oecd_sum) %&gt;%</span><br><span class="line">  knitr::kable()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">year</th>
+<th style="text-align:right">other</th>
+<th style="text-align:right">usa</th>
+<th style="text-align:right">diff</th>
+<th style="text-align:left">hi_lo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1960</td>
+<td style="text-align:right">68.6</td>
+<td style="text-align:right">69.9</td>
+<td style="text-align:right">1.3</td>
+<td style="text-align:left">Below</td>
+</tr>
+<tr>
+<td style="text-align:right">1961</td>
+<td style="text-align:right">69.2</td>
+<td style="text-align:right">70.4</td>
+<td style="text-align:right">1.2</td>
+<td style="text-align:left">Below</td>
+</tr>
+<tr>
+<td style="text-align:right">1962</td>
+<td style="text-align:right">68.9</td>
+<td style="text-align:right">70.2</td>
+<td style="text-align:right">1.3</td>
+<td style="text-align:left">Below</td>
+</tr>
+<tr>
+<td style="text-align:right">1963</td>
+<td style="text-align:right">69.1</td>
+<td style="text-align:right">70.0</td>
+<td style="text-align:right">0.9</td>
+<td style="text-align:left">Below</td>
+</tr>
+<tr>
+<td style="text-align:right">1964</td>
+<td style="text-align:right">69.5</td>
+<td style="text-align:right">70.3</td>
+<td style="text-align:right">0.8</td>
+<td style="text-align:left">Below</td>
+</tr>
+<tr>
+<td style="text-align:right">1965</td>
+<td style="text-align:right">69.6</td>
+<td style="text-align:right">70.3</td>
+<td style="text-align:right">0.7</td>
+<td style="text-align:left">Below</td>
+</tr>
+</tbody>
+</table>
+<p>用geom_col()作diff变量的条形图， 并按照hi_lo变量对正负差值分别使用不同颜色：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">p &lt;- ggplot(oecd_sum, mapping = aes(</span><br><span class="line">  x = year, </span><br><span class="line">  y = diff, </span><br><span class="line">  fill = hi_lo</span><br><span class="line">))</span><br><span class="line">p + geom_col() +</span><br><span class="line">  <span class="comment"># 去掉图例guides()</span></span><br><span class="line">  guides(fill = <span class="literal">FALSE</span>) +</span><br><span class="line">  labs(x = <span class="string">&quot;年份&quot;</span>,</span><br><span class="line">         y = <span class="string">&quot;期望寿命差值&quot;</span>,</span><br><span class="line">         title = <span class="string">&quot;美国期望寿命差值&quot;</span>,</span><br><span class="line">         subtitle = <span class="string">&quot;1960-2015年美国与OECD国家期望寿命差值&quot;</span>,</span><br><span class="line">         caption=<span class="string">&quot;来自socviz扩展包&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.mubu.com/document_image/2eb7b1de-a289-4848-9cc8-15f7c1823879-4340683.jpg" alt="oecd"></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a><a class="post-meta__tags" href="/tags/R%E8%AF%AD%E8%A8%80/">R语言</a></div><div class="post_share"><div class="social-share" data-image="https://blog-1301686007.cos.ap-shanghai.myqcloud.com/default_top_img.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/shixq_wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/shixq_alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/shixq_alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/07/10/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB156/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200712113728.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">每日外闻156</div></div></a></div><div class="next-post pull-right"><a href="/2020/07/12/%E6%AF%8F%E6%97%A5%E5%A4%96%E9%97%BB157/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/Steven-Shixq/imagerepository/img/20200712113728.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">每日外闻157</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/02/15/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/" title="R语言学习笔记1"><img class="cover" src="https://blog-1301686007.cos.ap-shanghai.myqcloud.com/default_top_img.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-15</div><div class="title">R语言学习笔记1</div></div></a></div><div><a href="/2020/04/17/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B010/" title="R语言学习笔记10"><img class="cover" src="https://blog-1301686007.cos.ap-shanghai.myqcloud.com/default_top_img.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-17</div><div class="title">R语言学习笔记10</div></div></a></div><div><a href="/2020/04/25/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B011/" title="R语言学习笔记11"><img class="cover" src="https://blog-1301686007.cos.ap-shanghai.myqcloud.com/default_top_img.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-25</div><div class="title">R语言学习笔记11</div></div></a></div><div><a href="/2020/05/02/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B012/" title="R语言学习笔记12"><img class="cover" src="https://blog-1301686007.cos.ap-shanghai.myqcloud.com/default_top_img.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-02</div><div class="title">R语言学习笔记12</div></div></a></div><div><a href="/2020/05/09/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B013/" title="R语言学习笔记13"><img class="cover" src="https://blog-1301686007.cos.ap-shanghai.myqcloud.com/default_top_img.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-09</div><div class="title">R语言学习笔记13</div></div></a></div><div><a href="/2020/05/30/R%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B016/" title="R语言学习笔记16"><img class="cover" src="https://blog-1301686007.cos.ap-shanghai.myqcloud.com/default_top_img.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-30</div><div class="title">R语言学习笔记16</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%8F%98%E6%8D%A2%E4%B8%8E%E6%9D%A1%E5%BD%A2%E5%9B%BE"><span class="toc-text">数据变换与条形图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%AE%B5%E4%B8%8E%E5%B9%B6%E5%88%97%E6%9D%A1%E5%BD%A2%E5%9B%BE"><span class="toc-text">分段与并列条形图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%A1%E5%BD%A2%E5%9B%BE%E7%9A%84%E5%85%B6%E5%AE%83%E5%BA%94%E7%94%A8"><span class="toc-text">条形图的其它应用</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By 石晓强 (Xiaoqiang Shi)</div><div class="footer_custom_text">欢迎来到我的<a href="https://steven-shixq.github.io/">博客</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'NFoxKw5kAkzXk9OujXdPn1Qp-gzGzoHsz',
+      appKey: '9awzk7TAM6SBvkG1Sn28h7Qf',
+      placeholder: '说点什么吧',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>
